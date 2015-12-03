@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ .container{
+ 	width: 800px;
+ 	margin: 0 auto;
+ 	text-align: center;
+ }
+
+ .brand{
+ 	margin-top: 30px;
+ 	font-size: 60px;
+ 	display: block;
+ }
