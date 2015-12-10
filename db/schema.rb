@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202190057) do
+ActiveRecord::Schema.define(version: 20151209184102) do
+
+  create_table "ideas", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "session_id"
+    t.integer  "theme_id"
+  end
+
+  add_index "ideas", ["session_id"], name: "index_ideas_on_session_id"
+  add_index "ideas", ["theme_id"], name: "index_ideas_on_theme_id"
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "session_id"
+  end
+
+  add_index "themes", ["session_id"], name: "index_themes_on_session_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
