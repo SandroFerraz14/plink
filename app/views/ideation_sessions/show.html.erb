@@ -9,6 +9,8 @@
   <strong>Description:</strong>
   <%= @ideation_session.description %>
 </p>
+<%= render 'themes/themes' %>
+<%= render 'themes/form' %>
 
 <%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
 <%= link_to 'Back', ideation_sessions_path %>

@@ -1,8 +1,8 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
+  resources :ideation_sessions do
+    resources :themes
+  end
 
-  resources :themes
-  resources :ideation_sessions
-  resources :sessions, :as => :my_sessions
   root to: "home#index"
   
   devise_for :users

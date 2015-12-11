@@ -16,11 +16,12 @@ class ThemesController < ApplicationController
   end
 
   def create
+    @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @theme = Theme.new(theme_params)
-
+    @theme.ideation_session = @ideation_session
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to @theme, notice: 'Theme was successfully created.' }
+        format.html { redirect_to @ideation_session, notice: 'Theme was successfully created.' }
       else
         format.html { render :new }
       end
@@ -38,10 +39,14 @@ class ThemesController < ApplicationController
   end
 
   def destroy
-    @theme.destroy
-    respond_to do |format|
-      format.html { redirect_to themes_url, notice: 'Theme was successfully destroyed.' }
+    @theme = Theme.find(params[:ideation_session_id])
+    if @theme.present?
+      @theme.destroy
+      respond_to do |format|
+        format.html { redirect_to themes_url, notice: 'Theme was successfully destroyed.' }
+      end
     end
+    format.html { redirect_to themes_url, notice: 'Error destroyed theme.' }
   end
 
   private

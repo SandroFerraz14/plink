@@ -1,5 +1,6 @@
 class IdeationSessionsController < ApplicationController
   before_action :set_ideation_session, only: [:show, :edit, :update, :destroy]
+  before_action :set_themes, only: [:show]
 
   def index
     @ideation_sessions = IdeationSession.all
@@ -52,6 +53,10 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description)
+      params.require(:ideation_session).permit(:name, :description, themes_attributes: [:id, :name])
+    end
+
+    def set_themes
+      @themes = @ideation_session.themes
     end
 end
