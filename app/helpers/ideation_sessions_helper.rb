@@ -1,0 +1,2 @@
+module IdeationSessionsHelper
+end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ideation_session.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ideation_session.description %>
+</p>
+
+<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
+<%= link_to 'Back', ideation_sessions_path %>
