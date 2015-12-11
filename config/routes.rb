@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :sessions, :as => :my_sessions
   root to: "home#index"
   
   devise_for :users
