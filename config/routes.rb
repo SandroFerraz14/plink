@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :themes
   resources :ideation_sessions
   resources :sessions, :as => :my_sessions
   root to: "home#index"
