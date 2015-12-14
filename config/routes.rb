@@ -1,6 +1,8 @@
 Rails.application.routes.draw do  
-  resources :ideation_sessions do
-    resources :themes
+  shallow do
+    resources :ideation_sessions do
+      resources :themes
+    end
   end
 
   root to: "home#index"

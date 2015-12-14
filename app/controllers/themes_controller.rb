@@ -1,12 +1,5 @@
 class ThemesController < ApplicationController
-  before_action :set_theme, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @themes = Theme.all
-  end
-
-  def show
-  end
+  before_action :set_theme, only: [:edit, :update, :destroy]
 
   def new
     @theme = Theme.new
@@ -39,14 +32,15 @@ class ThemesController < ApplicationController
   end
 
   def destroy
-    @theme = Theme.find(params[:ideation_session_id])
+    @theme = Theme.find(params[:id])
+    id_session = @theme.ideation_session_id
+    @ideation_session = IdeationSession.find(id_session)
     if @theme.present?
       @theme.destroy
-      respond_to do |format|
-        format.html { redirect_to themes_url, notice: 'Theme was successfully destroyed.' }
-      end
+      redirect_to ideation_session_path(@ideation_session), notice: 'Theme was successfully destroyed.'
+    else
+      redirect_to ideation_session_path(@ideation_session), notice: 'Error try destroyed theme.'
     end
-    format.html { redirect_to themes_url, notice: 'Error destroyed theme.' }
   end
 
   private

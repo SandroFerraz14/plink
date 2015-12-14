@@ -1,7 +1,7 @@
 <tr>
   	<td><%= theme.name %></td>
   	<td>
-  		<%= link_to @theme, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  		<%= link_to theme, method: :delete, data: { confirm: 'Are you sure?' } do %>
   			Delete
   		<% end %>
   	</td>
