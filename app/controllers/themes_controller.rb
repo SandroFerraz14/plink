@@ -5,6 +5,10 @@ class ThemesController < ApplicationController
     @theme = Theme.new
   end
 
+  def index
+    @themes = Theme.all
+  end
+
   def edit
   end
 
