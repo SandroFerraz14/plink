@@ -23,16 +23,16 @@ class IdeasController < ApplicationController
 
   # POST /ideas
   # POST /ideas.json
-  def create
-    @idea = Idea.new(idea_params)
 
+  def create
+    @ideation_session = IdeationSession.find(params[:ideation_session_id])
+    @idea = Idea.new(idea_params)
+    @idea.ideation_session = @ideation_session
     respond_to do |format|
       if @idea.save
-        format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
-        format.json { render :show, status: :created, location: @idea }
+        format.html { redirect_to @ideation_session, notice: 'Idea was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
   end
