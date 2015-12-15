@@ -28,6 +28,10 @@ class IdeasController < ApplicationController
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @idea = Idea.new(idea_params)
     @idea.ideation_session = @ideation_session
+    @idea.user_id = current_user.id
+    @idea.number = @ideation_session.nideas
+    @ideation_session.nideas = @idea.number + 1
+    @ideation_session.save
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @ideation_session, notice: 'Idea was successfully created.' }

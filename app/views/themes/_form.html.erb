@@ -2,7 +2,6 @@
   <% if @ideation_session.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ideation_session.errors.count, "error") %> prohibited this theme from being saved:</h2>
-
       <ul>
       <% @ideation_session.errors.full_messages.each do |message| %>
         <li><%= message %></li>
