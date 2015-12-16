@@ -58,10 +58,14 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    @idea.destroy
-    respond_to do |format|
-      format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
-      format.json { head :no_content }
+    @idea = Idea.find(params[:id])
+    id_session = @idea.ideation_session_id
+    @ideation_session = IdeationSession.find(id_session)
+    if @idea.present?
+      @idea.destroy
+      redirect_to ideation_session_path(@ideation_session), notice: 'Idea was successfully destroyed.'
+    else
+      redirect_to ideation_session_path(@ideation_session), notice: 'Error try destroyed Idea.'
     end
   end
 
