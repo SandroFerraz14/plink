@@ -1,6 +1,7 @@
 class IdeationSessionsController < ApplicationController
   before_action :set_ideation_session, only: [:show, :edit, :update, :destroy]
   before_action :set_themes, only: [:show, :destroy]
+  before_action :set_ideas, only: [:show, :destroy]
 
   def index
     @ideation_sessions = IdeationSession.all
@@ -18,7 +19,7 @@ class IdeationSessionsController < ApplicationController
 
   def create
     @ideation_session = IdeationSession.new(ideation_session_params)
-
+    @ideation_session.nideas = 1
     respond_to do |format|
       if @ideation_session.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
@@ -58,5 +59,9 @@ class IdeationSessionsController < ApplicationController
 
     def set_themes
       @themes = @ideation_session.themes
+    end
+
+    def set_ideas
+      @ideas = @ideation_session.ideas
     end
 end

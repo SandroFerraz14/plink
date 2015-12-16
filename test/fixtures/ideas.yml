@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  ideation_session_id: 
+  text: MyText
+  color: MyString
+  number: 1
+
+two:
+  user_id: 
+  ideation_session_id: 
+  text: MyText
+  color: MyString
+  number: 1

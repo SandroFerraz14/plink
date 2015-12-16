@@ -1,0 +1,10 @@
+<tr>
+  	<td><%= idea.number %></td>
+  	<td><%= idea.color %></td>
+  	<td><%= idea.text %></td>
+  	<td>
+  		<%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  			Delete
+  		<% end %>
+  	</td>
+</tr>
