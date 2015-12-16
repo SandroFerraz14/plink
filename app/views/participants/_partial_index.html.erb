@@ -1,0 +1,5 @@
+
+<%= form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f| %>
+	<%= f.text_field :email, placeholder: 'Email', label: false %>
+	<%= f.submit %>
+<% end %>

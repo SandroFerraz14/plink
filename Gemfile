@@ -23,6 +23,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "font-awesome-rails"
 
 gem 'devise'
+gem 'devise_invitable'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

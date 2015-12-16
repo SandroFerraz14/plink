@@ -13,5 +13,9 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
   
+  private
 
+    def after_invite_path_for(_resource)
+      ideation_sessions_path
+    end
 end
