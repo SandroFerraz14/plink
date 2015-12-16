@@ -1,7 +1,9 @@
 Rails.application.routes.draw do  
+  
   shallow do
     resources :ideation_sessions do
       resources :themes
+      resources :ideas
     end
   end
 
