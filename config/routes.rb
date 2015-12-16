@@ -1,9 +1,11 @@
 Rails.application.routes.draw do  
+  get "home" => "home#index"
   
   shallow do
     resources :ideation_sessions do
       resources :themes
       resources :ideas
+      resources :participants
     end
   end
 
@@ -17,8 +19,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
-  get 'home' => 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

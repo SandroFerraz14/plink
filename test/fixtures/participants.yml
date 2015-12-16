@@ -3,7 +3,13 @@
 one:
   user_id: 
   ideation_session_id: 
+  nickname: MyString
+  avatar_file_name: MyString
+  active: false
 
 two:
   user_id: 
   ideation_session_id: 
+  nickname: MyString
+  avatar_file_name: MyString
+  active: false
