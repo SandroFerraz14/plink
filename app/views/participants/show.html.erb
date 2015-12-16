@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @participant.user %>
+</p>
+
+<p>
+  <strong>Ideation session:</strong>
+  <%= @participant.ideation_session %>
+</p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @participant.nickname %>
+</p>
+
+<p>
+  <strong>Avatar file name:</strong>
+  <%= @participant.avatar_file_name %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @participant.active %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>
