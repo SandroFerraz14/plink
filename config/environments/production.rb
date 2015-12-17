@@ -76,4 +76,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'weplim.di.uminho.pt' }
+
+  #These settings are for the sending out email for active admin and consequently the   devise mailer
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = 
+  {
+
+    :address              => 'smtp.gmail.com',
+    :port                 => 587,
+    :domain               => 'gmail.com', 
+    :authentication       => :plain,
+    :user_name            => 'peigrupouce15@gmail.com',
+    :password             => 'UCE15grupoPEI',
+    :enable_starttls_auto => true
+  }
 end
