@@ -20,6 +20,7 @@ class IdeationSessionsController < ApplicationController
   def create
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
+    @ideation_session.user_id = current_user.id
     respond_to do |format|
       if @ideation_session.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
