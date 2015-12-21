@@ -26,7 +26,7 @@ class ParticipantsController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participant = Participant.new(participant_params)
-    @participant.ideation_session = @ideation_session
+    @participant.ideation_session_id = @ideation_session.id
     respond_to do |format|
       if @participant.save
         format.html { redirect_to @ideation_session, notice: 'Participant was successfully created.' }
