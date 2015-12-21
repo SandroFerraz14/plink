@@ -26,14 +26,12 @@ class ParticipantsController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participant = Participant.new(participant_params)
-    @participant.ideation_session_id = @ideation_session.id
+    @participant.ideation_session = @ideation_session
     respond_to do |format|
       if @participant.save
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
-        format.json { render :show, status: :created, location: @participant }
+        format.html { redirect_to @ideation_session, notice: 'Participant was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
       end
     end
   end
