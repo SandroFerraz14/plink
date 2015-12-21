@@ -1,5 +1,13 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @participants %>
+  </tbody>
+</table>
 
-<%= form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f| %>
-	<%= f.text_field :email, placeholder: 'Email', label: false %>
-	<%= f.submit %>
-<% end %>

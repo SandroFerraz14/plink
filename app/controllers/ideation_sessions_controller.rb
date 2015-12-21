@@ -2,6 +2,7 @@ class IdeationSessionsController < ApplicationController
   before_action :set_ideation_session, only: [:show, :edit, :update, :destroy]
   before_action :set_themes, only: [:show, :destroy]
   before_action :set_ideas, only: [:show, :destroy]
+  before_action :set_participants, only: [:show, :destroy]
 
   def index
     @ideation_sessions = IdeationSession.all
@@ -64,5 +65,9 @@ class IdeationSessionsController < ApplicationController
 
     def set_ideas
       @ideas = @ideation_session.ideas
+    end
+
+    def set_participants
+      @participants = @ideation_session.participants
     end
 end

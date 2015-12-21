@@ -13,9 +13,17 @@
 <%= render 'themes/form' %>
 <%= render 'ideas/partial_index' %>
 <%= render 'ideas/form' %>
-<% if current_user.id==@ideation_session.user_id %>
-  <%= render 'participants/partial_index' %>
-<% end %>
+
+
+
+<%= link_to 'Participantes', ideation_session_participants_path(@ideation_session) %>
+
+
+
+<%= render 'participants/partial_index' %>
+
+<%= render 'participants/invite_form' %>
+
 
 <%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
 <%= link_to 'Back', ideation_sessions_path %>

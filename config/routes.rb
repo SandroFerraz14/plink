@@ -1,5 +1,8 @@
 Rails.application.routes.draw do  
   get "home" => "home#index"
+
+  resources :ideas
+  resources :participants
   
   shallow do
     resources :ideation_sessions do
