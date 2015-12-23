@@ -38,9 +38,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.action_mailer.default_url_options = { host: 'weplim.di.uminho.pt' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  #These settings are for the sending out email for active admin and consequently the   devise mailer
+   #These settings are for the sending out email for active admin and consequently the   devise mailer
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
