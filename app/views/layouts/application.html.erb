@@ -19,20 +19,24 @@
 
 </head>
 <body>
+<% if user_signed_in? %>
 <!-- Skin configuration box -->
 <%= render 'layouts/skinconfig' %>
 
     <!-- Wrapper-->
     <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
 
-        <!-- Navigation -->
-        <%= render 'layouts/navigation' %>
+
+            <!-- Navigation -->
+            <%= render 'layouts/navigation' %>
+        
 
         <!-- Page wraper -->
         <div id="page-wrapper" class="gray-bg <%= @extra_class %>">
 
-            <!-- Page wrapper -->
-            <%= render 'layouts/topnavbar' %> 
+                <!-- Page wrapper -->
+                <%= render 'layouts/topnavbar' %> 
+           
 
             <!-- Main view  -->
             <%= yield %>
@@ -55,6 +59,10 @@
     <!-- Include javascript per-view -->
     <!-- For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want -->
     <%= yield :javascript %>
-
+<% else %>
+    <div class="gray-bg">
+        <%= yield %>
+    </div>
+<% end %>
 </body>
 </html>

@@ -3,15 +3,15 @@ class Users::SessionsController < Devise::SessionsController
 
   #GET /resource/sign_in
   def new
-    @extra_title = "oaksodk asodk asodk sds"
+    @extra_title = "Login"
     super
   end
 
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy
