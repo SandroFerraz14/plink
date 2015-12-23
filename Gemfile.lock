@@ -40,6 +40,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.0.0)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (8.2.1)
     capistrano (3.4.0)
@@ -76,7 +78,7 @@ GEM
       devise (>= 3.2.0)
     erubis (2.7.0)
     execjs (2.6.0)
-    font-awesome-rails (4.5.0.0)
+    font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -185,6 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (= 3.3.0.0)
   byebug
   capistrano-bundler
   capistrano-rails
@@ -192,7 +195,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise_invitable
-  font-awesome-rails
+  font-awesome-rails (= 4.3.0.0)
   jbuilder (~> 2.0)
   jquery-rails
   pg
