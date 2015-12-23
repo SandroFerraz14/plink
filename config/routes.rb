@@ -11,9 +11,10 @@ Rails.application.routes.draw do
       resources :participants
     end
   end
+  devise_for :users, controllers: { sessions: "users/sessions" }
 
   devise_scope :user do 
-    root to: "devise/sessions#new"
+    root to: "users/sessions#new"
     get "/users/sign_out" => "devise/sessions#destroy"
     get "/users/sign_in" => "devise/sessions#new"
     post "/users/sign_in" => "devise/sessions#create"
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
     put "/users/password" => "devise/passwords#update"
   end
 
-  devise_for :users
 
   # All routes
   get "dashboards/dashboard_1"
