@@ -34,6 +34,7 @@ class ParticipantsController < ApplicationController
         format.html { render :new }
       end
     end
+    User.invite!(:email => @participant.email)
   end
 
   # PATCH/PUT /participants/1
