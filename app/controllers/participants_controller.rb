@@ -26,7 +26,7 @@ class ParticipantsController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participant = Participant.new(participant_params)
-    @participant.ideation_session_id = @ideation_session.id
+    @participant.ideation_session = @ideation_session
     respond_to do |format|
       if @participant.save
         format.html { redirect_to @ideation_session, notice: 'Participant was successfully created.' }
@@ -34,7 +34,7 @@ class ParticipantsController < ApplicationController
         format.html { render :new }
       end
     end
-    User.invite!(:email => @participant.email)
+    User.invite!(email: @participant.email, active: false)
   end
 
   # PATCH/PUT /participants/1
