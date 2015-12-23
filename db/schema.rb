@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223154727) do
+ActiveRecord::Schema.define(version: 20151223163638) do
 
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20151223154727) do
   end
 
   add_index "ideation_sessions", ["user_id"], name: "index_ideation_sessions_on_user_id"
+
+  create_table "nicknames_feeds", force: :cascade do |t|
+    t.string   "nick"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "participants", force: :cascade do |t|
     t.integer  "user_id"
