@@ -24,17 +24,20 @@ class ParticipantsController < ApplicationController
   # POST /participants
   # POST /participants.json
   def create
+    @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participant = Participant.new(participant_params)
+    @participant.ideation_session = @ideation_session
+    @participant.active = false
+    @participant.avatar_file_name = "default_profile"
 
     respond_to do |format|
       if @participant.save
-        format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
-        format.json { render :show, status: :created, location: @participant }
+        format.html { redirect_to @ideation_session, notice: 'Participant was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
       end
     end
+    User.invite!(email: @participant.email)
   end
 
   # PATCH/PUT /participants/1
@@ -69,6 +72,6 @@ class ParticipantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def participant_params
-      params.require(:participant).permit(:user_id, :ideation_session_id, :nickname, :avatar_file_name, :active)
+      params.require(:participant).permit(:user_id, :ideation_session_id, :nickname, :avatar_file_name, :active, :email)
     end
 end

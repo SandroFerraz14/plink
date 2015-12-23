@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216185948) do
+ActiveRecord::Schema.define(version: 20151223154727) do
 
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
@@ -32,7 +32,11 @@ ActiveRecord::Schema.define(version: 20151216185948) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "nideas"
+    t.integer  "user_id"
+    t.integer  "anonymity"
   end
+
+  add_index "ideation_sessions", ["user_id"], name: "index_ideation_sessions_on_user_id"
 
   create_table "participants", force: :cascade do |t|
     t.integer  "user_id"
@@ -78,6 +82,7 @@ ActiveRecord::Schema.define(version: 20151216185948) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.string   "user_photo_file_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

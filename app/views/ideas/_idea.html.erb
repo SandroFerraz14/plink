@@ -1,8 +1,9 @@
 <tr>
   	<td><%= idea.number %></td>
-  	<td><%= idea.color %></td>
   	<td><%= idea.text %></td>
+  	<td><%= idea.color %></td>
   	<td><%= idea.user_id %></td>
+  	<td><%= idea.ideation_session_id %></td>
   	<td>
   		<%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %>
   			Delete

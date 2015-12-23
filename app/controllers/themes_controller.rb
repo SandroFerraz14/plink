@@ -15,7 +15,7 @@ class ThemesController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @theme = Theme.new(theme_params)
-    @theme.ideation_session = @ideation_session
+    @theme.ideation_session_id = @ideation_session.id
     respond_to do |format|
       if @theme.save
         format.html { redirect_to @ideation_session, notice: 'Theme was successfully created.' }

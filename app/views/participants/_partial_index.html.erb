@@ -1,5 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Ideation session</th>
+      <th>Nickname</th>
+      <th>Avatar file name</th>
+      <th>Active</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<%= form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f| %>
-	<%= f.text_field :email, placeholder: 'Email', label: false %>
-	<%= f.submit %>
-<% end %>
+  <tbody>
+    <%= render @participants %>
+  </tbody>
+</table>
+
