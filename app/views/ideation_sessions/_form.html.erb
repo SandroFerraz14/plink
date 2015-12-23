@@ -20,10 +20,12 @@
     <%= f.text_area :description %>
   </div>
 
-  <%= f.label :False %>
-  <%= f.radio_button :anonymity, false %>
-  <%= f.label :True %>
-  <%= f.radio_button :anonymity, true %>
+  <%= f.label :NoAnonymity %>
+  <%= f.radio_button :anonymity, 0 %>
+  <%= f.label :AllAnonymous %>
+  <%= f.radio_button :anonymity, 1 %>
+  <%= f.label :UserChoose %>
+  <%= f.radio_button :anonymity, 2 %>
 
   <div class="actions">
     <%= f.submit %>
