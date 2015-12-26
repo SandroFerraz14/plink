@@ -9,6 +9,7 @@ class IdeationSessionsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -22,6 +23,7 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
     @ideation_session.user_id = current_user.id
+    
     respond_to do |format|
       if @ideation_session.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
@@ -29,6 +31,8 @@ class IdeationSessionsController < ApplicationController
         format.html { render :new }
       end
     end
+    @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(0..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
+
   end
 
   def update
