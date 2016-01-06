@@ -30,7 +30,7 @@ class IdeationSessionsController < ApplicationController
         format.html { render :new }
       end
     end
-    @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(0..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
+    @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(1..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
 
   end
 
