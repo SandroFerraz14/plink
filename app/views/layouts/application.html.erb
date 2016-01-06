@@ -27,8 +27,13 @@
     <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
 
 
-            <!-- Navigation -->
+        <!-- Navigation -->
+        <% if params[:controller] == "ideation_sessions" && params[:action] == "index" %>
+            <%= render 'layouts/navigationSessions' %>
+        <% else %>
             <%= render 'layouts/navigation' %>
+        <% end %>
+
         
 
         <!-- Page wraper -->

@@ -2,28 +2,48 @@
 
 <h1>Listing Ideation Sessions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+
     <% @ideation_sessions.each do |ideation_session| %>
-      <tr>
-        <td><%= ideation_session.name %></td>
-        <td><%= ideation_session.description %></td>
-        <td><%= link_to 'Show', ideation_session %></td>
-        <td><%= link_to 'Edit', edit_ideation_session_path(ideation_session) %></td>
-        <td><%= link_to 'Destroy', ideation_session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+        <div class="col-lg-6">
+          <div class="widget navy-bg no-padding">
+            <div class="p-m">
+            <div class="col-xs-8 text-right">
+              </div>
+              <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
+              <%= ideation_session.description %>
+
+              <br><br>
+
+              <div class = "linkbranco">
+                <h2 class="font-bold">
+                  <%= link_to ideation_session, method: :get  do %>
+                    <i class="fa fa-eye"></i>
+                  <%end %>
+
+                  <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
+                    <i class="fa fa-edit"></i>
+                  <%end %>
+
+                  <%= link_to ideation_session, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                    <i class="fa fa-trash-o"></i>
+                  <%end %>
+                </h2>
+              </div>
+
+               <!-- <%= link_to 'Destroy', ideation_session, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+
+
+            </div>
+              
+              
+
+          </div>
+        </div>
+
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Ideation session', new_ideation_session_path %>
+    </div>
+  </div>
