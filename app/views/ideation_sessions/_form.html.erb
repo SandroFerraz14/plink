@@ -20,12 +20,9 @@
     <%= f.text_area :description %>
   </div>
 
-  <%= f.label :NoAnonymity %>
-  <%= f.radio_button :anonymity, 0 %>
-  <%= f.label :AllAnonymous %>
-  <%= f.radio_button :anonymity, 1 %>
-  <%= f.label :UserChoose %>
-  <%= f.radio_button :anonymity, 2 %>
+ <div class="field">
+    <%= f.select :anonymity, options_for_select([["No Anonymity",0],["All Anonymous",1],["User Choice",3]]) %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

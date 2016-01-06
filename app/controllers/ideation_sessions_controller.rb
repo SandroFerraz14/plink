@@ -9,6 +9,7 @@ class IdeationSessionsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -29,6 +30,8 @@ class IdeationSessionsController < ApplicationController
         format.html { render :new }
       end
     end
+    @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(1..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
+
   end
 
   def update
@@ -56,7 +59,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes
