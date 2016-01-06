@@ -18,7 +18,7 @@
 
 
 </head>
-<body>
+<body class= <%= (user_signed_in?) ? "" : "secondary-background" %> >
 <% if user_signed_in? %>
 <!-- Skin configuration box -->
 <%= render 'layouts/skinconfig' %>
