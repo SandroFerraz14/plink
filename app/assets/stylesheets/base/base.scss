@@ -39,6 +39,14 @@ body.boxed-layout #wrapper {
   max-width: 1300px !important;
 }
 
+.linkbranco a {
+  color: #88D7C5;
+}
+
+.linkbranco a :hover{
+  color: white;
+}
+
 .block {
   display: block;
 }
