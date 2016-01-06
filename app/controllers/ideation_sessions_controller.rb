@@ -23,7 +23,6 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
     @ideation_session.user_id = current_user.id
-    #@ideation_session.anonymity = 0
     respond_to do |format|
       if @ideation_session.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
@@ -60,7 +59,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes
