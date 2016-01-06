@@ -11,7 +11,12 @@ Rails.application.routes.draw do
       resources :participants
     end
   end
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  devise_for :users, controllers: { 
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    registrations: "users/registrations" 
+  }
+
 
   devise_scope :user do 
     root to: "users/sessions#new"
