@@ -14,21 +14,20 @@
 
 	<!-- todos anonimos, por defeito, não precisa fazer nada -->
 
+	<%= @ideation_session.anonymity %>
 	<!-- sem anonimato -->
 	<% if @ideation_session.anonymity==0 %>
-		<% #@part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
-         
+		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(email: current_user.email, nickname: current_user.email) %>
+        a usar informação do perfil de utilizador para o participante
 	<!-- o user decide -->
 	<% elsif @ideation_session.anonymity==2 %>
 		<!-- FALTA FAZEER -->
 		<!-- FALTA FAZEER -->
 		<!-- FALTA FAZEER -->
 		<!-- FALTA FAZEER -->
-
 	
 	<!-- falta deixar o utilizador decidir -->
 	<% end %>
-
 
 	<p id="notice"><%= notice %></p>
 
