@@ -17,14 +17,8 @@
 	<%= render 'ideas/partial_index' %>
 	<%= render 'ideas/form' %>
 
-	<% if current_user.id==@ideation_session.user_id %>
-		<%= render 'participants/partial_index' %>
-		<%= render 'participants/form' %>
-	<% end %>
 	<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
 	<%= link_to 'Back', ideation_sessions_path %>
-	<% #link_to 'Participantes', ideation_session_participants_path(@ideation_session) %>
-
 <% else %>
 	<p>
 		Não tem acesso a esta sessão

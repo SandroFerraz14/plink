@@ -23,12 +23,15 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
     @ideation_session.user_id = current_user.id
-    if @ideation_session.save
-      redirect_to ideation_session_path(@ideation_session), notice: 'Ideation session was successfully created.' 
-    else
-      format.html { render :new }
+    respond_to do |format|
+      if @ideation_session.save
+        format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
     @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(1..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
+
   end
 
   def update
