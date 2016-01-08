@@ -1,3 +1,6 @@
+<% if current_user.id==@ideation_session.user_id or 
+	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
+
 
 
 	<p id="notice"><%= notice %></p>
@@ -23,4 +26,9 @@
 	<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
 	<%= link_to 'Back', ideation_sessions_path %>
 	<% #link_to 'Participantes', ideation_session_participants_path(@ideation_session) %>
-	
+
+<% else %>
+	<p>
+		Não tem acesso a esta sessão
+	</p>
+<% end %>	
