@@ -2,27 +2,21 @@
 	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
 
 
-
-	<!-- sem anonimato -->
-	<% if @ideation_session.anonymity==0 %>
-
-		<% if current_user.user_photo_file_name %>
-			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
-	        -- a usar email e foto de utilizador para o participante --
-	    <% else %>
-	    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
-	        -- a usar email de utilizador e foto por defeito para o participante --
-	    <% end %>
-
-	<!-- o user decide -->
-	<% elsif @ideation_session.anonymity==2 %>
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-	
-	<!-- falta deixar o utilizador decidir -->
+    <% if @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.active == false %>
+        <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
+    	<div>o utilizador foi activado</div>
+    <% else %>
+    	<div>utilizador já activo</div>
 	<% end %>
+
+	<% if current_user.user_photo_file_name %>
+		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
+        <div>a usar email e foto de utilizador para o participante</div>
+    <% else %>
+    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
+        <div>a usar email de utilizador e foto por defeito para o participante</div>
+    <% end %>
+
 
 	<p id="notice"><%= notice %></p>
 
