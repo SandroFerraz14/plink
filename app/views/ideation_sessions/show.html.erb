@@ -1,6 +1,21 @@
 <% if current_user.id==@ideation_session.user_id or 
 	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
 
+    <!-- faz utilizador ficar activo se ainda não o era na sessão e adicionar o user_id ao participante = ao current_user.id -->
+    <% if @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.active == false %>
+        <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
+    	o utilizador foi activado
+    <% else %>
+    	utilizador já activo
+	<% end %>
+
+
+    <!-- define o nickname e imagem do participante, consoante o anonimato da sessão -->
+
+	<!-- todos anonimos, por defeito, não precisa fazer nada -->
+
+	- Anonimato: <%= @ideation_session.anonymity %> - 
+
 
 
 	<p id="notice"><%= notice %></p>
