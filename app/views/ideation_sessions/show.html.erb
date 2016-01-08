@@ -2,12 +2,7 @@
 	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
 
 
-    <% if @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.active == false %>
-        <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
-    	<div>o utilizador foi activado</div>
-    <% else %>
-    	<div>utilizador já activo</div>
-	<% end %>
+    
 
 	<% if current_user.user_photo_file_name %>
 		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
