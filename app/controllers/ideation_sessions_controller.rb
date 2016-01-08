@@ -6,6 +6,7 @@ class IdeationSessionsController < ApplicationController
 
   def index
     @ideation_sessions = IdeationSession.all
+    @participants = Participant.all
   end
 
   def show
