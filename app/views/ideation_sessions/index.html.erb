@@ -4,7 +4,36 @@
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <% @ideation_sessions.each do |ideation_session| %>
-        
+        <% if ideation_session.user_id == current_user.id %>
+          <div class="col-lg-6">
+            <div class="widget navy-bg no-padding">
+              <div class="p-m">
+              <div class="col-xs-8 text-right">
+                </div>
+                <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
+                <%= ideation_session.description %>
+
+                <br><br>
+
+                <div class = "linkbranco">
+                  <h2 class="font-bold">
+                    <%= link_to ideation_session, method: :get  do %>
+                      <i class="fa fa-eye"></i>
+                    <%end %>
+
+                    <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
+                      <i class="fa fa-edit"></i>
+                    <%end %>
+
+                    <%= link_to ideation_session, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                      <i class="fa fa-trash-o"></i>
+                    <%end %>
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
