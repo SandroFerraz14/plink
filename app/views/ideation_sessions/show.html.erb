@@ -2,9 +2,12 @@
 	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
 
 
-    
-
-	
+    <% if @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.active == false %>
+        <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
+    	<div>o utilizador foi activado</div>
+    <% else %>
+    	<div>utilizador já activo</div>
+	<% end %>
 
 
 	<p id="notice"><%= notice %></p>
