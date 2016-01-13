@@ -79,6 +79,17 @@ namespace :deploy do
       end
     end
   end
+
+  desc 'Runs rake db:setup'
+  task :setup => [:set_rails_env] do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "db:setup"
+        end
+      end
+    end
+  end
   # make sure we're deploying what we think we're deploying
   before :deploy, "deploy:check_revision"
   # only allow a deploy with passing tests to deployed
