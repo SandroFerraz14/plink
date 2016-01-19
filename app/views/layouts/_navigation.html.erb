@@ -4,18 +4,15 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <span>
-                        <% @participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id) %>
-                        <% if @participant.exists? %>
-                        
-                            <%= @participant.take.avatar_file_name %>
-                        <% else %>
-                            <%= image_tag(((current_user.user_photo_file_name) ? current_user.user_photo_file_name : "default_profile.png"), alt: "image", class: "img-circle user-img-profile") %>
+                        <% participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+                        <% if participant %>
+                            <%= image_tag(participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
                         <% end %>
                     </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold"><%= (current_user.email) ? current_user.email : "" %></strong>
+                                <strong class="font-bold"><%= (participant) ? participant.nickname : "" %></strong>
                             </span> 
                             <!-- <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> -->
                         </span>
