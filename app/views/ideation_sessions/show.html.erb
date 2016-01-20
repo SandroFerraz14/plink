@@ -48,9 +48,13 @@
 	  <strong>Description:</strong>
 	  <%= @ideation_session.description %>
 	</p>
+	
 	<%= render 'themes/partial_index' %>
+	<br>
 	<%= render 'themes/form' %>
+	<br>
 	<%= render 'ideas/partial_index' %>
+	<br>
 	<%= render 'ideas/form' %>
 
 	<% if current_user.id==@ideation_session.user_id %>
