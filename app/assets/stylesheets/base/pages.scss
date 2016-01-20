@@ -225,7 +225,7 @@ ul.notes li div a {
 }
 
 ul.notes li {
-  margin: 10px 40px 50px 0px;
+  margin: 10px 40px 30px 0px;
   float: left;
 }
 
@@ -291,8 +291,8 @@ ul.notes li div {
   text-decoration: none;
   color: #F2F2F2;
   display: block;
-  height: 200px;
-  width: 200px;
+  height: 180px;
+  width: 180px;
   padding: 1em;
   -moz-transition: -moz-transform 0.15s linear;
   -o-transition: -o-transform 0.15s linear;
@@ -301,66 +301,58 @@ ul.notes li div {
 
 ul.notes.c1 li div {
   background: #FDC331;
-  text-shadow: 1px 2px 2px #FB9509;
-  -moz-box-shadow: 3px 3px 5px #FB9509;
-  -webkit-box-shadow: 3px 3px 5px #FB9509;
-  box-shadow: 3px 3px 5px #FB9509;
+  -moz-box-shadow: 2px 1px 5px #FB9509;
+  -webkit-box-shadow: 2px 1px 5px #FB9509;
+  box-shadow: 2px 1px 5px #FB9509;
 }
 
 ul.notes.c2 li div {
   background: #EF8F24;
-  text-shadow: 1px 2px 2px #E05005;
-  -moz-box-shadow: 3px 3px 5px #E05005;
-  -webkit-box-shadow: 3px 3px 5px #E05005;
-  box-shadow: 3px 3px 5px #E05005;
+  -moz-box-shadow: 2px 1px 5px #E05005;
+  -webkit-box-shadow: 2px 1px 5px #E05005;
+  box-shadow: 2px 1px 5px #E05005;
 }
 
 ul.notes.c3 li div {
   background: #E7524E;
-  text-shadow: 1px 2px 2px #D11A18;
-  -moz-box-shadow: 3px 3px 5px #D11A18;
-  -webkit-box-shadow: 3px 3px 5px #D11A18;
-  box-shadow: 3px 3px 5px #D11A18;
+  -moz-box-shadow: 2px 1px 5px #D11A18;
+  -webkit-box-shadow: 2px 1px 5px #D11A18;
+  box-shadow: 2px 1px 5px #D11A18;
 }
 
 ul.notes.c4 li div {
   background: #792ca0;
-  text-shadow: 1px 2px 2px #481A5F;
-  -moz-box-shadow: 3px 3px 5px #481A5F;
-  -webkit-box-shadow: 3px 3px 5px #481A5F;
-  box-shadow: 3px 3px 5px #481A5F;
+  -moz-box-shadow: 2px 1px 5px #481A5F;
+  -webkit-box-shadow: 2px 1px 5px #481A5F;
+  box-shadow: 2px 1px 5px #481A5F;
 }
 
 ul.notes.c5 li div {
   background: #A855A9;
-  text-shadow: 1px 2px 2px #6F1C70;
-  -moz-box-shadow: 3px 3px 5px #6F1C70;
-  -webkit-box-shadow: 3px 3px 5px #6F1C70;
-  box-shadow: 3px 3px 5px #6F1C70;
+  -moz-box-shadow: 2px 1px 5px #6F1C70;
+  -webkit-box-shadow: 2px 1px 5px #6F1C70;
+  box-shadow: 2px 1px 5px #6F1C70;
 }
 
 ul.notes.c6 li div {
   background: #FF92A4;
-  text-shadow: 1px 2px 2px #FF5469;
-  -moz-box-shadow: 3px 3px 5px #FF5469;
-  -webkit-box-shadow: 3px 3px 5px #FF5469;
-  box-shadow: 3px 3px 5px #FF5469;
+  -moz-box-shadow: 2px 1px 5px #FF5469;
+  -webkit-box-shadow: 2px 1px 5px #FF5469;
+  box-shadow: 2px 1px 5px #FF5469;
 }
 
 ul.notes.c7 li div {
   background: #00ADE4;
-  text-shadow: 1px 2px 2px #0075CC;
-  -moz-box-shadow: 3px 3px 5px #0075CC;
-  -webkit-box-shadow: 3px 3px 5px #0075CC;
-  box-shadow: 3px 3px 5px #0075CC;
+  -moz-box-shadow: 2px 1px 5px #0075CC;
+  -webkit-box-shadow: 2px 1px 5px #0075CC;
+  box-shadow: 2px 1px 5px #0075CC;
 }
 
 ul.notes.c8 li div {
   background: #71C458;
-  text-shadow: 1px 2px 2px #32971E;
-  -moz-box-shadow: 3px 3px 5px #32971E;
-  -webkit-box-shadow: 3px 3px 5px #32971E;
-  box-shadow: 3px 3px 5px #32971E;
+  -moz-box-shadow: 2px 1px 5px #32971E;
+  -webkit-box-shadow: 2px 1px 5px #32971E;
+  box-shadow: 2px 1px 5px #32971E;
 }
 
 /* FILE MANAGER */
