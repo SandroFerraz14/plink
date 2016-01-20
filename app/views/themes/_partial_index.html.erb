@@ -9,7 +9,10 @@
            </li>
         <% end %>
         <li>
-          <a href="#" class="">+</a>
+          <%= render 'themes/form' %>
+           <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
         </li>
       </ul>
     </div>
@@ -24,4 +27,9 @@
     </div>
   </div>
 </div>
+<script>
+var showFormTopic = function(){
+  $(".new_theme").show();
+}
+</script>
 
