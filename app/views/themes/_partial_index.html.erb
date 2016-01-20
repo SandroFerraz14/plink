@@ -1,12 +1,27 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @themes %>
-  </tbody>
-</table>
+<div class="panel blank-panel">
+  <div class="panel-heading">
+    <div class="panel-options">
+      <ul class="nav nav-tabs">
+        <% @themes.each do |theme| %>
+           <li class="<%= (@themes.first == theme) ? "active" : "" %>">
+              <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
+              <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+           </li>
+        <% end %>
+        <li>
+          <a href="#" class="">+</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="tab-content">
+      <% @themes.each do |theme| %>
+        <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+            <%= theme.name %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
