@@ -21,7 +21,9 @@
     <div class="tab-content">
       <% @themes.each do |theme| %>
         <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
-            <%= theme.name %>
+            <% theme.ideas.each do |idea| %>
+              <%= render partial: "ideas/idea", object: idea %>
+            <% end %>
         </div>
       <% end %>
     </div>
