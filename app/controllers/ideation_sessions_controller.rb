@@ -26,6 +26,10 @@ class IdeationSessionsController < ApplicationController
     @ideation_session.user_id = current_user.id
     respond_to do |format|
       if @ideation_session.save
+        theme = Theme.new
+        theme.name = GlobalConstants::DefaultTheme
+        theme.ideation_session_id = @ideation_session.id
+        theme.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
       else
         format.html { render :new }
