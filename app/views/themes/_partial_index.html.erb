@@ -5,7 +5,9 @@
         <% @themes.each do |theme| %>
            <li class="<%= (@themes.first == theme) ? "active" : "" %>">
               <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
-              <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+              <% if (@themes.first != theme) %>
+                <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+              <% end %>
            </li>
         <% end %>
         <li>
@@ -29,7 +31,7 @@
     </div>
   </div>
 </div>
-<script>
+<script type="text/javascript">
 var showFormTopic = function(){
   $(".new_theme").show();
 }
