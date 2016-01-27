@@ -31,7 +31,13 @@ class IdeationSessionsController < ApplicationController
         format.html { render :new }
       end
     end
-    @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: NicknamesFeed.find(rand(1..10)).nick, avatar_file_name: "default_profile", email: current_user.email)
+    if @ideation_session.anonymity == 1
+      @seed = NicknamesFeed.find(rand(1..10))
+      @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: @seed.nick, avatar_file_name: @seed.image_url, email: current_user.email)
+    else
+      @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: current_user.email, avatar_file_name: 'default_profile', email: current_user.email)
+
+    end
 
   end
 
@@ -58,7 +64,8 @@ class IdeationSessionsController < ApplicationController
   def set_anonymous 
     @ideation_session = IdeationSession.find(params[:id])
     @participants = @ideation_session.participants
-    @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile", nickname: NicknamesFeed.find(rand(1..10)).nick)
+    @seed = NicknamesFeed.find(rand(1..10))
+    @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: @seed.image_url, nickname: @seed.nick)
     redirect_to :back
   end
 

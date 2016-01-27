@@ -8,16 +8,16 @@
 
 
 NicknamesFeed.create([
-	{nick: 'Joe'}, 
-	{nick: 'Stephanie'}, 
-	{nick: 'Jorge'}, 
-	{nick: 'Paulo'},
-	{nick: 'Ana'},
-	{nick: 'Manuel'},
-	{nick: 'Priscila'},
-	{nick: 'Francisco'},
-	{nick: 'Fifi'},
-	{nick: 'Gina'},
-	{nick: 'Juan'},
-	{nick: 'Rui'}])
+	{nick: 'Joe', image_url: 'Joe'}, 
+	{nick: 'Stephanie', image_url: 'Stephanie'}, 
+	{nick: 'Jorge', image_url: 'Jorge'}, 
+	{nick: 'Paulo', image_url: 'Paulo'},
+	{nick: 'Ana', image_url: 'Ana'},
+	{nick: 'Manuel', image_url: 'Manuel'},
+	{nick: 'Priscila', image_url: 'Priscila'},
+	{nick: 'Francisco', image_url: 'Francisco'},
+	{nick: 'Fifi', image_url: 'Fifi'},
+	{nick: 'Gina', image_url: 'Gina'},
+	{nick: 'Juan', image_url: 'Juan'},
+	{nick: 'Rui', image_url: 'Rui'}])
 
