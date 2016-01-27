@@ -1,12 +1,39 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @themes %>
-  </tbody>
-</table>
+<div class="panel blank-panel">
+  <div class="panel-heading">
+    <div class="panel-options">
+      <ul class="nav nav-tabs">
+        <% @themes.each do |theme| %>
+           <li class="<%= (@themes.first == theme) ? "active" : "" %>">
+              <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
+              <% if (@themes.first != theme) %>
+                <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+              <% end %>
+           </li>
+        <% end %>
+        <li>
+          <%= render 'themes/form' %>
+           <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="tab-content">
+      <% @themes.each do |theme| %>
+        <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+            <% theme.ideas.each do |idea| %>
+              <%= render partial: "ideas/idea", object: idea %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var showFormTopic = function(){
+  $(".new_theme").show();
+}
+</script>
+

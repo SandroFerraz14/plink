@@ -12,6 +12,8 @@
  *= require font-awesome
  *= require animate/animate.css
  *= require style
+ *= require topic
+ *= require plugins/iCheck/custom
  */
 
  .logo-text{
@@ -25,3 +27,33 @@
  .secondary-background{
  	background-color:#f3f3f4;
  }
+
+ div#page-wrapper {
+    padding-bottom: 50px;
+}
+
+.user-img-profile{
+	max-width: 40px;
+	max-height: 40px;
+}
+
+.nav-tabs > li > a {
+	border-radius: 0 !important;
+}
+
+.remove-button{
+	padding:0 !important;
+	border:0 !important;
+	margin:0 !important;
+	cursor: pointer !important;
+}
+
+.remove-button:hover{
+	background:none !important;
+}
+
+.absolute-top-right{
+	position:absolute !important;
+	top:0;
+	right: 6px;
+}

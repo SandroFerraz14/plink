@@ -3,10 +3,10 @@ class IdeationSessionsController < ApplicationController
   before_action :set_themes, only: [:show, :destroy]
   before_action :set_ideas, only: [:show, :destroy]
   before_action :set_participants, only: [:show, :destroy]
+  before_action :all_participants, only: [:index, :new, :edit]
 
   def index
     @ideation_sessions = IdeationSession.all
-    @participants = Participant.all
   end
 
   def show
@@ -26,6 +26,10 @@ class IdeationSessionsController < ApplicationController
     @ideation_session.user_id = current_user.id
     respond_to do |format|
       if @ideation_session.save
+        theme = Theme.new
+        theme.name = GlobalConstants::DefaultTheme
+        theme.ideation_session_id = @ideation_session.id
+        theme.save
         format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully created.' }
       else
         format.html { render :new }
@@ -103,5 +107,9 @@ class IdeationSessionsController < ApplicationController
 
     def set_participants
       @participants = @ideation_session.participants
+    end
+
+    def all_participants
+      @participants = Participant.all
     end
 end

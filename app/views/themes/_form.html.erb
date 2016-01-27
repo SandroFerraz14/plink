@@ -11,10 +11,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <%= f.text_field :name, class: "form-control pull-left width-auto", placeholder: "Topic Name" %>
+    <%= button_tag(type: "submit", class: "btn btn-primary pull-left") do %>
+      <i class="fa fa-save"></i>
+    <% end %>
   </div>
 <% end %>

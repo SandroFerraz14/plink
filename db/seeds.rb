@@ -21,3 +21,13 @@ NicknamesFeed.create([
 	{nick: 'Juan', image_url: 'Juan'},
 	{nick: 'Rui', image_url: 'Rui'}])
 
+User.create([
+	{email: 'sandro@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'xico@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'filipe@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'duarte@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'renato@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'ana@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'isabel@gmail.com', password: '12345678', password_confirmation: '12345678'},
+	{email: 'nelson@gmail.com', password: '12345678', password_confirmation: '12345678'}])
+

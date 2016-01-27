@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160127175354) do
 
+
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ideation_session_id"
@@ -21,9 +22,11 @@ ActiveRecord::Schema.define(version: 20160127175354) do
     t.integer  "number"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "theme_id"
   end
 
   add_index "ideas", ["ideation_session_id"], name: "index_ideas_on_ideation_session_id"
+  add_index "ideas", ["theme_id"], name: "index_ideas_on_theme_id"
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id"
 
   create_table "ideation_sessions", force: :cascade do |t|

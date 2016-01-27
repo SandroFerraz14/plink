@@ -20,7 +20,7 @@ class ThemesController < ApplicationController
       if @theme.save
         format.html { redirect_to @ideation_session, notice: 'Theme was successfully created.' }
       else
-        format.html { render :new }
+        format.html { redirect_to @ideation_session, notice: 'Error created theme.' }
       end
     end
   end
