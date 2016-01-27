@@ -1,0 +1,4 @@
+fdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
+---
+<%= @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.nickname %>

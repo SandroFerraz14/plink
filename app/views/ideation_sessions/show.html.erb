@@ -9,11 +9,8 @@
     	utilizador já activo
 	<% end %>
 
-
     <!-- define o nickname e imagem do participante, consoante o anonimato da sessão -->
-
 	<!-- todos anonimos, por defeito, não precisa fazer nada -->
-
 	- Anonimato: <%= @ideation_session.anonymity %> - 
 
 	<!-- sem anonimato -->
@@ -29,12 +26,17 @@
 
 	<!-- o user decide -->
 	<% elsif @ideation_session.anonymity==2 %>
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-		<!-- FALTA FAZEER -->
-	
-	<!-- falta deixar o utilizador decidir -->
+		<!-- aparece se user está como anonimo ou não, comparando se o nickname = email -->
+		<!-- se anon -> um botão, se não outro -->
+		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+		<% if @part.nickname == current_user.email %>
+			O utilizador está identificado
+
+			<%= button_to "Set Anonymous", { :controller => "ideation_sessions", :action => "set_anonymous"} %>
+		<% else %>
+			O utilizador está anonimo.
+			<%= button_to "Set Identified", { :controller => "ideation_sessions", :action => "set_identified"} %>
+		<% end %>
 	<% end %>
 	
 	<p id="notice"><%= notice %></p>

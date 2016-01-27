@@ -32,6 +32,12 @@ Rails.application.routes.draw do
 
 
   # All routes
+
+  post "ideation_sessions/set_anonymous/:id" => "ideation_sessions#set_anonymous"
+
+  post "ideation_sessions/set_identified/:id" => "ideation_sessions#set_identified"
+
+
   get "dashboards/dashboard_1"
   get "dashboards/dashboard_2"
   get "dashboards/dashboard_3"

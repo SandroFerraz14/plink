@@ -52,6 +52,29 @@ class IdeationSessionsController < ApplicationController
     end
   end
 
+
+
+
+  def set_anonymous 
+    @ideation_session = IdeationSession.find(params[:id])
+    @participants = @ideation_session.participants
+    @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile", nickname: NicknamesFeed.find(rand(1..10)).nick)
+    redirect_to :back
+  end
+
+  def set_identified
+    @ideation_session = IdeationSession.find(params[:id])
+    @participants = @ideation_session.participants
+    if current_user.user_photo_file_name
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email)
+    else
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile", nickname: current_user.email)
+    end
+    redirect_to :back
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ideation_session
