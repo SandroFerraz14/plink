@@ -75,7 +75,7 @@ class IdeasController < ApplicationController
       ids = params[:idea_ids]
       @ideas = Idea.find(ids)
       @ideas.each do |idea|
-        idea.update_attribute(:theme_id, 2)
+        idea.update_attribute(:theme_id, params[:id_theme])
       end
       render json: [{ message: 'Ideas updated with success' }]
     end

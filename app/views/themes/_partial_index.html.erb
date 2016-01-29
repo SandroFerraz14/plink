@@ -1,9 +1,7 @@
 <div class="panel blank-panel">
   <div class="panel-heading">
     <div class="panel-options">
-      <%= button_tag(type: "button", class: "btn btn-primary") do %>
-            Teste
-          <% end %>
+      
       <ul class="nav nav-tabs">
         <% @themes.each do |theme| %>
            <li class="<%= (@themes.first == theme) ? "active" : "" %>">
@@ -11,6 +9,7 @@
               <% if (@themes.first != theme) %>
                 <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
               <% end %>
+              <a href="#" alt="Update theme ideas" title="Update theme ideas" type="button" class="btn btn-default glyphicon glyphicon-save-file" onclick="updateThemeIdeas(<%= theme.id %>);"><%= theme.name %></a>
            </li>
         <% end %>
         <li>
@@ -30,10 +29,13 @@
             <% theme.ideas.each do |idea| %>
               <%= render partial: "ideas/idea", object: idea %>
             <% end %>
+            <%= hidden_field_tag "id_theme" %>
           <% end %>
         </div>
+        
+            
       <% end %>
-      <a href="#" alt="Update theme ideas" title="Update theme ideas" type="button" class="btn btn-default glyphicon glyphicon-save-file" onclick="updateThemeIdeas();"></a>
+      
     </div>
   </div>
 </div>
@@ -41,7 +43,8 @@
   var showFormTopic = function(){
     $(".new_theme").show();
   }
-  function updateThemeIdeas() {
+  function updateThemeIdeas(themeId) {
+    $("#id_theme").val(themeId);
     var form = $("#selected-ideas");
     $.ajax({
       type: "GET",
@@ -50,7 +53,7 @@
       traditional: true,
       data: form.serialize(),
       success: function(data){
-        console.log("deu");
+        console.log(data[0].message);
       }
     });
   }
