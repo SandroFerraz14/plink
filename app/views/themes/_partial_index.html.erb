@@ -1,7 +1,14 @@
 <div class="panel blank-panel">
   <div class="panel-heading">
+    <div class="btn-group">
+      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Theme <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+         <% @themes.each do |theme| %>
+          <li><%= link_to theme.name, '#', onclick: "updateThemeIdeas(#{theme.id})" %></li>
+         <% end %>
+      </ul>
+    </div>
     <div class="panel-options">
-      
       <ul class="nav nav-tabs">
         <% @themes.each do |theme| %>
            <li class="<%= (@themes.first == theme) ? "active" : "" %>">
@@ -9,7 +16,6 @@
               <% if (@themes.first != theme) %>
                 <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
               <% end %>
-              <a href="#" alt="Update theme ideas" title="Update theme ideas" type="button" class="btn btn-default glyphicon glyphicon-save-file" onclick="updateThemeIdeas(<%= theme.id %>);"><%= theme.name %></a>
            </li>
         <% end %>
         <li>
@@ -25,17 +31,14 @@
     <div class="tab-content">
       <% @themes.each do |theme| %>
         <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
-          <%= form_for update_theme_ideas_ideas_path, :html => {:id => "selected-ideas"}, method: :get do %>
+          <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
             <% theme.ideas.each do |idea| %>
               <%= render partial: "ideas/idea", object: idea %>
             <% end %>
             <%= hidden_field_tag "id_theme" %>
           <% end %>
         </div>
-        
-            
       <% end %>
-      
     </div>
   </div>
 </div>
@@ -44,18 +47,23 @@
     $(".new_theme").show();
   }
   function updateThemeIdeas(themeId) {
-    $("#id_theme").val(themeId);
-    var form = $("#selected-ideas");
-    $.ajax({
-      type: "GET",
-      url: "/ideas/update_theme_ideas",
-      dataType: "json",
-      traditional: true,
-      data: form.serialize(),
-      success: function(data){
-        console.log(data[0].message);
+    $(".selected-ideas").each(function(){
+      if($(this).parent().hasClass("active"))
+      {
+        var form = $(this);
+        form.find("#id_theme").val(themeId);
+        $.ajax({
+          type: "GET",
+          url: "/ideas/update_theme_ideas",
+          dataType: "json",
+          traditional: true,
+          data: form.serialize(),
+          success: function(data){
+            console.log(data[0].message);
+          }
+        });
       }
-    });
+    })
   }
 </script>
 
