@@ -51,13 +51,7 @@
     $(".selected-ideas").each(function(){
       if($(this).parent().hasClass("active"))
       {
-        
         var form = $(this);
-        form.find('input:checked').each(function () {
-            var ideaForRemove = $(this).parents().eq(2);
-            $("form#" + themeId).append(ideaForRemove[0].outerHTML);
-            ideaForRemove.fadeOut(500, function() { $(this).remove(); });
-        });
         form.find("#id_theme").val(themeId);
         $.ajax({
           type: "GET",
@@ -66,6 +60,11 @@
           traditional: true,
           data: form.serialize(),
           success: function(data){
+            form.find('input:checked').each(function () {
+              var ideaForRemove = $(this).parents().eq(2);
+              $("form#" + themeId).append(ideaForRemove[0].outerHTML);
+              ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+            });
             console.log(data[0].message);
           }
         });
