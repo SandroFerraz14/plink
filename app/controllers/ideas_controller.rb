@@ -30,7 +30,8 @@ class IdeasController < ApplicationController
     @idea.ideation_session = @ideation_session
     @idea.user_id = current_user.id
     @idea.number = @ideation_session.nideas
-    @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
+    # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
+    @idea.theme_id = params[:id_theme]
     @ideation_session.nideas = @idea.number + 1
     @ideation_session.save
     respond_to do |format|

@@ -1,4 +1,4 @@
-<%= form_for([@ideation_session, @ideation_session.ideas.build]) do |f| %>
+<%= form_for([@ideation_session, @ideation_session.ideas.build], id_theme: id_theme) do |f| %>
   <% if @ideation_session.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ideation_session.errors.count, "error") %> prohibited this idea from being saved:</h2>
@@ -9,7 +9,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= hidden_field_tag "id_theme",id_theme %>
   <div class="field">
     <%= f.label :text %><br>
     <%= f.text_area :text %>
