@@ -23,12 +23,34 @@
                             </span> 
                         </span>
                     </a>
+                    <% if @ideation_session.anonymity==0 %>
+                		<% if current_user.user_photo_file_name %>
+                			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
+                	    <% else %>
+                	    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
+                	    <% end %>
+                
+                	<% elsif @ideation_session.anonymity==2 %>
+                		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+                		<% if @part.nickname == current_user.email %>
+                			<%= button_to "Set Anonymous", { :controller => "ideation_sessions", :action => "set_anonymous"}, class: "btn btn-w-m btn-success" %>
+                		<% else %>
+                			<%= button_to "Set Identified", { :controller => "ideation_sessions", :action => "set_identified"}, class: "btn btn-w-m btn-success" %>
+                		<% end %>
+                	<% end %>
                 </div>
                 <div class="logo-element">
                     <%= link_to root_path do %>
                         <img alt="logo" src="<%= image_url 'logo.png' %>"  width="40"/>
                     <% end %>
                 </div>
+            </li>
+            <li>
+                <div class="profile-element">
+                    <% if current_user.id==@ideation_session.user_id %>
+                		<%= render 'participants/form' %>
+                	<% end %>
+            	</div>
             </li>
         </ul>
 

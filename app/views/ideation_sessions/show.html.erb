@@ -8,23 +8,6 @@
     
 	<% end %>
 
-	<% if @ideation_session.anonymity==0 %>
-
-		<% if current_user.user_photo_file_name %>
-			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
-	    <% else %>
-	    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
-	    <% end %>
-
-	<% elsif @ideation_session.anonymity==2 %>
-		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
-		<% if @part.nickname == current_user.email %>
-			<%= button_to "Set Anonymous", { :controller => "ideation_sessions", :action => "set_anonymous"} %>
-		<% else %>
-			<%= button_to "Set Identified", { :controller => "ideation_sessions", :action => "set_identified"} %>
-		<% end %>
-	<% end %>
-	
 	<p id="notice"><%= notice %></p>
 
 	<%= render 'themes/partial_index' %>
@@ -33,8 +16,8 @@
 		<!--<%= render 'participants/partial_index' %>-->
 		<!--<%= render 'participants/form' %>-->
 	<% end %>
-	<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |
-	<%= link_to 'Back', ideation_sessions_path %>
+	<!--<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |-->
+	<!--<%= link_to 'Back', ideation_sessions_path %>-->
 
 <% else %>
 	<p>
