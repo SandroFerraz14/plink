@@ -50,11 +50,16 @@
     $(".selected-ideas").each(function(){
       if($(this).parent().hasClass("active"))
       {
+        
         var form = $(this);
+        form.find('input:checked').each(function () {
+            var ideaForRemove = $(this).parent().parent();
+            ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+        });
         form.find("#id_theme").val(themeId);
         $.ajax({
           type: "GET",
-          url: "/ideas/update_theme_ideas",
+          //url: "/ideas/update_theme_ideas",
           dataType: "json",
           traditional: true,
           data: form.serialize(),
