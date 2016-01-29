@@ -1,6 +1,13 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
+            <li>
+                <div class="dropdown profile-element">
+                <%= link_to root_path do %>
+                    <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="180"/>
+                <% end %>
+                </div>
+            </li>
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <!-- <span>
@@ -26,7 +33,7 @@
                     </ul> -->
                 </div>
                 <div class="logo-element">
-                    <img alt="image" class="img-circle" src="<%= image_url 'logo3.png' %>" height="40" width="40"/>
+                    <img alt="image" class="img-circle" src="<%= image_url 'logo.png' %>" height="40" width="40"/>
                 </div>
             </li>
             
