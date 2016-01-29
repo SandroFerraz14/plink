@@ -53,13 +53,14 @@
         
         var form = $(this);
         form.find('input:checked').each(function () {
-            var ideaForRemove = $(this).parent().parent();
+            var ideaForRemove = $(this).parents().eq(2);
+            $("form#" + themeId).append(ideaForRemove[0].outerHTML);
             ideaForRemove.fadeOut(500, function() { $(this).remove(); });
         });
         form.find("#id_theme").val(themeId);
         $.ajax({
           type: "GET",
-          //url: "/ideas/update_theme_ideas",
+          url: "/ideas/update_theme_ideas",
           dataType: "json",
           traditional: true,
           data: form.serialize(),
