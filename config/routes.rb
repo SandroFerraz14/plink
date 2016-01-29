@@ -1,7 +1,12 @@
 Rails.application.routes.draw do  
   get "home" => "home#index"
 
-  resources :ideas
+  resources :ideas do
+    collection do
+      get :update_theme_ideas
+    end
+  end
+  
   resources :participants
   
   shallow do

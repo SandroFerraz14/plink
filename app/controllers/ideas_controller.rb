@@ -70,6 +70,17 @@ class IdeasController < ApplicationController
     end
   end
 
+  def update_theme_ideas
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      @ideas = Idea.find(ids)
+      @ideas.each do |idea|
+        idea.update_attribute(:theme_id, 2)
+      end
+      render json: [{ message: 'Ideas updated with success' }]
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_idea

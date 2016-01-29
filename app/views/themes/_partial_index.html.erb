@@ -1,6 +1,9 @@
 <div class="panel blank-panel">
   <div class="panel-heading">
     <div class="panel-options">
+      <%= button_tag(type: "button", class: "btn btn-primary") do %>
+            Teste
+          <% end %>
       <ul class="nav nav-tabs">
         <% @themes.each do |theme| %>
            <li class="<%= (@themes.first == theme) ? "active" : "" %>">
@@ -23,17 +26,33 @@
     <div class="tab-content">
       <% @themes.each do |theme| %>
         <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+          <%= form_for update_theme_ideas_ideas_path, :html => {:id => "selected-ideas"}, method: :get do %>
             <% theme.ideas.each do |idea| %>
               <%= render partial: "ideas/idea", object: idea %>
             <% end %>
+          <% end %>
         </div>
       <% end %>
+      <a href="#" alt="Update theme ideas" title="Update theme ideas" type="button" class="btn btn-default glyphicon glyphicon-save-file" onclick="updateThemeIdeas();"></a>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-var showFormTopic = function(){
-  $(".new_theme").show();
-}
+  var showFormTopic = function(){
+    $(".new_theme").show();
+  }
+  function updateThemeIdeas() {
+    var form = $("#selected-ideas");
+    $.ajax({
+      type: "GET",
+      url: "/ideas/update_theme_ideas",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        console.log("deu");
+      }
+    });
+  }
 </script>
 
