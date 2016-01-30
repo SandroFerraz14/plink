@@ -5,8 +5,10 @@
             <small>12:03:28 12-04-2014</small>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
-            <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-                      <i class="fa fa-trash-o"></i>
+            <% if current_user.id==@ideation_session.user_id %>
+                <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                          <i class="fa fa-trash-o"></i>
+                <% end %>
             <% end %>
         </div>
     </li>

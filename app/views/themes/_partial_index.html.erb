@@ -1,44 +1,64 @@
 <div class="panel blank-panel">
   <div class="panel-heading">
-    <div class="btn-group">
-      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Theme <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-         <% @themes.each do |theme| %>
-          <li><%= link_to theme.name, '#', onclick: "updateThemeIdeas(#{theme.id})" %></li>
-         <% end %>
-      </ul>
-    </div>
+    <% if current_user.id==@ideation_session.user_id %>
+      <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Theme <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+           <% @themes.each do |theme| %>
+            <li><%= link_to theme.name, '#', onclick: "selectedIdeas('changetheme', #{theme.id})" %></li>
+           <% end %>
+        </ul>
+      </div>
+      <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)" do %>
+        <i class="fa fa-trash-o"></i>
+      <% end %>
+    <% end %>
     <div class="panel-options">
-      <ul class="nav nav-tabs">
-        <% @themes.each do |theme| %>
-           <li class="<%= (@themes.first == theme) ? "active" : "" %>">
-              <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
-              <% if (@themes.first != theme) %>
-                <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
-              <% end %>
-           </li>
-        <% end %>
-        <li>
-          <%= render 'themes/form' %>
-           <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
-            <i class="glyphicon glyphicon-plus"></i>
+      <% if current_user.id==@ideation_session.user_id %> 
+        <ul class="nav nav-tabs">
+          <% @themes.each do |theme| %>
+             <li class="<%= (@themes.first == theme) ? "active" : "" %>">
+                <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
+                <% if (@themes.first != theme) %>
+                  <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+                <% end %>
+             </li>
           <% end %>
-        </li>
-      </ul>
+          <li>
+            <%= render 'themes/form' %>
+             <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
+              <i class="glyphicon glyphicon-plus"></i>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
   <div class="panel-body">
     <div class="tab-content">
-      <% @themes.each do |theme| %>
-        <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
-          <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
-            <% theme.ideas.each do |idea| %>
-              <%= render partial: "ideas/idea", object: idea %>
+      <% if current_user.id==@ideation_session.user_id %>
+        <% @themes.each do |theme| %>
+          <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+            <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
+              <% theme.ideas.each do |idea| %>
+                <%= render partial: "ideas/idea", object: idea %>
+              <% end %>
+              <%= hidden_field_tag "id_theme" %>
             <% end %>
-            <%= hidden_field_tag "id_theme" %>
-          <% end %>
-          <%= render 'ideas/form', id_theme: theme.id %>
-        </div>
+            <%= render 'ideas/form', id_theme: theme.id %>
+          </div>
+        <% end %>
+      <% else %>
+          <div id="tab-<%= @themes.first.id %>" class="tab-pane active">
+            <%= form_for update_theme_ideas_ideas_path, :html => {:id => @themes.first.id, :class => "selected-ideas"}, method: :get do %>
+              <% @ideas.each do |idea| %>
+                <%= render partial: "ideas/idea", object: idea %>
+              <% end %>
+              <%= hidden_field_tag "id_theme" %>
+            <% end %>
+            <%= render 'ideas/form', id_theme: @themes.first.id %>
+          </div>
+  
       <% end %>
     </div>
   </div>
@@ -47,29 +67,53 @@
   var showFormTopic = function(){
     $(".new_theme").show();
   }
-  function updateThemeIdeas(themeId) {
+  function selectedIdeas(keyAction, themeId) {
+
     $(".selected-ideas").each(function(){
       if($(this).parent().hasClass("active"))
       {
         var form = $(this);
-        form.find("#id_theme").val(themeId);
-        $.ajax({
-          type: "GET",
-          url: "/ideas/update_theme_ideas",
-          dataType: "json",
-          traditional: true,
-          data: form.serialize(),
-          success: function(data){
-            form.find('input:checked').each(function () {
-              var ideaForRemove = $(this).parents().eq(2);
-              $("form#" + themeId).append(ideaForRemove[0].outerHTML);
-              ideaForRemove.fadeOut(500, function() { $(this).remove(); });
-            });
-            console.log(data[0].message);
-          }
-        });
+        if (keyAction.toLowerCase() == "changetheme"){
+          updateThemeIdeas(form, themeId);
+        } else if(keyAction.toLowerCase() == "deleteideias"){      
+          deleteIdeas(form);
+        }
       }
     })
+  }
+  function updateThemeIdeas(form, themeId) {
+    form.find("#id_theme").val(themeId);
+    $.ajax({
+      type: "GET",
+      url: "/ideas/update_theme_ideas",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        form.find('input:checked').each(function () {
+          var ideaForRemove = $(this).parents().eq(2);
+          $("form#" + themeId).append(ideaForRemove[0].outerHTML);
+          ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+        });
+        console.log(data[0].message);
+      }
+    });
+  }
+  function deleteIdeas(form) {
+    $.ajax({
+      type: "GET",
+      url: "/ideas/delete_ideas",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        form.find('input:checked').each(function () {
+          var ideaForRemove = $(this).parents().eq(2);
+          ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+        });
+        console.log(data[0].message);
+      }
+    });
   }
 </script>
 

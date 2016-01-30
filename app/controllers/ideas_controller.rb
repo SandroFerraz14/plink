@@ -82,6 +82,14 @@ class IdeasController < ApplicationController
     end
   end
 
+  def delete_ideas
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      Idea.destroy(ids)
+      render json: [{ message: 'Ideas deleted with success' }]
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_idea
