@@ -93,7 +93,7 @@ Rails.application.configure do
     :domain               => 'gmail.com', 
     :authentication       => :plain,
     :user_name            => 'peigrupouce15@gmail.com',
-    :password             => 'UCE15grupoPEI',
+    :password             => 'PEI1516Weplim',
     :enable_starttls_auto => true
   }
 end
