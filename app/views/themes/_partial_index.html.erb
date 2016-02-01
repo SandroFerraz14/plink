@@ -67,8 +67,25 @@
   var showFormTopic = function(){
     $(".new_theme").show();
   }
-  function selectedIdeas(keyAction, themeId) {
+  
+  $.fn.clickOutsideThisElement = function (callback) {
+    return this.each(function () {
+        var self = this;
+        $(document).click(function (e) {
+            if (!$(e.target).closest(self).length) {
+                callback.call(self, e)
+            }
+        })
+    });
+  };
 
+  $(".new_theme").parent().clickOutsideThisElement(function () {
+   $(".new_theme").hide();
+  }).click(function () {
+    console.log("fora");
+  });
+
+  function selectedIdeas(keyAction, themeId) {
     $(".selected-ideas").each(function(){
       if($(this).parent().hasClass("active"))
       {
