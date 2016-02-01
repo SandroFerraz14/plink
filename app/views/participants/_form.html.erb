@@ -1,4 +1,4 @@
-<%= form_for([@ideation_session, @ideation_session.participants.build]) do |f| %>
+<%= form_for([@ideation_session, @ideation_session.participants.build], :html => {class: "form-inline"}) do |f| %>
   <% if @ideation_session.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ideation_session.errors.count, "error") %> prohibited this participant from being saved:</h2>
@@ -11,21 +11,11 @@
   <% end %>
   
   <div class="field">
-    <%= f.label :nickname %><br>
-    <%= f.text_field :nickname %>
-  </div>
-  <div class="field">
-    <%= f.label :avatar_file_name %><br>
-    <%= f.text_field :avatar_file_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, placeholder: :email, class: "form-control", required: true %>
   </div>
 
   <br>
-  <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Participant</strong></button>
+  <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Invite Participant</strong></button>
   <br>
   <br>
 <% end %>

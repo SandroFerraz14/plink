@@ -40,9 +40,7 @@ class IdeationSessionsController < ApplicationController
       @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: @seed.nick, avatar_file_name: @seed.image_url, email: current_user.email)
     else
       @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: current_user.email, avatar_file_name: 'default_profile', email: current_user.email)
-
     end
-
   end
 
   def update
@@ -61,9 +59,6 @@ class IdeationSessionsController < ApplicationController
       format.html { redirect_to ideation_sessions_url, notice: 'Ideation session was successfully destroyed.' }
     end
   end
-
-
-
 
   def set_anonymous 
     @ideation_session = IdeationSession.find(params[:id])

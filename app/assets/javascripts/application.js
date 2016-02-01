@@ -15,4 +15,5 @@
 //= require slimscroll/jquery.slimscroll.min.js
 //= require inspinia.js
 //= require plugins/iCheck/icheck.min.js
+//= require plugins/footable/footable.all.min.js
 
