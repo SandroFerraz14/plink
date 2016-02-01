@@ -34,7 +34,7 @@ class ParticipantsController < ApplicationController
     @participant.nickname = @seed.nick 
     respond_to do |format|
       if @participant.save
-        format.html { redirect_to @ideation_session, notice: 'Participant was successfully created.' }
+        format.html { redirect_to :back, notice: 'Participant was successfully created.' }
       else
         format.html { render :new }
       end
