@@ -24,6 +24,8 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
     @ideation_session.user_id = current_user.id
+    @ideation_session.start = Time.current
+    @ideation_session.end = @ideation_session.start + 3.days
     respond_to do |format|
       if @ideation_session.save
         theme = Theme.new
