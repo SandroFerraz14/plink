@@ -4,6 +4,7 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
   def index
+    @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participants = Participant.all
   end
 

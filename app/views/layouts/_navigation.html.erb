@@ -46,7 +46,12 @@
                 </div>
             </li>
             <li>
-                <div class="profile-element">
+                <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
+                <i class="fa fa-list"></i> <span class="nav-label">List Participants</span>
+                <% end %>
+            </li>
+            <li>
+                <div class="nav-label">
                     <% if current_user.id==@ideation_session.user_id %>
                 		<%= render 'participants/form' %>
                 	<% end %>
