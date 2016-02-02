@@ -10,6 +10,9 @@
                           <i class="fa fa-trash-o"></i>
                 <% end %>
             <% end %>
+            <% idea.coments.each do |comment| %>
+                <%= render partial: "comments/comment", object: comment %>
+            <% end %>
         </div>
     </li>
 </ul>

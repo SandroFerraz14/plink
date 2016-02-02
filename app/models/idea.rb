@@ -3,6 +3,7 @@ class Idea < ActiveRecord::Base
   belongs_to :ideation_session
   belongs_to :theme
   before_save :default_values
+  has_many :comments
 
 
   def default_values
