@@ -1,11 +1,15 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :all_participants, only: [:index, :new, :edit]
   # GET /comments
   # GET /comments.json
   def index
     @comments = Comment.all
+    @idea = Idea.find(params[:idea_id])
+    @ideation_session = IdeationSession.find(@idea.ideation_session_id)
+
   end
+
 
   # GET /comments/1
   # GET /comments/1.json
@@ -15,6 +19,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+
+
   end
 
   # GET /comments/1/edit
@@ -24,8 +30,11 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    @idea = Idea.find(params[:idea_id])
+    @ideation_session = IdeationSession.find(@idea.ideation_session_id)
     @comment = Comment.new(comment_params)
-
+    @comment.idea_id = @idea.id
+    @comment.participant_id = current_user.id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
@@ -70,5 +79,9 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:participant_id, :idea_id, :body)
+    end
+
+    def all_participants
+      @participants = Participant.all
     end
 end

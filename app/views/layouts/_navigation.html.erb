@@ -1,4 +1,4 @@
-<% participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+<% @participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
@@ -36,10 +36,10 @@
              <li>
                 <a href="#">
                      
-                      <% if participant %>
-                            <%= image_tag(participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+                      <% if @participant %>
+                            <%= image_tag(@participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
                             <span class="nav-label">
-                                <%= (participant) ? participant.nickname : "" %>
+                                <%= (@participant) ? @participant.nickname : "" %>
                             </span>
                         <% end %>
                     <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->

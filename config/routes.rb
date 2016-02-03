@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   shallow do
     resources :ideation_sessions do
       resources :themes
-      resources :ideas
+      resources :ideas do
+        resources :comments
+      end
       resources :participants
     end
   end

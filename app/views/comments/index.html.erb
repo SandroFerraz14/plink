@@ -28,4 +28,12 @@
 
 <br>
 
+
+
+<%= @idea.id %>
+<%= @ideation_session.id %>
+
+
+<%= render 'comments/form', id_idea: @idea.id %>
+<br>
 <%= link_to 'New Comment', new_comment_path %>

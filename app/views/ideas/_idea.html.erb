@@ -10,9 +10,28 @@
                           <i class="fa fa-trash-o"></i>
                 <% end %>
             <% end %>
-            <% idea.coments.each do |comment| %>
-                <%= render partial: "comments/comment", object: comment %>
+
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+            <%= idea.id %>
+
+            <%= link_to idea_comments_path(idea) do %>
+                Comentários
             <% end %>
+
+            <%# idea.comments.each do |comment| %>
+                <%#= render partial: "comments/comment", object: comment %>
+            <%# end %>
+            
+            <%#= render 'comments/form', object: idea.id %>
+
+
         </div>
     </li>
 </ul>
