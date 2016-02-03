@@ -18,9 +18,9 @@ class ThemesController < ApplicationController
     @theme.ideation_session_id = @ideation_session.id
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to @ideation_session, notice: 'Theme was successfully created.' }
+        format.html { redirect_to @ideation_session, notice: '' }
       else
-        format.html { redirect_to @ideation_session, notice: 'Error created theme.' }
+        format.html { redirect_to @ideation_session, notice: '' }
       end
     end
   end
@@ -28,7 +28,7 @@ class ThemesController < ApplicationController
   def update
     respond_to do |format|
       if @theme.update(theme_params)
-        format.html { redirect_to @theme, notice: 'Theme was successfully updated.' }
+        format.html { redirect_to @theme, notice: '' }
       else
         format.html { render :edit }
       end
@@ -41,9 +41,9 @@ class ThemesController < ApplicationController
     @ideation_session = IdeationSession.find(id_session)
     if @theme.present?
       @theme.destroy
-      redirect_to ideation_session_path(@ideation_session), notice: 'Theme was successfully destroyed.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     else
-      redirect_to ideation_session_path(@ideation_session), notice: 'Error try destroyed theme.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     end
   end
 
