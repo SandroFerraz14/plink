@@ -1,0 +1,15 @@
+<% if current_user.id==@ideation_session.user_id %>
+      <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Theme <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+           <% @themes.each do |theme| %>
+            <li><%= link_to theme.name, '#', onclick: "selectedIdeas('changetheme', #{theme.id})" %></li>
+           <% end %>
+        </ul>
+      </div>
+      
+      <%= button_to '#', onclick: "selectedIdeas('deleteideias', 0)", class: "btn btn-danger dropdown-toggle" do %>
+        <i class="fa fa-trash-o"></i>
+      <% end %>
+
+<% end %>
