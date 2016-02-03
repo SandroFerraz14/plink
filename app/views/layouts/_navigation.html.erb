@@ -3,11 +3,6 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <div class="dropdown profile-element">
-                    <%= link_to root_path do %>
-                        <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="180"/>
-                    <% end %>
-                </div>
                 <div class="logo-element">
                     <%= link_to root_path do %>
                         <img alt="logo" src="<%= image_url 'logo.png' %>"  width="40"/>
@@ -15,6 +10,11 @@
                 </div>
             </li>
             <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <%= link_to root_path do %>
+                        <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="130"/>
+                    <% end %>
+                </div>
                 <div class="dropdown profile-element">
                     <% if @ideation_session.anonymity==0 %>
                 		<% if current_user.user_photo_file_name %>

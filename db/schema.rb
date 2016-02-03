@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160127175354) do
 
-
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "ideation_session_id"

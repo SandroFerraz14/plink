@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
     @ideation_session.save
     respond_to do |format|
       if @idea.save
-        format.html { redirect_to @ideation_session, notice: 'Idea was successfully created.' }
+        format.html { redirect_to @ideation_session, notice: '' }
       else
         format.html { render :new }
       end
@@ -48,7 +48,7 @@ class IdeasController < ApplicationController
   def update
     respond_to do |format|
       if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        format.html { redirect_to @idea, notice: '' }
         format.json { render :show, status: :ok, location: @idea }
       else
         format.html { render :edit }
@@ -65,9 +65,9 @@ class IdeasController < ApplicationController
     @ideation_session = IdeationSession.find(id_session)
     if @idea.present?
       @idea.destroy
-      redirect_to ideation_session_path(@ideation_session), notice: 'Idea was successfully destroyed.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     else
-      redirect_to ideation_session_path(@ideation_session), notice: 'Error try destroyed Idea.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     end
   end
 
@@ -78,7 +78,7 @@ class IdeasController < ApplicationController
       @ideas.each do |idea|
         idea.update_attribute(:theme_id, params[:id_theme])
       end
-      render json: [{ message: 'Ideas updated with success' }]
+      render json: [{ message: '' }]
     end
   end
 
@@ -86,7 +86,7 @@ class IdeasController < ApplicationController
     if params[:idea_ids].present?
       ids = params[:idea_ids]
       Idea.destroy(ids)
-      render json: [{ message: 'Ideas deleted with success' }]
+      render json: [{ message: '' }]
     end
   end
 

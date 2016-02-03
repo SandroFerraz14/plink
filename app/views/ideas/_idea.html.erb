@@ -1,13 +1,16 @@
+
 <ul class="notes <%=idea.color%>">
     <li>
         <div>   
-            <%= check_box_tag "idea_ids[]", idea.id %>
-            <small>12:03:28 12-04-2014</small>
+            <% if current_user.id==@ideation_session.user_id %>
+                <small><%= check_box_tag "idea_ids[]", idea.id %></small>
+            <% end %>
+            <!--<small>12:03:28 12-04-2014</small>-->
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
             <% if current_user.id==@ideation_session.user_id %>
                 <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-                          <i class="fa fa-trash-o"></i>
+                    <i class="fa fa-trash-o"></i>
                 <% end %>
             <% end %>
         </div>

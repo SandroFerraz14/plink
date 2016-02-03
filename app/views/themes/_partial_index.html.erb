@@ -14,51 +14,105 @@
       <% end %>
     <% end %>
     <div class="panel-options">
-      <% if current_user.id==@ideation_session.user_id %> 
         <ul class="nav nav-tabs">
           <% @themes.each do |theme| %>
              <li class="<%= (@themes.first == theme) ? "active" : "" %>">
                 <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
-                <% if (@themes.first != theme) %>
+                <% if (@themes.first != theme) and current_user.id==@ideation_session.user_id %>
                   <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
                 <% end %>
              </li>
           <% end %>
+
+          <% if current_user.id==@ideation_session.user_id %> 
           <li>
             <%= render 'themes/form' %>
              <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
               <i class="glyphicon glyphicon-plus"></i>
             <% end %>
           </li>
+          <% end %>
         </ul>
-      <% end %>
+      
     </div>
   </div>
+
+
+
+
   <div class="panel-body">
     <div class="tab-content">
       <% if current_user.id==@ideation_session.user_id %>
         <% @themes.each do |theme| %>
           <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
             <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
-              <% theme.ideas.each do |idea| %>
-                <%= render partial: "ideas/idea", object: idea %>
-              <% end %>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Ideias</h2>
+                  <ol class="breadcrumb">
+                    <li>
+                        <strong><%=@ideation_session.name%></strong>
+                    </li>
+                    <li class="active">
+                      <strong><%=theme.name%></strong>
+                    </li>
+                  </ol>
+                </div>
+                    <% theme.ideas.each do |idea| %>
+                    <%= render partial: "ideas/idea", object: idea %>
+                  <% end %>
+            </div>
+    
               <%= hidden_field_tag "id_theme" %>
-            <% end %>
-            <%= render 'ideas/form', id_theme: theme.id %>
+            <% end %>       
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Inserir ideia</h2>
+              <%= render 'ideas/form', id_theme: theme.id %>
+            </div>
+            </div>
+          
           </div>
         <% end %>
       <% else %>
-          <div id="tab-<%= @themes.first.id %>" class="tab-pane active">
-            <%= form_for update_theme_ideas_ideas_path, :html => {:id => @themes.first.id, :class => "selected-ideas"}, method: :get do %>
-              <% @ideas.each do |idea| %>
-                <%= render partial: "ideas/idea", object: idea %>
-              <% end %>
+          
+<% @themes.each do |theme| %>
+          <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+            <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Ideias</h2>
+                  <ol class="breadcrumb">
+                    <li>
+                        <strong><%=@ideation_session.name%></strong>
+                    </li>
+                    <li class="active">
+                      <strong><%=theme.name%></strong>
+                    </li>
+                  </ol>
+                </div>
+                    <% theme.ideas.each do |idea| %>
+                    <%= render partial: "ideas/idea", object: idea %>
+                  <% end %>
+            </div>
+    
               <%= hidden_field_tag "id_theme" %>
-            <% end %>
-            <%= render 'ideas/form', id_theme: @themes.first.id %>
+            <% end %>       
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Inserir ideia</h2>
+
+              <%= render 'ideas/form', id_theme: theme.id %>
+            </div>
+            </div>
+          
           </div>
-  
+        <% end %>
+
       <% end %>
     </div>
   </div>
