@@ -299,6 +299,13 @@ ul.notes li div {
   -webkit-transition: -webkit-transform 0.15s linear;
 }
 
+.notas {
+  position: relative;
+  margin-right: 180px;
+  margin-top: 180px;
+  background-color: red;
+}
+
 ul.notes.c1 li div {
   background: #FDC331;
   -moz-box-shadow: 2px 1px 5px #FB9509;

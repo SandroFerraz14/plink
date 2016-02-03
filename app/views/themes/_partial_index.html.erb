@@ -34,18 +34,44 @@
       <% end %>
     </div>
   </div>
+
+
+
+
   <div class="panel-body">
     <div class="tab-content">
       <% if current_user.id==@ideation_session.user_id %>
         <% @themes.each do |theme| %>
           <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
             <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
-              <% theme.ideas.each do |idea| %>
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Nome</h2>
+              <ol class="breadcrumb">
+                <li>
+                    <a><%=@ideation_session.name%></a>
+                </li>
+                <li class="active">
+                  <strong><%=theme.name%></strong>
+                </li>
+              </ol>
+            </div>
+                <% theme.ideas.each do |idea| %>
                 <%= render partial: "ideas/idea", object: idea %>
               <% end %>
+        </div>
+    
               <%= hidden_field_tag "id_theme" %>
-            <% end %>
-            <%= render 'ideas/form', id_theme: theme.id %>
+            <% end %>       
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Inserir ideia:</h2>
+                <%= render 'ideas/form', id_theme: theme.id %>
+            </div>
+            </div>
+          
           </div>
         <% end %>
       <% else %>
