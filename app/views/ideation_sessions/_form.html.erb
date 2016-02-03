@@ -13,16 +13,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name  %><br>
-    <%= f.text_field :name,class: "form-control" %>
+    <%= f.text_field :name, placeholder: :name, class: "form-control", required: true %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description ,class: "form-control" %>
-  </div>
-
   <br>
- <div class="field">
+  <div class="field">
+    <%= f.text_area :description, placeholder: :description, class: "form-control", required: true %>
+  </div>
+  <br>
+  <div class="field">
+    <label>Set duration</label>
+    <div class="input-daterange input-group">
+      <%= f.text_field :start_time, class: "input-sm form-control" %>
+      <span class="input-group-addon">to</span>
+      <%= f.text_field :end_time, class: "input-sm form-control" %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="field">
     <%= f.select :anonymity, options_for_select([["No Anonymity",0],["All Anonymous",1],["User Choice",2]]) %>
   </div>
   <br>
@@ -37,3 +45,29 @@
 <%= link_to 'Back', ideation_sessions_path %>
 
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var datepickerStartId = "#ideation_session_start_time";
+    $(datepickerStartId).datetimepicker({ 
+ 
+    });
+    $(datepickerStartId).on("dp.change", function (e) {
+      $(this).attr('value', $(datepickerStartId).val());
+    });
+    
+    var datepickerEndId = "#ideation_session_end_time";
+    $(datepickerEndId).datetimepicker({ 
+      useCurrent: false
+    });
+    $(datepickerEndId).on("dp.change", function (e) {
+      $(this).attr('value', $(datepickerEndId).val());
+    });
+
+    $(datepickerStartId).on("dp.change", function (e) {
+        $(datepickerEndId).data("DateTimePicker").minDate(e.date);
+    });
+    $(datepickerEndId).on("dp.change", function (e) {
+        $(datepickerStartId).data("DateTimePicker").maxDate(e.date);
+    });
+  });
+</script>
