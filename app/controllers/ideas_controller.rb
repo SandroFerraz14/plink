@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  before_action :set_comments, only: [:show, :destroy]
 
   # GET /ideas
   # GET /ideas.json
@@ -98,6 +99,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:user_id, :ideation_session_id, :text, :color, :number)
+      params.require(:idea).permit(:user_id, :ideation_session_id, :text, :color, :number, comments_attributes: [:id, :participant_id, :idea_id, :body])
     end
 end

@@ -4,9 +4,9 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
     @idea = Idea.find(params[:idea_id])
     @ideation_session = IdeationSession.find(@idea.ideation_session_id)
+    @comments = Comment.where(idea_id: @idea.id)
 
   end
 
@@ -19,6 +19,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @idea = Idea.find(params[:idea_id])
+    @ideation_session = IdeationSession.find(@idea.ideation_session_id)
 
 
   end
@@ -30,18 +32,17 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    @comments = Comment.all
     @idea = Idea.find(params[:idea_id])
     @ideation_session = IdeationSession.find(@idea.ideation_session_id)
     @comment = Comment.new(comment_params)
     @comment.idea_id = @idea.id
-    @comment.participant_id = current_user.id
+    @comment.participant_id = Participant.where(user_id: current_user.id).first.id
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        format.html { redirect_to idea_comments_path(@idea), notice: 'Comment was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,9 +64,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @idea = Idea.find(@comment.idea_id)
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to idea_comments_path(@idea), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Participant</th>
-      <th>Idea</th>
+      <th>Data</th>
       <th>Body</th>
       <th colspan="3"></th>
     </tr>
@@ -15,11 +15,9 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td><%= comment.participant %></td>
-        <td><%= comment.idea %></td>
+        <td><%= comment.participant.nickname   %></td>
+        <td><%= comment.created_at %></td>
         <td><%= comment.body %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
         <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -28,11 +26,11 @@
 
 <br>
 
-
+<!-- 
 
 <%= @idea.id %>
 <%= @ideation_session.id %>
-
+ -->
 
 <%= render 'comments/form', id_idea: @idea.id %>
 <br>

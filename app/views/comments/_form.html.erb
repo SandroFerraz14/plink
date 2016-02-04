@@ -1,32 +1,16 @@
-<%= form_for @comment do |f| %>
-
-<%#= form_for([@idea, @idea.comments.build], id_idea: id_idea) do |f| %>
-
-
-
-
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-      <% @comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %> 
-      </ul>
-    </div>
-  <% end %>
-
-
   ID da Ideia <%= @idea.id %><br>
   Texto da ideia: <%= @idea.text %><br>
-  Texto da ideia: <%= @ideation_session.id %><br>
+  Sessão: <%= @ideation_session.id %><br>
 
-  <div class="field">
+
+<%= form_for([@idea, @idea.comments.build]) do |f| %>
+
+<div class="field">
     <%= f.label :body %><br>
     <%= f.text_field :body %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
