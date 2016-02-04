@@ -110,6 +110,20 @@ class IdeasController < ApplicationController
       render json: [{ message: 'Ideas voted with success.' }]
     end
   end
+  
+  def vote_remove
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      @ideas = Idea.find(ids)
+      vote_ids = []
+      @ideas.each do |idea|
+        vote_id = Vote.where(idea_id: idea.id, participant_id: params[:id_participant], ideation_session_id: params[:id_ideation_session]).take.id
+        vote_ids.push(vote_id)
+      end
+      Vote.destroy(vote_ids)
+      render json: [{ message: 'Voted removed with success.' }]
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

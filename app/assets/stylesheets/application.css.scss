@@ -76,3 +76,10 @@ img.logo{
 ul.notes{
     margin-top: 5px !important;
 }
+
+ul.notes li div a.remove-vote {
+  	position: relative !important;
+  	right: initial !important;
+  	bottom: initial !important;
+  	padding-left:5px;
+}

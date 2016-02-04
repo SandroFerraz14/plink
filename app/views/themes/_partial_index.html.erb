@@ -188,8 +188,30 @@
       data: form.serialize(),
       success: function(data){
         form.find('input:checked').each(function () {
-          //var ideaForRemove = $(this).parents().eq(2);
-          //ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+          var ideaVoted = $(this).parents().eq(2);
+          if (ideaVoted.find("#vote-actions").children().length == 0){
+            var html = '<i class="fa fa-thumbs-o-up" title="You voted that idea"></i><a onclick="removeVote($(this))" alt="Remove vote" title="Remove vote" class="remove-vote" href="#"><i class="fa fa-times"></i></a>';
+            ideaVoted.find("#vote-actions").append(html).hide().fadeIn(500);
+          }
+        });
+        console.log(data[0].message);
+      }
+    });
+  }
+  function removeVote(el) {
+    var elsForRemove = el.parent();
+    var form = el.parents().eq(5);
+    form.find("[type=checkbox]").prop('checked', false);
+    el.parents().eq(2).find("[type=checkbox]").prop('checked', true);
+    $.ajax({
+      type: "GET",
+      url: "/ideas/vote_remove",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        elsForRemove.fadeOut(500, function() {
+          $(this).empty().show();
         });
         console.log(data[0].message);
       }

@@ -1,11 +1,16 @@
-
+<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <ul class="notes <%=idea.color%>">
     <li>
         <div>   
             <small><%= check_box_tag "idea_ids[]", idea.id %></small>
-            <% if current_user.id==@ideation_session.user_id %>
-                
-            <% end %>
+            <section id="vote-actions">
+                <% if idea.votes.where(idea_id: idea.id, participant_id: @part.id, ideation_session_id: @ideation_session.id).exists? %>
+                    <i class="fa fa-thumbs-o-up", title="You voted that idea"></i>
+                    <%= link_to '#', onclick: "removeVote($(this))", alt: "Remove vote", title: "Remove vote", class: "remove-vote" do %>
+                        <i class="fa fa-times"></i>
+                    <% end %>
+                <% end %>
+            </section>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
             <% if current_user.id==@ideation_session.user_id %>

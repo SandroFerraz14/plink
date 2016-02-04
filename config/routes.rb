@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :update_theme_ideas
       get :vote_ideas
       get :delete_ideas
+      get :vote_remove
     end
   end
   
