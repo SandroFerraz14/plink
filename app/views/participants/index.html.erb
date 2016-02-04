@@ -1,7 +1,13 @@
 <p id="notice"><%= notice %></p>
-
+<h1><%=@ideation_session.name%></h1>
+<br>
+<h2><%=@ideation_session.description%></h2>
+<br>
+<h3>Session start: </h3><h2><%=@ideation_session.start_time.to_s %></h2>
+<h3>Session end: </h3><h2><%=@ideation_session.end_time.to_s %></h2>
+<br>
 <h1>Participants</h1>
-
+<div>Anonymity: <%=@ideation_session.anonymity%></div>
 <table class="footable table">
   <thead>
     <tr>
