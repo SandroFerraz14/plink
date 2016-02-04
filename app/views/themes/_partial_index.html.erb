@@ -46,8 +46,8 @@
                     <%= render partial: "formTools" %>
                     <% theme.ideas.each do |idea| %>
                     <%= render partial: "ideas/idea", object: idea %>
-                     <%= hidden_field_tag "id_theme" %>
                   <% end %>
+                  <%= hidden_field_tag "id_theme" %>
             </div>
     
              
@@ -63,7 +63,7 @@
         <% end %>
       <% else %>
           
-<% @themes.each do |theme| %>
+      <% @themes.each do |theme| %>
           <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
             <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
 
@@ -83,8 +83,8 @@
                     <%= render partial: "formTools" %>
                     <% theme.ideas.each do |idea| %>
                     <%= render partial: "ideas/idea", object: idea %>
-                    <%= hidden_field_tag "id_theme" %>
                   <% end %>
+                   <%= hidden_field_tag "id_theme" %>
             </div>
             <% end %>       
 
@@ -143,6 +143,7 @@
   }
   function updateThemeIdeas(form, themeId) {
     form.find("#id_theme").val(themeId);
+    console.log(form.find("#id_theme"));
     $.ajax({
       type: "GET",
       url: "/ideas/update_theme_ideas",
