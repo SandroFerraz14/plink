@@ -46,10 +46,11 @@
                     <%= render partial: "formTools" %>
                     <% theme.ideas.each do |idea| %>
                     <%= render partial: "ideas/idea", object: idea %>
+                     <%= hidden_field_tag "id_theme" %>
                   <% end %>
             </div>
     
-              <%= hidden_field_tag "id_theme" %>
+             
             <% end %>       
 
           <div class="row wrapper border-bottom white-bg page-heading">
@@ -82,10 +83,9 @@
                     <%= render partial: "formTools" %>
                     <% theme.ideas.each do |idea| %>
                     <%= render partial: "ideas/idea", object: idea %>
+                    <%= hidden_field_tag "id_theme" %>
                   <% end %>
             </div>
-    
-              <%= hidden_field_tag "id_theme" %>
             <% end %>       
 
           <div class="row wrapper border-bottom white-bg page-heading">
@@ -148,8 +148,8 @@
       data: form.serialize(),
       success: function(data){
         form.find('input:checked').each(function () {
-          var ideaForRemove = $(this).parents().eq(2);
-          $("form#" + themeId).append(ideaForRemove[0].outerHTML);
+          var ideaForRemove = $(this).parents().eq(3);
+          $("form#" + themeId).find(".page-heading").append(ideaForRemove[0].outerHTML);
           ideaForRemove.fadeOut(500, function() { $(this).remove(); });
         });
         console.log(data[0].message);
