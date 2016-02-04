@@ -24,8 +24,10 @@
     <label>Set duration</label>
     <div class="input-daterange input-group">
       <%= f.text_field :start_time, class: "input-sm form-control" %>
+      <%= hidden_field_tag "start_time_value" %>
       <span class="input-group-addon">to</span>
       <%= f.text_field :end_time, class: "input-sm form-control" %>
+      <%= hidden_field_tag "end_time_value" %>
     </div>
   </div>
   <br>
@@ -49,25 +51,22 @@
   $(document).ready(function() {
     var datepickerStartId = "#ideation_session_start_time";
     $(datepickerStartId).datetimepicker({ 
- 
+      format: "DD MMMM YYYY - hh:mm"
     });
-    $(datepickerStartId).on("dp.change", function (e) {
-      $(this).attr('value', $(datepickerStartId).val());
-    });
-    
+
     var datepickerEndId = "#ideation_session_end_time";
     $(datepickerEndId).datetimepicker({ 
+      format: "DD MMMM YYYY - hh:mm",
       useCurrent: false
-    });
-    $(datepickerEndId).on("dp.change", function (e) {
-      $(this).attr('value', $(datepickerEndId).val());
     });
 
     $(datepickerStartId).on("dp.change", function (e) {
-        $(datepickerEndId).data("DateTimePicker").minDate(e.date);
+      $("#start_time_value").attr('value', $(datepickerStartId).val());
+      $(datepickerEndId).data("DateTimePicker").minDate(e.date);
     });
     $(datepickerEndId).on("dp.change", function (e) {
-        $(datepickerStartId).data("DateTimePicker").maxDate(e.date);
+      $("#end_time_value").attr('value', $(datepickerEndId).val());
+      $(datepickerStartId).data("DateTimePicker").maxDate(e.date);
     });
   });
 </script>
