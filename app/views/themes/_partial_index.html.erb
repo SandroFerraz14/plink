@@ -96,11 +96,7 @@
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>Inserir ideia</h2>
-              <%if ideation_session.end_time.to_i >= Time.new.to_i %>
                 <%= render 'ideas/form', id_theme: theme.id %>
-              <%else%>
-                <%= redirect_to ideation_sessions_path ,{ confirm: 'This session has ended' }%>
-              <%end%>
             </div>
             </div>
           
