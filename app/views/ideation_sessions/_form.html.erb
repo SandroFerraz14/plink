@@ -21,6 +21,12 @@
   </div>
   <br>
   <div class="field">
+    <label>Set number of votes</label>
+    <br>
+    <%= f.number_field :number_votes, in: 0..100, step: 1, value: 3 %>
+  </div>
+  <br>
+  <div class="field">
     <label>Set duration</label>
     <div class="input-daterange input-group">
       <%= f.text_field :start_time, class: "input-sm form-control" %>

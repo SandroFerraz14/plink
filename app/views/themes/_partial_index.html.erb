@@ -51,8 +51,8 @@
                   <%= hidden_field_tag "id_theme" %>
                   <%= hidden_field_tag "id_participant", @part.id %>
                   <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
+                  <%= hidden_field_tag "how_many_votes_left", @ideation_session.number_votes - (Vote.where(participant_id: @part.id, ideation_session_id: @ideation_session.id).count) %>
             </div>
-    
              
             <% end %>       
 
@@ -180,23 +180,30 @@
     });
   }
   function voteIdeas(form) {
-    $.ajax({
-      type: "GET",
-      url: "/ideas/vote_ideas",
-      dataType: "json",
-      traditional: true,
-      data: form.serialize(),
-      success: function(data){
-        form.find('input:checked').each(function () {
-          var ideaVoted = $(this).parents().eq(2);
-          if (ideaVoted.find("#vote-actions").children().length == 0){
-            var html = '<i class="fa fa-thumbs-o-up" title="You voted that idea"></i><a onclick="removeVote($(this))" alt="Remove vote" title="Remove vote" class="remove-vote" href="#"><i class="fa fa-times"></i></a>';
-            ideaVoted.find("#vote-actions").append(html).hide().fadeIn(500);
-          }
-        });
-        console.log(data[0].message);
-      }
-    });
+    var votesLeft = parseInt($("#how_many_votes_left").val());
+    var numCheckedIdeas = form.find('input:checked').length;
+    if(numCheckedIdeas <= votesLeft){
+      $.ajax({
+        type: "GET",
+        url: "/ideas/vote_ideas",
+        dataType: "json",
+        traditional: true,
+        data: form.serialize(),
+        success: function(data){
+          form.find('input:checked').each(function () {
+            var ideaVoted = $(this).parents().eq(2);
+            if (ideaVoted.find("#vote-actions").children().length == 0){
+              var html = '<i class="fa fa-thumbs-o-up" title="You voted that idea"></i><a onclick="removeVote($(this))" alt="Remove vote" title="Remove vote" class="remove-vote" href="#"><i class="fa fa-times"></i></a>';
+              ideaVoted.find("#vote-actions").append(html).hide().fadeIn(500);
+            }
+          });
+          $("#how_many_votes_left").val(votesLeft - numCheckedIdeas);
+          console.log(data[0].message);
+        }
+      });
+    }else{
+      alert("Only left " + votesLeft + " votes.");  
+    }
   }
   function removeVote(el) {
     var elsForRemove = el.parent();
@@ -213,6 +220,7 @@
         elsForRemove.fadeOut(500, function() {
           $(this).empty().show();
         });
+        $("#how_many_votes_left").val(parseInt($("#how_many_votes_left").val()) + 1);
         console.log(data[0].message);
       }
     });
