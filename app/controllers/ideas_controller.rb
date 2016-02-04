@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
       @ideas.each do |idea|
         idea.update_attribute(:theme_id, params[:id_theme])
       end
-      render json: [{ message: '' }]
+      render json: [{ message: 'Topic changed with success.' }]
     end
   end
 
@@ -96,7 +96,18 @@ class IdeasController < ApplicationController
     if params[:idea_ids].present?
       ids = params[:idea_ids]
       Idea.destroy(ids)
-      render json: [{ message: '' }]
+      render json: [{ message: 'Ideas deleted with success' }]
+    end
+  end
+  
+  def vote_ideas
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      @ideas = Idea.find(ids)
+      @ideas.each do |idea|
+        Vote.create(idea_id: idea.id, participant_id: params[:id_participant], ideation_session_id: params[:id_ideation_session])
+      end
+      render json: [{ message: 'Ideas voted with success.' }]
     end
   end
 

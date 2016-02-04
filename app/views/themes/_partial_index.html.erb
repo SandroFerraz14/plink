@@ -1,3 +1,4 @@
+<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <div class="panel blank-panel">
   <div class="panel-heading">
     <br><br>
@@ -48,6 +49,8 @@
                     <%= render partial: "ideas/idea", object: idea %>
                   <% end %>
                   <%= hidden_field_tag "id_theme" %>
+                  <%= hidden_field_tag "id_participant", @part.id %>
+                  <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
             </div>
     
              
@@ -137,6 +140,8 @@
           updateThemeIdeas(form, themeId);
         } else if(keyAction.toLowerCase() == "deleteideias"){      
           deleteIdeas(form);
+        } else if(keyAction.toLowerCase() == "voteideias"){      
+          voteIdeas(form);
         }
       }
     })
@@ -171,6 +176,22 @@
         form.find('input:checked').each(function () {
           var ideaForRemove = $(this).parents().eq(2);
           ideaForRemove.fadeOut(500, function() { $(this).remove(); });
+        });
+        console.log(data[0].message);
+      }
+    });
+  }
+  function voteIdeas(form) {
+    $.ajax({
+      type: "GET",
+      url: "/ideas/vote_ideas",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        form.find('input:checked').each(function () {
+          //var ideaForRemove = $(this).parents().eq(2);
+          //ideaForRemove.fadeOut(500, function() { $(this).remove(); });
         });
         console.log(data[0].message);
       }
