@@ -27,18 +27,28 @@ class IdeasController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @idea = Idea.new(idea_params)
-    @idea.ideation_session = @ideation_session
-    @idea.user_id = current_user.id
-    @idea.number = @ideation_session.nideas
-    # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
-    @idea.theme_id = params[:id_theme]
-    @ideation_session.nideas = @idea.number + 1
-    @ideation_session.save
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to @ideation_session, notice: '' }
-      else
-        format.html { render :new }
+    @t=Time.new.to_i
+    @d=@ideation_session.end_time.to_i
+    if @d - @t >0
+      @idea=nil 
+      @ideation_session.available_session= false
+      respond_to do |format|
+        format.html { redirect_to ideation_sessions_path, prompt: 'The session has ended' }
+      end
+    else
+      @idea.ideation_session = @ideation_session
+      @idea.user_id = current_user.id
+      @idea.number = @ideation_session.nideas
+      # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
+      @idea.theme_id = params[:id_theme]
+      @ideation_session.nideas = @idea.number + 1
+      @ideation_session.save
+      respond_to do |format|
+        if @idea.save
+          format.html { redirect_to @ideation_session, notice: '' }
+        else
+          format.html { render :new }
+        end
       end
     end
   end
