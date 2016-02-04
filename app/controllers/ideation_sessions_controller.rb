@@ -92,7 +92,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes
