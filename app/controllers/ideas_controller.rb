@@ -29,12 +29,12 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
     @ideation_session.available_session = @ideation_session.available_session and @ideation_session.start_time.to_i <= Time.new.to_i 
     @ideation_session.available_session = @ideation_session.available_session and @ideation_session.end_time.to_i >= Time.new.to_i 
-    if !@ideation_session.available_session
-      @idea=nil 
-      respond_to do |format|
-        format.html { redirect_to ideation_sessions_path, prompt: 'The session has ended' }
-      end
-    else
+    # if !@ideation_session.available_session
+    #   @idea=nil 
+    #   respond_to do |format|
+    #     format.html { redirect_to ideation_sessions_path, prompt: 'The session has ended' }
+    #   end
+    # else
       @idea.ideation_session = @ideation_session
       @idea.user_id = current_user.id
       @idea.number = @ideation_session.nideas
@@ -49,7 +49,7 @@ class IdeasController < ApplicationController
           format.html { render :new }
         end
       end
-    end
+    # end
   end
 
   # PATCH/PUT /ideas/1
