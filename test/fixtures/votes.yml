@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idea_id: 
+  participant_id: 
+  ideation_session_id: 
+
+two:
+  idea_id: 
+  participant_id: 
+  ideation_session_id: 

@@ -16,4 +16,11 @@
 //= require inspinia.js
 //= require plugins/iCheck/icheck.min.js
 //= require plugins/footable/footable.all.min.js
+//= require plugins/jquery-validation/jquery.validate.js
+//= require plugins/jquery-validation/additional-methods.js
+//= require plugins/bootstrap-datepicker/moment.min.js
+//= require plugins/bootstrap-datepicker/bootstrap-datetimepicker.js
+//= require jquery.countdown
+//= require jquery.countdown-es
+
 

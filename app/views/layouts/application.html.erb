@@ -28,7 +28,7 @@
 
 
         <!-- Navigation -->
-        <% if params[:controller] == "ideation_sessions" && params[:action] == "index" %>
+        <% if params[:controller] == "ideation_sessions" && (params[:action] == "index" || params[:action] == "new") %>
             <%= render 'layouts/navigationSessions' %>
         <% else %>
             <%= render 'layouts/navigation' %>

@@ -28,20 +28,29 @@ class IdeasController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @idea = Idea.new(idea_params)
-    @idea.ideation_session = @ideation_session
-    @idea.user_id = current_user.id
-    @idea.number = @ideation_session.nideas
-    # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
-    @idea.theme_id = params[:id_theme]
-    @ideation_session.nideas = @idea.number + 1
-    @ideation_session.save
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to @ideation_session, notice: 'Idea was successfully created.' }
-      else
-        format.html { render :new }
+    @ideation_session.available_session = @ideation_session.available_session and @ideation_session.start_time.to_i <= Time.new.to_i 
+    @ideation_session.available_session = @ideation_session.available_session and @ideation_session.end_time.to_i >= Time.new.to_i 
+    # if !@ideation_session.available_session
+    #   @idea=nil 
+    #   respond_to do |format|
+    #     format.html { redirect_to ideation_sessions_path, prompt: 'The session has ended' }
+    #   end
+    # else
+      @idea.ideation_session = @ideation_session
+      @idea.user_id = current_user.id
+      @idea.number = @ideation_session.nideas
+      # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
+      @idea.theme_id = params[:id_theme]
+      @ideation_session.nideas = @idea.number + 1
+      @ideation_session.save
+      respond_to do |format|
+        if @idea.save
+          format.html { redirect_to @ideation_session, notice: '' }
+        else
+          format.html { render :new }
+        end
       end
-    end
+    # end
   end
 
   # PATCH/PUT /ideas/1
@@ -49,7 +58,7 @@ class IdeasController < ApplicationController
   def update
     respond_to do |format|
       if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+        format.html { redirect_to @idea, notice: '' }
         format.json { render :show, status: :ok, location: @idea }
       else
         format.html { render :edit }
@@ -66,9 +75,9 @@ class IdeasController < ApplicationController
     @ideation_session = IdeationSession.find(id_session)
     if @idea.present?
       @idea.destroy
-      redirect_to ideation_session_path(@ideation_session), notice: 'Idea was successfully destroyed.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     else
-      redirect_to ideation_session_path(@ideation_session), notice: 'Error try destroyed Idea.'
+      redirect_to ideation_session_path(@ideation_session), notice: ''
     end
   end
 
@@ -79,7 +88,7 @@ class IdeasController < ApplicationController
       @ideas.each do |idea|
         idea.update_attribute(:theme_id, params[:id_theme])
       end
-      render json: [{ message: 'Ideas updated with success' }]
+      render json: [{ message: 'Topic changed with success.' }]
     end
   end
 
@@ -88,6 +97,31 @@ class IdeasController < ApplicationController
       ids = params[:idea_ids]
       Idea.destroy(ids)
       render json: [{ message: 'Ideas deleted with success' }]
+    end
+  end
+  
+  def vote_ideas
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      @ideas = Idea.find(ids)
+      @ideas.each do |idea|
+        Vote.create(idea_id: idea.id, participant_id: params[:id_participant], ideation_session_id: params[:id_ideation_session])
+      end
+      render json: [{ message: 'Ideas voted with success.' }]
+    end
+  end
+  
+  def vote_remove
+    if params[:idea_ids].present?
+      ids = params[:idea_ids]
+      @ideas = Idea.find(ids)
+      vote_ids = []
+      @ideas.each do |idea|
+        vote_id = Vote.where(idea_id: idea.id, participant_id: params[:id_participant], ideation_session_id: params[:id_ideation_session]).take.id
+        vote_ids.push(vote_id)
+      end
+      Vote.destroy(vote_ids)
+      render json: [{ message: 'Voted removed with success.' }]
     end
   end
 

@@ -24,6 +24,9 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.new(ideation_session_params)
     @ideation_session.nideas = 1
     @ideation_session.user_id = current_user.id
+    @ideation_session.start_time = params[:start_time_value]
+    @ideation_session.end_time = params[:end_time_value]
+    @ideation_session.available_session = (@ideation_session.start_time.to_i <= Time.new.to_i and @ideation_session.end_time.to_i >= Time.new.to_i) 
     respond_to do |format|
       if @ideation_session.save
         theme = Theme.new
@@ -89,7 +92,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes

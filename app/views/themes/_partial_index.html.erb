@@ -1,64 +1,108 @@
+<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <div class="panel blank-panel">
   <div class="panel-heading">
-    <% if current_user.id==@ideation_session.user_id %>
-      <div class="btn-group">
-        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Theme <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-           <% @themes.each do |theme| %>
-            <li><%= link_to theme.name, '#', onclick: "selectedIdeas('changetheme', #{theme.id})" %></li>
-           <% end %>
-        </ul>
-      </div>
-      <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)" do %>
-        <i class="fa fa-trash-o"></i>
-      <% end %>
-    <% end %>
+    <br><br>
     <div class="panel-options">
-      <% if current_user.id==@ideation_session.user_id %> 
         <ul class="nav nav-tabs">
           <% @themes.each do |theme| %>
              <li class="<%= (@themes.first == theme) ? "active" : "" %>">
                 <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
-                <% if (@themes.first != theme) %>
+                <% if (@themes.first != theme) and current_user.id==@ideation_session.user_id %>
                   <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
                 <% end %>
              </li>
           <% end %>
+          <% if current_user.id==@ideation_session.user_id %> 
           <li>
             <%= render 'themes/form' %>
-             <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-primary pull-left add-item") do %>
+             <%= button_tag(type: "button", onclick: "showFormTopic();", class: "btn btn-success pull-left add-item") do %>
               <i class="glyphicon glyphicon-plus"></i>
             <% end %>
           </li>
+          <% end %>
         </ul>
-      <% end %>
     </div>
   </div>
+
   <div class="panel-body">
     <div class="tab-content">
       <% if current_user.id==@ideation_session.user_id %>
         <% @themes.each do |theme| %>
           <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
             <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
-              <% theme.ideas.each do |idea| %>
-                <%= render partial: "ideas/idea", object: idea %>
-              <% end %>
-              <%= hidden_field_tag "id_theme" %>
-            <% end %>
-            <%= render 'ideas/form', id_theme: theme.id %>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Ideas</h2>
+                  <ol class="breadcrumb">
+                    <li>
+                        <strong><%=@ideation_session.name%></strong>
+                    </li>
+                    <li class="active">
+                      <strong><%=theme.name%></strong>
+                    </li>
+                  </ol>
+                </div>
+                    <br><br>
+                    <%= render partial: "formTools" %>
+                    <% theme.ideas.each do |idea| %>
+                    <%= render partial: "ideas/idea", object: idea %>
+                  <% end %>
+                  <%= hidden_field_tag "id_theme" %>
+                  <%= hidden_field_tag "id_participant", @part.id %>
+                  <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
+                  <%= hidden_field_tag "how_many_votes_left", @ideation_session.number_votes - (Vote.where(participant_id: @part.id, ideation_session_id: @ideation_session.id).count) %>
+            </div>
+             
+            <% end %>       
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Insert idea</h2>
+              <%= render 'ideas/form', id_theme: theme.id %>
+            </div>
+            </div>
           </div>
         <% end %>
       <% else %>
-          <div id="tab-<%= @themes.first.id %>" class="tab-pane active">
-            <%= form_for update_theme_ideas_ideas_path, :html => {:id => @themes.first.id, :class => "selected-ideas"}, method: :get do %>
-              <% @ideas.each do |idea| %>
-                <%= render partial: "ideas/idea", object: idea %>
-              <% end %>
-              <%= hidden_field_tag "id_theme" %>
-            <% end %>
-            <%= render 'ideas/form', id_theme: @themes.first.id %>
+          
+      <% @themes.each do |theme| %>
+          <div id="tab-<%= theme.id %>" class="tab-pane <%= (@themes.first == theme) ? "active" : "" %>">
+            <%= form_for update_theme_ideas_ideas_path, :html => {:id => theme.id, :class => "selected-ideas"}, method: :get do %>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Ideias</h2>
+                  <ol class="breadcrumb">
+                    <li>
+                        <strong><%=@ideation_session.name%></strong>
+                    </li>
+                    <li class="active">
+                      <strong><%=theme.name%></strong>
+                    </li>
+                  </ol>
+                </div>
+                    <br><br>
+                    <%= render partial: "formTools" %>
+                    <% theme.ideas.each do |idea| %>
+                    <%= render partial: "ideas/idea", object: idea %>
+                  <% end %>
+                   <%= hidden_field_tag "id_theme" %>
+                   <%= hidden_field_tag "id_participant", @part.id %>
+                   <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
+            </div>
+            <% end %>       
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Inserir ideia</h2>
+                <%= render 'ideas/form', id_theme: theme.id %>
+            </div>
+            </div>
+          
           </div>
-  
+        <% end %>
+
       <% end %>
     </div>
   </div>
@@ -94,12 +138,15 @@
           updateThemeIdeas(form, themeId);
         } else if(keyAction.toLowerCase() == "deleteideias"){      
           deleteIdeas(form);
+        } else if(keyAction.toLowerCase() == "voteideias"){      
+          voteIdeas(form);
         }
       }
     })
   }
   function updateThemeIdeas(form, themeId) {
     form.find("#id_theme").val(themeId);
+    console.log(form.find("#id_theme"));
     $.ajax({
       type: "GET",
       url: "/ideas/update_theme_ideas",
@@ -108,8 +155,8 @@
       data: form.serialize(),
       success: function(data){
         form.find('input:checked').each(function () {
-          var ideaForRemove = $(this).parents().eq(2);
-          $("form#" + themeId).append(ideaForRemove[0].outerHTML);
+          var ideaForRemove = $(this).parents().eq(3);
+          $("form#" + themeId).find(".page-heading").append(ideaForRemove[0].outerHTML);
           ideaForRemove.fadeOut(500, function() { $(this).remove(); });
         });
         console.log(data[0].message);
@@ -128,6 +175,52 @@
           var ideaForRemove = $(this).parents().eq(2);
           ideaForRemove.fadeOut(500, function() { $(this).remove(); });
         });
+        console.log(data[0].message);
+      }
+    });
+  }
+  function voteIdeas(form) {
+    var votesLeft = parseInt($("#how_many_votes_left").val());
+    var numCheckedIdeas = form.find('input:checked').length;
+    if(numCheckedIdeas <= votesLeft){
+      $.ajax({
+        type: "GET",
+        url: "/ideas/vote_ideas",
+        dataType: "json",
+        traditional: true,
+        data: form.serialize(),
+        success: function(data){
+          form.find('input:checked').each(function () {
+            var ideaVoted = $(this).parents().eq(2);
+            if (ideaVoted.find("#vote-actions").children().length == 0){
+              var html = '<i class="fa fa-thumbs-o-up" title="You voted that idea"></i><a onclick="removeVote($(this))" alt="Remove vote" title="Remove vote" class="remove-vote" href="#"><i class="fa fa-times"></i></a>';
+              ideaVoted.find("#vote-actions").append(html).hide().fadeIn(500);
+            }
+          });
+          $("#how_many_votes_left").val(votesLeft - numCheckedIdeas);
+          console.log(data[0].message);
+        }
+      });
+    }else{
+      alert("Only left " + votesLeft + " votes.");  
+    }
+  }
+  function removeVote(el) {
+    var elsForRemove = el.parent();
+    var form = el.parents().eq(5);
+    form.find("[type=checkbox]").prop('checked', false);
+    el.parents().eq(2).find("[type=checkbox]").prop('checked', true);
+    $.ajax({
+      type: "GET",
+      url: "/ideas/vote_remove",
+      dataType: "json",
+      traditional: true,
+      data: form.serialize(),
+      success: function(data){
+        elsForRemove.fadeOut(500, function() {
+          $(this).empty().show();
+        });
+        $("#how_many_votes_left").val(parseInt($("#how_many_votes_left").val()) + 1);
         console.log(data[0].message);
       }
     });

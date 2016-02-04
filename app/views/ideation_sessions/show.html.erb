@@ -7,6 +7,7 @@
     <% else %>
     
 	<% end %>
+	<%="Session ends in: "+ @ideation_session.end_time.to_s %>
 
 	<p id="notice"><%= notice %></p>
 
@@ -17,9 +18,10 @@
 		<!--<%= render 'participants/form' %>-->
 	<% end %>
 	<!--<%= link_to 'Edit', edit_ideation_session_path(@ideation_session) %> |-->
-	<!--<%= link_to 'Back', ideation_sessions_path %>-->
+	<br>
+	<%= link_to 'Back', ideation_sessions_path %>
 <% else %>
 	<p>
-		Não tem acesso a esta sessão
+		Access denied.
 	</p>
 <% end %>	

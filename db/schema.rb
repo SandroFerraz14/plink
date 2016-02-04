@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160202221852) do
 
   create_table "comments", force: :cascade do |t|
@@ -23,6 +24,9 @@ ActiveRecord::Schema.define(version: 20160202221852) do
 
   add_index "comments", ["idea_id"], name: "index_comments_on_idea_id"
   add_index "comments", ["participant_id"], name: "index_comments_on_participant_id"
+=======
+ActiveRecord::Schema.define(version: 20160204181247) do
+>>>>>>> master
 
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
@@ -48,6 +52,11 @@ ActiveRecord::Schema.define(version: 20160202221852) do
     t.integer  "user_id"
     t.integer  "anonymity"
     t.boolean  "allow_comments"
+    t.boolean  "available"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "available_session"
+    t.integer  "number_votes"
   end
 
   add_index "ideation_sessions", ["user_id"], name: "index_ideation_sessions_on_user_id"
@@ -111,5 +120,17 @@ ActiveRecord::Schema.define(version: 20160202221852) do
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "idea_id"
+    t.integer  "participant_id"
+    t.integer  "ideation_session_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "votes", ["idea_id"], name: "index_votes_on_idea_id"
+  add_index "votes", ["ideation_session_id"], name: "index_votes_on_ideation_session_id"
+  add_index "votes", ["participant_id"], name: "index_votes_on_participant_id"
 
 end
