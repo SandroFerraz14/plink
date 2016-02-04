@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204002830) do
+ActiveRecord::Schema.define(version: 20160204115452) do
 
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
@@ -103,5 +103,17 @@ ActiveRecord::Schema.define(version: 20160204002830) do
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "idea_id"
+    t.integer  "participant_id"
+    t.integer  "ideation_session_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "votes", ["idea_id"], name: "index_votes_on_idea_id"
+  add_index "votes", ["ideation_session_id"], name: "index_votes_on_ideation_session_id"
+  add_index "votes", ["participant_id"], name: "index_votes_on_participant_id"
 
 end
