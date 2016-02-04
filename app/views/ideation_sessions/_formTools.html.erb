@@ -8,11 +8,11 @@
         </ul>
       </div>
       
-      <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)", class: "btn btn-danger dropdown-toggle" do %>
-        <i class="fa fa-trash-o"></i>
+      <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-success", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
+        <i class="glyphicon glyphicon-inbox"></i>
       <% end %>
       
-      <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-white dropdown-toggle" do %>
+      <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)", class: "btn btn-danger", alt: "Delete selected ideas", title: "Delete selected ideas" do %>
         <i class="fa fa-trash-o"></i>
       <% end %>
 

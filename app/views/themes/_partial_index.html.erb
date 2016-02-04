@@ -88,6 +88,8 @@
                     <%= render partial: "ideas/idea", object: idea %>
                   <% end %>
                    <%= hidden_field_tag "id_theme" %>
+                   <%= hidden_field_tag "id_participant", @part.id %>
+                   <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
             </div>
             <% end %>       
 
