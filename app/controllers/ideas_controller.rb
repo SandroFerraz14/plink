@@ -27,11 +27,10 @@ class IdeasController < ApplicationController
   def create
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @idea = Idea.new(idea_params)
-    @t=Time.new.to_i
-    @d=@ideation_session.end_time.to_i
-    if @d - @t >0
+    @ideation_session.available_session = @ideation_session.available_session and @ideation_session.start_time.to_i <= Time.new.to_i 
+    @ideation_session.available_session = @ideation_session.available_session and @ideation_session.end_time.to_i >= Time.new.to_i 
+    if !@ideation_session.available_session
       @idea=nil 
-      @ideation_session.available_session= false
       respond_to do |format|
         format.html { redirect_to ideation_sessions_path, prompt: 'The session has ended' }
       end
