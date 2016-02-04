@@ -12,16 +12,21 @@
               <div class="col-xs-8 text-right">
                 </div>
                 <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
-                <%= ideation_session.description %>
-
+                <%="Starts in: "+ ideation_session.start_time.to_s %>
+                <br>
+                <%="Ends in: "+ ideation_session.end_time.to_s %>
+                <br>
+                <%=ideation_session.description %>
                 <br><br>
 
                 <div class = "linkbranco">
                   <h2 class="font-bold">
-                    <%= link_to ideation_session, method: :get  do %>
-                      <i class="fa fa-eye"></i>
+                    <% if ideation_session.available_session %> 
+                      <%= link_to ideation_session, method: :get  do %>
+                        <i class="fa fa-eye"></i>
+                      <%end %> 
                     <%end %>
-
+                   
                     <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
                       <i class="fa fa-edit"></i>
                     <%end %>
