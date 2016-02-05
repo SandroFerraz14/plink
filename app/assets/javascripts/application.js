@@ -20,7 +20,6 @@
 //= require plugins/jquery-validation/additional-methods.js
 //= require plugins/bootstrap-datepicker/moment.min.js
 //= require plugins/bootstrap-datepicker/bootstrap-datetimepicker.js
-//= require jquery.countdown
-//= require jquery.countdown-es
+//= require plugins/countdown/countdown.js
 
 

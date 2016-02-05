@@ -7,8 +7,9 @@
     <% else %>
     
 	<% end %>
-	<%="Session ends in: "+ @ideation_session.end_time.to_s %>
-
+	
+	<div id="countdown">
+    </div>
 	<p id="notice"><%= notice %></p>
 
 	<%= render 'themes/partial_index' %>
@@ -25,3 +26,19 @@
 		Access denied.
 	</p>
 <% end %>	
+<script type="text/javascript">
+	
+	var endTime = <%= Time.zone.parse(@ideation_session.end_time.to_s).to_i %>;
+	var dateFinish = endTime * 1000;
+	if(new Date() <= dateFinish){
+		var timerId =
+		  countdown(
+		    dateFinish,
+		    function(ts) {
+		      document.getElementById('countdown').innerHTML = ts.toHTML("strong");
+		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
+		      	clearInterval(timerId);
+		    },
+		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+	}
+</script>
