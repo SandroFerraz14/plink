@@ -1,15 +1,14 @@
 @font-face {
   font-family: 'footable';
-  src: url('fonts/footable.eot');
-  src: url('fonts/footable.eot?#iefix') format('embedded-opentype'), url('fonts/footable.woff') format('woff'), url('fonts/footable.ttf') format('truetype'), url('fonts/footable.svg#footable') format('svg');
+  src: url('/assets/footable.eot');
+  src: url('/assets/footable.eot?#iefix') format('embedded-opentype'), url('/assets/footable.woff') format('woff'), url('/assets/footable.ttf') format('truetype'), url('/assets/footable.svg#footable') format('svg');
   font-weight: normal;
   font-style: normal;
 }
-
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   @font-face {
     font-family: 'footable';
-    src: url('fonts/footable.svg#footable') format('svg');
+    src: url('/assets/footable.svg#footable') format('svg');
     font-weight: normal;
     font-style: normal;
   }
