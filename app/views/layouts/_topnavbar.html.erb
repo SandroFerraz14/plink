@@ -108,13 +108,17 @@
                     </li>
                 </ul>
             </li> -->
-
+                
+        <% if user_signed_in? %>
 
             <li>
-                <% if user_signed_in? %>
-                  <%= link_to '<i class="fa fa-sign-out"></i> Logout'.html_safe, destroy_user_session_path, method: :delete  %>
-                <% end %>
-        </li>
+                <%= link_to '<i class="fa fa-sign-out"></i> Edit'.html_safe, edit_user_registration_path  %>
+            </li>
+
+            <li>
+                <%= link_to '<i class="fa fa-sign-out"></i> Logout'.html_safe, destroy_user_session_path, method: :delete  %>
+            </li>
+        <% end %>
 
             <!-- <li>
                 <a class="right-sidebar-toggle">

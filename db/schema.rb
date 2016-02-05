@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160202221852) do
+ActiveRecord::Schema.define(version: 20160205185012) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "participant_id"
@@ -24,9 +23,6 @@ ActiveRecord::Schema.define(version: 20160202221852) do
 
   add_index "comments", ["idea_id"], name: "index_comments_on_idea_id"
   add_index "comments", ["participant_id"], name: "index_comments_on_participant_id"
-=======
-ActiveRecord::Schema.define(version: 20160204181247) do
->>>>>>> master
 
   create_table "ideas", force: :cascade do |t|
     t.integer  "user_id"
@@ -46,15 +42,15 @@ ActiveRecord::Schema.define(version: 20160204181247) do
   create_table "ideation_sessions", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "nideas"
     t.integer  "user_id"
     t.integer  "anonymity"
     t.boolean  "allow_comments"
-    t.boolean  "available"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean  "available"
     t.boolean  "available_session"
     t.integer  "number_votes"
   end
@@ -113,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160204181247) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
     t.string   "user_photo_file_name"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
