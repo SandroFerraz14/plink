@@ -39,9 +39,10 @@
 		    function(ts) {
 		      document.getElementById("countdown").innerHTML = ts.toHTML("strong");
 		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
+		      {
 		      	clearInterval(timerId);
-		      else
 		      	$("#countdown").append("<span>Finished</span>");
+		      }
 		    },
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
 	}
