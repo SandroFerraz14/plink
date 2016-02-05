@@ -7,8 +7,10 @@
     <% else %>
     
 	<% end %>
-	
 	<div id="countdown">
+		<% if (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i) %>
+			<span>Finished</span>
+		<% end %>
     </div>
 	<p id="notice"><%= notice %></p>
 
@@ -35,9 +37,11 @@
 		  countdown(
 		    dateFinish,
 		    function(ts) {
-		      document.getElementById('countdown').innerHTML = ts.toHTML("strong");
+		      document.getElementById("countdown").innerHTML = ts.toHTML("strong");
 		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
 		      	clearInterval(timerId);
+		      else
+		      	$("#countdown").append("<span>Finished</span>");
 		    },
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
 	}

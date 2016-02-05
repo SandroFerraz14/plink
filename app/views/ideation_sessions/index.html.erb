@@ -20,11 +20,9 @@
                 <br><br>
                 <div class = "linkbranco">
                   <h2 class="font-bold">
-                    <% if ideation_session.available_session %>
-                      <%= link_to ideation_session, method: :get  do %>
-                        <i class="fa fa-eye"></i>
-                      <%end %>
-                    <%end%>
+                    <%= link_to ideation_session, method: :get  do %>
+                      <i class="fa fa-eye"></i>
+                    <%end %>
                     <% if current_user.id==ideation_session.user_id %>
                       <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
                         <i class="fa fa-edit"></i>
