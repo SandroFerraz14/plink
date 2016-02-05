@@ -38,7 +38,6 @@ class IdeationSessionsController < ApplicationController
     else
       @ideation_session.available_session = true
     end
-    byebug;1+1;
     respond_to do |format|
       if @ideation_session.save
         theme = Theme.new
