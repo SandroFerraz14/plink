@@ -23,16 +23,16 @@
   <div class="field">
     <label>Set number of votes</label>
     <br>
-    <%= f.number_field :number_votes, in: 0..100, step: 1, value: 3 %>
+    <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3  %>
   </div>
   <br>
   <div class="field">
     <label>Set duration</label>
     <div class="input-daterange input-group">
-      <%= f.text_field :start_time, class: "input-sm form-control" %>
+      <%= f.text_field :start_time, class: "input-sm form-control", value: (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y - %H:%M") : "" %>
       <%= hidden_field_tag "start_time_value" %>
       <span class="input-group-addon">to</span>
-      <%= f.text_field :end_time, class: "input-sm form-control" %>
+      <%= f.text_field :end_time, class: "input-sm form-control", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
       <%= hidden_field_tag "end_time_value" %>
     </div>
   </div>

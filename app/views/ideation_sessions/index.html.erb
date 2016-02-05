@@ -12,9 +12,9 @@
               <div class="col-xs-8 text-right">
                 </div>
                 <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
-                <%="Starts: "+ ideation_session.start_time.to_s %>
+                <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") : "" %>
                 <br>
-                <%="Ends: "+ ideation_session.end_time.to_s %>
+                <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("Start on %d %B %Y at %H:%M") : "" %>
                 <br>
                 <%=ideation_session.description %>
                 <br><br>
