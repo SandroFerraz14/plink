@@ -26,7 +26,19 @@ class IdeationSessionsController < ApplicationController
     @ideation_session.user_id = current_user.id
     @ideation_session.start_time = params[:start_time_value]
     @ideation_session.end_time = params[:end_time_value]
-    @ideation_session.available_session = (@ideation_session.start_time.to_i <= Time.new.to_i and @ideation_session.end_time.to_i >= Time.new.to_i) 
+
+    if @ideation_session.start_time == nil
+      @ideation_session.available_session = true
+    elsif @ideation_session.start_time.to_i > Time.new.to_i
+      @ideation_session.available_session = false
+    elsif @ideation_session.end_time == nil
+      @ideation_session.available_session = true
+    elsif @ideation_session.end_time.to_i < Time.new.to_i
+      @ideation_session.available_session = false
+    else
+      @ideation_session.available_session = true
+    end
+    byebug;1+1;
     respond_to do |format|
       if @ideation_session.save
         theme = Theme.new
@@ -47,9 +59,31 @@ class IdeationSessionsController < ApplicationController
   end
 
   def update
+    @ideation_session.start_time = params[:start_time_value]
+    @ideation_session.end_time = params[:end_time_value]
+    
+    if @ideation_session.start_time == nil
+      @ideation_session.available_session = true
+    end
+
+    if @ideation_session.start_time.to_i > Time.new.to_i
+      @ideation_session.available_session = false
+    elsif @ideation_session.end_time == nil
+      @ideation_session.available_session = true
+    elsif @ideation_session.end_time.to_i < Time.new.to_i
+      @ideation_session.available_session = false
+    else
+      @ideation_session.available_session = true
+    end
+
     respond_to do |format|
       if @ideation_session.update(ideation_session_params)
-        format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully updated.' }
+        if @ideation_session.available_session 
+          format.html { redirect_to @ideation_session, notice: 'Ideation session was successfully updated.' }
+        else
+          format.html { redirect_to ideation_sessions_path, notice: 'Ideation session was successfully updated.' }
+        end
+
       else
         format.html { render :edit }
       end
