@@ -33,22 +33,35 @@
 	</p>
 <% end %>	
 <script type="text/javascript">
+	var updateStatusSession = function(status){
+		$.ajax({
+	      type: "GET",
+	      url: "/ideation_sessions/set_availability",
+	      data: {'id_ideation_session': idIdeationSession, 'availability' : status},
+	      success: function(data){
+	        console.log(data[0].message);
+	      }
+	    });
+	}
 	
+	var idIdeationSession = <%= @ideation_session.id %>;
 	var startTime = <%= Time.zone.parse(@ideation_session.start_time.to_s).to_i %>;
 	var endTime = <%= Time.zone.parse(@ideation_session.end_time.to_s).to_i %>;
 	var dateStart = startTime * 1000;
 	var dateFinish = endTime * 1000;
 	if((new Date() <= dateFinish) && (new Date() > dateStart)){
+		updateStatusSession(true);
 		var timerId =
 		  countdown(
 		    dateFinish,
 		    function(ts) {
-		    	console.log(ts.toHTML("strong"));
 		      document.getElementById("countdown").innerHTML = "<span>The session ends on:</span><br>" + ts.toHTML("strong");
 		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
 		      {
 		      	clearInterval(timerId);
+		      	$("#countdown").html("");
 		      	$("#countdown").append("<span>The session is closed</span>");
+		      	updateStatusSession(false);
 		      }
 		    },
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);

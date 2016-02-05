@@ -10,7 +10,7 @@ class IdeationSessionsController < ApplicationController
   end
 
   def show
-
+    
   end
 
   def new
@@ -115,6 +115,11 @@ class IdeationSessionsController < ApplicationController
     redirect_to :back
   end
 
+  def set_availability
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    @ideation_session.update_attribute(:available_session, params[:availability])
+    render json: [{ message: 'Status of session updated with success.' }]
+  end
 
 
   private

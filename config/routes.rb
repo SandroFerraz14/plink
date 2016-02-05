@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   
   shallow do
     resources :ideation_sessions do
+      collection do
+        get :set_availability
+      end
       resources :themes
       resources :ideas do
         resources :comments
