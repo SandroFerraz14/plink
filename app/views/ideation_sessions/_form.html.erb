@@ -111,6 +111,7 @@
       $(datepickerEndVotationId).data("DateTimePicker").minDate(e.date);   
       if(e.date == false)
       {
+        $(datepickerEndVotationId).val("");
         $(datepickerEndVotationId)[0].setAttribute("disabled", "true");
       } else {
         $(datepickerEndVotationId)[0].removeAttribute("disabled");
