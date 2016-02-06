@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :ideation_sessions do
       collection do
         get :set_availability
+        get :set_status_votation
       end
       resources :themes
       resources :ideas do

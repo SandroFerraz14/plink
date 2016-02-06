@@ -34,6 +34,7 @@
 	</p>
 <% end %>	
 <script type="text/javascript">
+	var idIdeationSession = <%= @ideation_session.id %>;
 	var updateStatusSession = function(status){
 		$.ajax({
 	      type: "GET",
@@ -44,14 +45,25 @@
 	      }
 	    });
 	}
-	
-	var idIdeationSession = <%= @ideation_session.id %>;
+
+	var updateStatusVotation = function(status){
+		$.ajax({
+	      type: "GET",
+	      url: "/ideation_sessions/set_status_votation",
+	      data: {'id_ideation_session': idIdeationSession, 'status' : status},
+	      success: function(data){
+	        console.log(data[0].message);
+	      }
+	    });
+	}
+
 	var startTime = <%= Time.zone.parse(@ideation_session.start_time.to_s).to_i %>;
 	var endTime = <%= Time.zone.parse(@ideation_session.end_time.to_s).to_i %>;
 	var dateStart = startTime * 1000;
 	var dateFinish = endTime * 1000;
 	if((new Date() <= dateFinish) && (new Date() > dateStart)){
 		updateStatusSession(true);
+		updateStatusVotation(false);
 		var timerId =
 		  countdown(
 		    dateFinish,
@@ -63,6 +75,7 @@
 		      	$("#countdown").html("");
 		      	$("#countdown").append("<span>The session is closed</span>");
 		      	updateStatusSession(false);
+		      	updateStatusVotation(true);
 		      }
 		    },
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);

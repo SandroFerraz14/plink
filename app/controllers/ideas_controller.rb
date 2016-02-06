@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
        end
      else
       @idea.ideation_session = @ideation_session
-      @idea.user_id = current_user.id
+      @idea.participant_id = Participant.where(email: current_user.email, ideation_session_id: params[:ideation_session_id]).first.id
       @idea.number = @ideation_session.nideas
       # @idea.theme_id = Theme.where(name: GlobalConstants::DefaultTheme, ideation_session_id: @ideation_session.id).first.id
       @idea.theme_id = params[:id_theme]
@@ -101,7 +101,8 @@ class IdeasController < ApplicationController
   end
   
   def vote_ideas
-    if params[:idea_ids].present?
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    if params[:idea_ids].present? && @ideation_session.status_votation == true
       ids = params[:idea_ids]
       @ideas = Idea.find(ids)
       @ideas.each do |idea|

@@ -10,7 +10,10 @@ class IdeationSessionsController < ApplicationController
   end
 
   def show
-    
+    @ideation_session = IdeationSession.find(params[:id])
+    if Time.new.to_i <= @ideation_session.end_time.to_i 
+      @ideation_session.status_votation = nil
+    end
   end
 
   def new
@@ -124,6 +127,12 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.find(params[:id_ideation_session])
     @ideation_session.update_attribute(:available_session, params[:availability])
     render json: [{ message: 'Status of session updated with success.' }]
+  end
+
+  def set_status_votation
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    @ideation_session.update_attribute(:status_votation, params[:status])
+    render json: [{ message: 'Status of votation updated with success.' }]
   end
 
 
