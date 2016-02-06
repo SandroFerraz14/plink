@@ -54,7 +54,7 @@ class IdeationSessionsController < ApplicationController
       @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: @seed.nick, avatar_file_name: @seed.image_url, email: current_user.email)
     else
       @admin = Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: current_user.email, avatar_file_name: 'default_profile', email: current_user.email)
-    end
+    end    
   end
 
   def update
@@ -108,9 +108,14 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.find(params[:id])
     @participants = @ideation_session.participants
     if current_user.user_photo_file_name
-      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email)
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name)
     else
-      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile", nickname: current_user.email)
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile")
+    end
+    if current_user.name?
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.name)
+    else
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email)
     end
     redirect_to :back
   end
@@ -130,7 +135,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes

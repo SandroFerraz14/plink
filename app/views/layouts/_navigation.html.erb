@@ -1,61 +1,67 @@
-<% @participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
-<nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
-        <ul class="nav" id="side-menu">
-            <li>
-                <div class="logo-element">
-                    <%= link_to root_path do %>
-                        <img alt="logo" src="<%= image_url 'logo.png' %>"  width="40"/>
-                    <% end %>
-                </div>
-            </li>
-            <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <%= link_to root_path do %>
-                        <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="130"/>
-                    <% end %>
-                </div>
-                <div class="dropdown profile-element">
-                    <% if @ideation_session.anonymity==0 %>
-                		<% if current_user.user_photo_file_name %>
-                			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
-                	    <% else %>
-                	    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
-                	    <% end %>
-                
-                	<% elsif @ideation_session.anonymity==2 %>
-                		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
-                		<% if @part.nickname == current_user.email %>
-                			<%= button_to "Set Anonymous", { :controller => "ideation_sessions", :action => "set_anonymous"}, class: "btn btn-w-m btn-success" %>
-                		<% else %>
-                			<%= button_to "Set Identified", { :controller => "ideation_sessions", :action => "set_identified"}, class: "btn btn-w-m btn-success" %>
-                		<% end %>
-                	<% end %>
-                </div>
-            </li>
-             <li>
-                <a href="#">
-                     
-                      <% if @participant %>
-                            <%= image_tag(@participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
-                            <span class="nav-label">
-                                <%= (@participant) ? @participant.nickname : "" %>
-                            </span>
+<% if @ideation_session %>
+    <% @participant = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <div class="logo-element">
+                        <%= link_to root_path do %>
+                            <img alt="logo" src="<%= image_url 'logo.png' %>"  width="40"/>
                         <% end %>
-                    <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->
-                </a>
-            </li>
-            <li>
-                <%= link_to ideation_session_path(@ideation_session.id) do %>
-                <i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>
-                <% end %>
-            </li>
-            <li>
-                <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
-                <i class="fa fa-list"></i> <span class="nav-label">Participants</span>
-                <% end %>
-            </li>
-        </ul>
+                    </div>
+                </li>
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <%= link_to root_path do %>
+                            <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="130"/>
+                        <% end %>
+                    </div>
+                    <div class="dropdown profile-element">
+                        <% if @ideation_session.anonymity==0 %>
+                    		<% if current_user.user_photo_file_name? && current_user.name? %>
+                    			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.name) %>
+                    	    <% elsif current_user.user_photo_file_name? %>
+                                <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email) %>
+                            <% elsif current_user.name? %>
+                                <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.name) %>
+                            <% else %>
+                    	    	<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email) %>
+                    	    <% end %>
+                    
+                    	<% elsif @ideation_session.anonymity==2 %>
+                    		<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
+                    		<% if @part.nickname == current_user.email || @part.nickname == current_user.name %>
+                    			<%= button_to "Set Anonymous", { :controller => "ideation_sessions", :action => "set_anonymous"}, class: "btn btn-w-m btn-success" %>
+                    		<% else %>
+                    			<%= button_to "Set Identified", { :controller => "ideation_sessions", :action => "set_identified"}, class: "btn btn-w-m btn-success" %>
+                    		<% end %>
+                    	<% end %>
+                    </div>
+                </li>
+                 <li>
+                    <a href="#">
+                         
+                          <% if @participant %>
+                                <%= image_tag(@participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+                                <span class="nav-label">
+                                    <%= (@participant) ? @participant.nickname : "" %>
+                                </span>
+                            <% end %>
+                        <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->
+                    </a>
+                </li>
+                <li>
+                    <%= link_to ideation_session_path(@ideation_session.id) do %>
+                    <i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
+                    <i class="fa fa-list"></i> <span class="nav-label">Participants</span>
+                    <% end %>
+                </li>
+            </ul>
 
-    </div>
-</nav>
+        </div>
+    </nav>
+<% end %>
