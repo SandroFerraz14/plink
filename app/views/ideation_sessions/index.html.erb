@@ -6,17 +6,27 @@
       <% @ideation_sessions.each do |ideation_session| %>
       <% if current_user.id==ideation_session.user_id or 
   @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists? %>
-          <div class="col-lg-6">
-            <div class="widget navy-bg no-padding">
+          <div class="col-lg-12">
+            <div class="widget red-bg no-padding">
+              <div class="ppp"></div>
               <div class="p-m">
               <div class="col-xs-8 text-right">
                 </div>
-                <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
-                <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") : "" %>
+
+                
+                  <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
+                <div class= "direitaa">
+                  Starts on: <i class="fa fa-calendar"></i>
+                  <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime(" %d %B %Y at %H:%M") : "" %>
+                  <br>
+                  Ends on: <i class="fa fa-calendar"></i>
+                  <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime(" %d %B %Y at %H:%M") : "" %>
+                  <br>
+                </div>
+
                 <br>
-                <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("Ends on %d %B %Y at %H:%M") : "" %>
-                <br>
-                <%=ideation_session.description %>
+
+                Description: <%=ideation_session.description %>
                 <br><br>
                 <div class = "linkbranco">
                   <h2 class="font-bold">
@@ -34,10 +44,11 @@
                     <%end %>
                   </h2>
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
+

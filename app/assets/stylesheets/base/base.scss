@@ -40,12 +40,30 @@ body.boxed-layout #wrapper {
 }
 
 .linkbranco a {
-  color: #88D7C5;
+  color: #d0162a;
 }
 
 .linkbranco a :hover{
   color: white;
 }
+
+.direitaa{
+  text-align: right;
+}
+
+.ppp{
+  bottom: 12px;
+  width: 30px;
+  height: 30px;
+  right: 15px;
+  opacity: 0.3;
+  background-image: url(logo2.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+
 
 .block {
   display: block;
