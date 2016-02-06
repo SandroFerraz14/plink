@@ -39,11 +39,18 @@
   <br>
   <br>
   <div class="field">
-    <%= f.select :anonymity, options_for_select([["No Anonymity",0],["All Anonymous",1],["User Choice",2]]) %>
+    <%= f.radio_button :anonymity, '2', :checked => true %><%= f.label :anonimity, 'User Choice'%>
+    <br>
+    <%= f.radio_button :anonymity, '0' %><%= f.label :anonimity, 'Anonimous'%>
+    <br>
+    <%= f.radio_button :anonymity, '1' %><%= f.label :anonimity, 'No Anonimity'%>
+
   </div>
   <br>
   <div class="field">
-    <%= f.select :allow_comments, options_for_select([["Allow Comments",true],["No Comments",false]]) %>
+    <%= f.radio_button :allow_comments, true, :checked => true %><%= f.label :allow_comments, 'Allow Comments'%>
+    <br>
+    <%= f.radio_button :allow_comments, false%><%= f.label :allow_comments, 'No Comments'%>
   </div>
   <br>
   <div class="field">
