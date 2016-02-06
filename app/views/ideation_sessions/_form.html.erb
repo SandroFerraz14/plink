@@ -39,11 +39,13 @@
   <br>
   <br>
   <div class="field">
-    <%= f.radio_button :anonymity, '2',  %><%= f.label :anonimity, 'User Choice'%>
-    <br>
-    <%= f.radio_button :anonymity, '0' %><%= f.label :anonimity, 'Anonimous',:checked => true%>
+   
+    <%= f.radio_button :anonymity, '0',:checked => true%><%= f.label :anonimity, 'Anonimous'%>
     <br>
     <%= f.radio_button :anonymity, '1' %><%= f.label :anonimity, 'No Anonimity'%>
+    <br>
+     <%= f.radio_button :anonymity, '2'  %><%= f.label :anonimity, 'User Choice'%>
+    <br>
 
   </div>
   <br>
