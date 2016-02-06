@@ -1,17 +1,52 @@
 <p id="notice"><%= notice %></p>
-<h1><%=@ideation_session.name%></h1>
-<br>
-<h2><%=@ideation_session.description%></h2>
-<br>
-<%if @ideation_session.start_time!=nil%>
-  <h3>Session start: </h3>
-  <h2><%=@ideation_session.start_time.to_s %></h2>
-<%end%>
-<%if @ideation_session.end_time!=nil%>
-  <h3>Session end: </h3>
-  <h2><%=@ideation_session.end_time.to_s %></h2>
-<%end%>
-<br>
+
+
+<div class="row">
+  <div class="col-xs-6 col-md-4">
+  <h2><%=@ideation_session.name%></h2>
+  <br>    
+  <span><%=@ideation_session.description%></span>
+  </div>
+  <div class="col-xs-6 col-md-4">
+  <i class="fa fa-calendar"></i>
+    Start Date: <%= (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+        <br>
+        <i class="fa fa-clock-o"></i>
+        End of first phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+        <br>
+        <i class="fa fa-calendar"></i>
+        Start Votation phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+        <br>
+        <i class="fa fa-clock-o"></i>
+        End of Votation phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+        <br>
+        </div>
+  <div class="col-xs-6 col-md-4">
+    <i class="fa fa-qq"></i>
+   <% if (@ideation_session.anonymity ==0 ) %>
+            No Anonimity 
+          <%elsif (@ideation_session.anonymity ==1 ) %>
+            Anonimity
+          <%else%>
+            User Choise
+          <%end%>
+          <br>
+          <i class="fa fa-comments-o"></i>
+          Comments: <%= @ideation_session.allow_comments%>
+          <br>
+          <i class="fa fa-thumbs-o-up"></i>
+          Number of Votes: <%= @ideation_session.number_votes %>
+          <br>
+          <i class="fa fa-users"></i>
+          Ideas generated: <%= @ideation_session.nideas %>
+          </div>
+</div>
+
+
+
+
+
+
 <h1>Participants</h1>
 <div>Anonymity: <%=@ideation_session.anonymity%></div>
  
