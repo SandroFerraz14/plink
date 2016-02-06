@@ -6,6 +6,7 @@
       <i class="fa fa-circle text-danger"></i>
     <% end %>
   </td>
+  <td><%= participant.nickname %></td>
   <td><%= participant.email %></td>
   <td>
     <% if current_user.id != participant.user_id %> 

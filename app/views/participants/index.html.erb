@@ -3,8 +3,14 @@
 <br>
 <h2><%=@ideation_session.description%></h2>
 <br>
-<h3>Session start: </h3><h2><%=@ideation_session.start_time.to_s %></h2>
-<h3>Session end: </h3><h2><%=@ideation_session.end_time.to_s %></h2>
+<%if @ideation_session.start_time!=nil%>
+  <h3>Session start: </h3>
+  <h2><%=@ideation_session.start_time.to_s %></h2>
+<%end%>
+<%if @ideation_session.end_time!=nil%>
+  <h3>Session end: </h3>
+  <h2><%=@ideation_session.end_time.to_s %></h2>
+<%end%>
 <br>
 <h1>Participants</h1>
 <div>Anonymity: <%=@ideation_session.anonymity%></div>
@@ -12,8 +18,10 @@
   <thead>
     <tr>
       <th>Active</th>
+      <th>nickname</th>
+      <%if current_user.id==@ideation_session.user_id %>
       <th>Email</th>
-      <th colspan="3"></th>
+      <%end%>
     </tr>
   </thead>
 
