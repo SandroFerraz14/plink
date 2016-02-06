@@ -19,18 +19,12 @@
                 <% end %>
             <% end %>
 
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
-            <%= idea.id %>
+            <!-- <%= idea.id %> -->
 
-            <%= link_to idea_comments_path(idea) do %>
-                Comentários
+            <% if @ideation_session.allow_comments %>
+                <%= link_to idea_comments_path(idea) do %>
+                    Comentários
+                <% end %>
             <% end %>
 
             <%# idea.comments.each do |comment| %>
