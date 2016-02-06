@@ -14,7 +14,7 @@
                 <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
                 <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") : "" %>
                 <br>
-                <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("Start on %d %B %Y at %H:%M") : "" %>
+                <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("Ends on %d %B %Y at %H:%M") : "" %>
                 <br>
                 <%=ideation_session.description %>
                 <br><br>

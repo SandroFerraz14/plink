@@ -1,16 +1,18 @@
+<div class="col-lg-6">
   ID da Ideia <%= @idea.id %><br>
   Texto da ideia: <%= @idea.text %><br>
-  Sessão: <%= @ideation_session.id %><br>
+  <%=label @ideation_session.name %><br>
 
 
 <%= form_for([@idea, @idea.comments.build]) do |f| %>
 
 <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_field :body %>
+    <%= f.text_area :body, class:'form-control',placeholder: "New comment text" %>
   </div>
+  <br>
   <div class="actions">
-    <%= f.submit %>
+    <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Comment</strong></button>
   </div>
 
 <% end %>
+</div>
