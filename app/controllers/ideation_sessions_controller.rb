@@ -75,9 +75,14 @@ class IdeationSessionsController < ApplicationController
     @ideation_session = IdeationSession.find(params[:id])
     @participants = @ideation_session.participants
     if current_user.user_photo_file_name
-      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.email)
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name)
     else
-      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile", nickname: current_user.email)
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: "default_profile")
+    end
+    if current_user.name?
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.name)
+    else
+      @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(nickname: current_user.email)
     end
     redirect_to :back
   end
