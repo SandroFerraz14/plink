@@ -41,12 +41,19 @@
                  <li>
                     <a href="#">
                          
-                          <% if @participant %>
+                        <% if @participant %>
+
+                            <% if @participant.avatar_file_name == current_user.user_photo_file_name %>
+                                <%= image_tag( current_user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile")%>
+                            <% else %>
                                 <%= image_tag(@participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
-                                <span class="nav-label">
-                                    <%= (@participant) ? @participant.nickname : "" %>
-                                </span>
                             <% end %>
+                            <span class="nav-label">
+                                <%= (@participant) ? @participant.nickname : "" %>
+                            </span>
+
+                        <% end %>
+
                         <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->
                     </a>
                 </li>

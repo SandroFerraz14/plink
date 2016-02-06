@@ -26,6 +26,8 @@ gem 'font-awesome-rails', '4.3.0.0'
 gem 'devise'
 gem 'devise_invitable'
 
+gem "paperclip", "~> 4.3"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
