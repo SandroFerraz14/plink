@@ -8,15 +8,30 @@
     <% else %>
     
 	<% end %>
-	<div id="countdown">
-		<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
-			<span>The session is closed</span>
-		<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
-			<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
-		<% else %>
-			<span>The session is open</span>
-		<% end %>
-    </div>
+	
+
+
+		<div class="col-lg-12">
+            <div class="widget navy-bg no-padding">
+              <div class="ppp"></div>
+              <div class="p-m">
+              <div class="col-xs-8 text-right">
+                </div>
+                <h4 class="m-xs font-bold">
+				<div id="countdown">
+						<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
+							<span>The session is closed</span>
+						<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
+							<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
+						<% else %>
+							<span>The session is open</span>
+						<% end %>
+				    </div>
+                </h1>
+               </div>
+              </div> 
+            </div>
+
 	<p id="notice"><%= notice %></p>
 
 	<%= render 'themes/partial_index' %>
@@ -81,3 +96,5 @@
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
 	}
 </script>
+
+
