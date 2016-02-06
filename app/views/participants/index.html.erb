@@ -14,26 +14,15 @@
 <br>
 <h1>Participants</h1>
 <div>Anonymity: <%=@ideation_session.anonymity%></div>
-<table class="footable table">
-  <thead>
-    <tr>
-      <th>Active</th>
-      <th>nickname</th>
-      <%if current_user.id==@ideation_session.user_id %>
-      <th>Email</th>
-      <%end%>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= render @participants %>
-  </tbody>
-</table>
-
+ 
+<div class= "field">
+  <%= render @participants %>
+</div>
+<div class= "field">
 <% if current_user.id==@ideation_session.user_id %>
   <%= render 'participants/form' %>
 <% end %>
-
+</div>
 
 <script>
   $(document).ready(function() {
