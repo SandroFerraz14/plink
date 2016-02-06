@@ -11,8 +11,10 @@ class IdeationSessionsController < ApplicationController
 
   def show
     @ideation_session = IdeationSession.find(params[:id])
-    if Time.new.to_i <= @ideation_session.end_time.to_i 
-      @ideation_session.status_votation = nil
+    if Time.new.to_i <= @ideation_session.end_time.to_i || Time.new.to_i > @ideation_session.end_time_votation.to_i
+      @ideation_session.status_votation = false
+    else
+      @ideation_session.status_votation = true
     end
   end
 
@@ -144,7 +146,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, :start_time_votation, :end_time_votation, :status_votation, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes

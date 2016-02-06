@@ -107,13 +107,16 @@
       $("#end_time_value").attr('value', $(datepickerEndId).val());
       $("#start_time_votation_value").attr('value', $(datepickerEndId).val());
       $(datepickerStartVotationId).val($(datepickerEndId).val());
+      $(datepickerEndVotationId).val($(datepickerEndId).val());
       $(datepickerStartId).data("DateTimePicker").maxDate(e.date);  
       $(datepickerEndVotationId).data("DateTimePicker").minDate(e.date);   
       if(e.date == false)
       {
         $(datepickerEndVotationId).val("");
+        $("#ideation_session_number_votes")[0].setAttribute("disabled", "true");
         $(datepickerEndVotationId)[0].setAttribute("disabled", "true");
       } else {
+        $("#ideation_session_number_votes")[0].removeAttribute("disabled");
         $(datepickerEndVotationId)[0].removeAttribute("disabled");
       }
     });

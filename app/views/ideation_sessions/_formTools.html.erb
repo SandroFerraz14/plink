@@ -1,5 +1,5 @@
 <% if current_user.id==@ideation_session.user_id %>
-  <div class="btn-group">
+  <div class="btn-group themes-box">
     <button data-toggle="dropdown" class="btn btn-white dropdown-toggle">Theme <span class="caret"></span></button>
     <ul class="dropdown-menu">
        <% @themes.each do |theme| %>
@@ -9,7 +9,7 @@
   </div>
   
   <% if(@ideation_session.status_votation) %>
-    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
+    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", id: "btn_votes" , class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
       <i class="glyphicon glyphicon-inbox"></i>
     <% end %>
   <% end %>
@@ -20,7 +20,7 @@
   
 <% else %>
   <% if(@ideation_session.status_votation) %>
-    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
+    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", id: "btn_votes", class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
       <i class="glyphicon glyphicon-inbox"></i>
     <% end %>
   <% end %>
