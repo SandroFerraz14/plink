@@ -20,23 +20,46 @@
     <%= f.text_area :text, class: "form-control", required: true %>
   </div>
   <br>
-  <div class="field">
-    <select name="d" class="styled">
-      <option value="c1">Yellow</option>
-      <option value="c2">Option 2</option>
-      <option value="c3">Option 3</option>
-      <option value="c4">Option 3</option>
-      <option value="c5">Option 3</option>
-      <option value="c6">Option 3</option>
-      <option value="c7">Option 3</option>
 
-    </select>
 
-    <%= f.label :color %><br>
-    <%= f.text_field :color, class: "form-control"  %>
+
+
+<div class="field form-group" >
+    <div class="btn-group-horizontal" data-toggle="buttons">
+      <%= f.label :color, class: "btn c1-bg inline-block" do %>
+        <%= f.radio_button :color, "c1", checked: true %>
+      <% end %>
+      <%= f.label :color, class: "btn c2-bg inline-block" do %>
+        <%= f.radio_button :color, "c2"%>
+      <% end %>
+      <%= f.label :color, class: "btn c3-bg" do %>
+        <%= f.radio_button :color, "c3"%>
+      <% end %>
+       <%= f.label :color, class: "btn c4-bg" do %>
+        <%= f.radio_button :color, "c4"%>
+      <% end %>
+       <%= f.label :color, class: "btn c5-bg" do %>
+        <%= f.radio_button :color, "c5"%>
+      <% end %>
+       <%= f.label :color, class: "btn c6-bg" do %>
+        <%= f.radio_button :color, "c6"%>
+      <% end %>
+       <%= f.label :color, class: "btn c7-bg" do %>
+        <%= f.radio_button :color, "c7"%>
+      <% end %>
+       <%= f.label :color, class: "btn c8-bg" do %>
+        <%= f.radio_button :color, "c8"%>
+      <% end %>
+      
+
+    </div>
   </div>
+
+
+
+
   <br>
-  
+  <br>  
     <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Idea</strong></button>
   
 
