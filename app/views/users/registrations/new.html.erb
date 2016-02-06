@@ -13,9 +13,10 @@
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, class: "form-control",placeholder: "Email", required:"" %>
       
-      <%= f.label :name %>
-      <%= f.name_field :name, autofocus: true %>
-      
+    <form class="m-t" role="form" action="#">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, class: "form-control",placeholder: "Name", required:"" %>
+
       <%= f.label :password %>
       <% if @minimum_password_length %>
       <em><%= @minimum_password_length %> (characters minimum)</em>
