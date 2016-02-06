@@ -72,6 +72,24 @@
 	    });
 	}
 
+	var countdownVotation = function(){
+		var timerVotationId =
+		  countdown(
+		    dateFinishVotation,
+		    function(ts) {
+		      document.getElementById("countdown").innerHTML = "<span>The votation phase ends on:</span><br>" + ts.toHTML("strong");
+		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
+		      {
+		      	clearInterval(timerVotationId);
+		      	$("#countdown").html("");
+		      	$("#countdown").append("<span>The session is closed</span>");
+		      	updateStatusVotation(false);
+		      	$("#btn_votes").remove();
+		      }
+		    },
+		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+	}
+
 	var startTime = <%= Time.zone.parse(@ideation_session.start_time.to_s).to_i %>;
 	var endTime = <%= Time.zone.parse(@ideation_session.end_time.to_s).to_i %>;
 	var endTimeVotation = <%= Time.zone.parse(@ideation_session.end_time_votation.to_s).to_i %>;
@@ -94,40 +112,12 @@
 		      	updateStatusSession(false);
 		      	updateStatusVotation(true);
 		      	$(".themes-box").after('<a onclick="selectedIdeas(\'voteideias\', 0)" id="btn_votes" class="btn btn-white" alt="Vote selected ideas" title="Vote selected ideas" href="#"><i class="glyphicon glyphicon-inbox"></i></a>');
-		      	var timerVotationId =
-		  countdown(
-		    dateFinishVotation,
-		    function(ts) {
-		      document.getElementById("countdown").innerHTML = "<span>The votation phase ends on:</span><br>" + ts.toHTML("strong");
-		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
-		      {
-		      	clearInterval(timerVotationId);
-		      	$("#countdown").html("");
-		      	$("#countdown").append("<span>The session is closed</span>");
-		      	updateStatusVotation(false);
-		      	$("#btn_votes").remove();
-		      }
-		    },
-		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+		      	countdownVotation();
 		      }
 		    },
 		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
 	} else if ((new Date() > dateFinish) && (new Date() < dateFinishVotation)){
-		var timerVotationId =
-		  countdown(
-		    dateFinishVotation,
-		    function(ts) {
-		      document.getElementById("countdown").innerHTML = "<span>The votation phase ends on:</span><br>" + ts.toHTML("strong");
-		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
-		      {
-		      	clearInterval(timerVotationId);
-		      	$("#countdown").html("");
-		      	$("#countdown").append("<span>The session is closed</span>");
-		      	updateStatusVotation(false);
-		      	$("#btn_votes").remove();
-		      }
-		    },
-		    countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
+		countdownVotation();
 	}
 </script>
 
