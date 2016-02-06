@@ -10,8 +10,17 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <%= image_tag(((current_user.user_photo_file_name) ? current_user.user_photo_file_name : "default_profile.png"), alt: "image", class: "img-rounded user-img-profile") %>
-                <span class="m-r-sm text-muted welcome-message"> <% if user_signed_in? %><%= current_user.email %><% end %></span>
+
+                <% if current_user.user_photo? %>
+                    <%= image_tag( current_user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile")%>
+                <% else %>
+                    <%= image_tag(((current_user.user_photo_file_name) ? current_user.user_photo_file_name : "default_profile.png"), alt: "image", class: "img-rounded user-img-profile") %>
+                <% end %>
+
+<!--                 <%= image_tag(((current_user.user_photo_file_name) ? current_user.user_photo_file_name : "default_profile.png"), alt: "image", class: "img-rounded user-img-profile") %>
+                <span class="m-r-sm text-muted welcome-message">  -->
+
+                <% if user_signed_in? %><%= current_user.email %><% end %></span>
             </li>
             <!-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
