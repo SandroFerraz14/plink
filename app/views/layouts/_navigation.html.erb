@@ -17,6 +17,7 @@
                         <% end %>
                     </div>
                     <div class="dropdown profile-element">
+                        
                         <% if @ideation_session.anonymity==0 %>
                     		<% if current_user.user_photo_file_name? && current_user.name? %>
                     			<% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attributes(avatar_file_name: current_user.user_photo_file_name, nickname: current_user.name) %>
