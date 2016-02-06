@@ -1,12 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Comments List</h1>
+    <ul class="notes <%=@idea.color%>">
+        <li>
+            <div>   
+                <h4><%= @idea.id %></h4>
+                <p><%= @idea.text %></p>
+            </div>
+        </li>
+    </ul>
+
 
   <br><br>
     <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>
-              Idea:  <%=@idea.text %> 
+            <div class="text-warning">
+              Comments
+            </div>
           </h5>
         </div>
         <div class="ibox-content no-padding">
