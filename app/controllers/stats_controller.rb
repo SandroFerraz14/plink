@@ -3,15 +3,13 @@ class StatsController < ApplicationController
 
   def index
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
-    @participants = Participant.all
 
-    @votes = Vote.all.where(ideation_session_id: @ideation_session.id)
+    @participants = Participant.where(ideation_session_id: @ideation_session.id)
+    @votes = Vote.where(ideation_session_id: @ideation_session.id)
+    @ideas = Idea.where(ideation_session_id: @ideation_session.id)
+    @themes = Theme.where(ideation_session_id: @ideation_session.id)
 
-
-
-
-
-
+    total_de_votos = @votes.all.sum(:amount)
 
 
 
@@ -20,6 +18,10 @@ class StatsController < ApplicationController
 
 
 
+
+
+
+    byebug;1+1;
 
     # ideias masi votadas
     @top_ideas = LazyHighCharts::HighChart.new('graph') do |f|
@@ -93,7 +95,7 @@ class StatsController < ApplicationController
 
 
 
-    # teste apenas
+    # temas com mais ideias
     @chart4 = LazyHighCharts::HighChart.new('column') do |f|
       f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
       f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )     
