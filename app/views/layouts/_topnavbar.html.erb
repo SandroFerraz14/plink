@@ -20,8 +20,15 @@
 <!--                 <%= image_tag(((current_user.user_photo_file_name) ? current_user.user_photo_file_name : "default_profile.png"), alt: "image", class: "img-rounded user-img-profile") %>
                 <span class="m-r-sm text-muted welcome-message">  -->
 
-                <% if user_signed_in? %><%= current_user.email %><% end %></span>
-            </li>
+                <% if user_signed_in? %>
+                    <% if current_user.name? %>
+                        <%= current_user.name %></span>
+                    <% else %>
+                        <%= current_user.email %></span>
+                    <% end %>
+                <% end %>
+
+                </li>
             <!-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>

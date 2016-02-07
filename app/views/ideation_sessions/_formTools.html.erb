@@ -1,6 +1,6 @@
 <% if current_user.id==@ideation_session.user_id %>
-  <div class="btn-group">
-    <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">Theme <span class="caret"></span></button>
+  <div class="btn-group themes-box">
+    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle">Theme <span class="caret"></span></button>
     <ul class="dropdown-menu">
        <% @themes.each do |theme| %>
         <li><%= link_to theme.name, '#', onclick: "selectedIdeas('changetheme', #{theme.id})" %></li>
@@ -8,15 +8,20 @@
     </ul>
   </div>
   
-  <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-success", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
-    <i class="glyphicon glyphicon-inbox"></i>
+  <% if(@ideation_session.status_votation) %>
+    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", id: "btn_votes" , class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
+      <i class="glyphicon glyphicon-inbox"></i>
+    <% end %>
   <% end %>
   
-  <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)", class: "btn btn-danger", alt: "Delete selected ideas", title: "Delete selected ideas" do %>
+  <%= link_to '#', onclick: "selectedIdeas('deleteideias', 0)", class: "btn btn-white", alt: "Delete selected ideas", title: "Delete selected ideas" do %>
     <i class="fa fa-trash-o"></i>
   <% end %>
+  
 <% else %>
-  <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", class: "btn btn-success", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
-    <i class="glyphicon glyphicon-inbox"></i>
+  <% if(@ideation_session.status_votation) %>
+    <%= link_to '#', onclick: "selectedIdeas('voteideias', 0)", id: "btn_votes", class: "btn btn-white", alt: "Vote selected ideas", title: "Vote selected ideas" do %>
+      <i class="glyphicon glyphicon-inbox"></i>
+    <% end %>
   <% end %>
 <% end %>

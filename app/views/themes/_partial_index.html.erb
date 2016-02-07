@@ -51,7 +51,7 @@
                   <%= hidden_field_tag "id_theme" %>
                   <%= hidden_field_tag "id_participant", @part.id %>
                   <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
-                  <%= hidden_field_tag "how_many_votes_left", @ideation_session.number_votes - (Vote.where(participant_id: @part.id, ideation_session_id: @ideation_session.id).count) %>
+                  <%= hidden_field_tag "how_many_votes_left", (@ideation_session.number_votes != nil) ? @ideation_session.number_votes - (Vote.where(participant_id: @part.id, ideation_session_id: @ideation_session.id).count) : 0 %>
             </div>
              
             <% end %>       
@@ -92,6 +92,7 @@
                    <%= hidden_field_tag "id_theme" %>
                    <%= hidden_field_tag "id_participant", @part.id %>
                    <%= hidden_field_tag "id_ideation_session", @ideation_session.id %>
+                   <%= hidden_field_tag "how_many_votes_left", (@ideation_session.number_votes != nil) ? @ideation_session.number_votes - (Vote.where(participant_id: @part.id, ideation_session_id: @ideation_session.id).count) : 0 %>
             </div>
             <% end %>       
 

@@ -10,7 +10,12 @@ class IdeationSessionsController < ApplicationController
   end
 
   def show
-    
+    @ideation_session = IdeationSession.find(params[:id])
+    if Time.new.to_i <= @ideation_session.end_time.to_i || Time.new.to_i > @ideation_session.end_time_votation.to_i
+      @ideation_session.status_votation = false
+    else
+      @ideation_session.status_votation = true
+    end
   end
 
   def new
@@ -126,6 +131,12 @@ class IdeationSessionsController < ApplicationController
     render json: [{ message: 'Status of session updated with success.' }]
   end
 
+  def set_status_votation
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    @ideation_session.update_attribute(:status_votation, params[:status])
+    render json: [{ message: 'Status of votation updated with success.' }]
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -135,7 +146,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, :start_time_votation, :end_time_votation, :status_votation, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes

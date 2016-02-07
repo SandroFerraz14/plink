@@ -12,20 +12,19 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>
+  
 
-  <!-- ADICIONAR FOTOGRAFIA -->
-
-  <%= image_tag current_user.user_photo.url(:thumb) %>
-
+  <% if current_user.user_photo_file_name? %>
+    <%= image_tag( current_user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile")%>
+  <% else %>
+    <%= image_tag("default_profile.png", alt: "image", class: "img-rounded user-img-profile") %>
+  <% end %>
 
   <div class="field">
     <%= f.label :user_photo %><br />
     <%= f.file_field :user_photo %>
   </div>
-
-
-
-
+  
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
