@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     @comment.idea_id = @idea.id
     @comment.participant_id = Participant.where(user_id: current_user.id).first.id
     respond_to do |format|
-      if @comment.save
+      if @comment.save && (@ideation_session.status_votation || @ideation_session.available_session)
         format.html { redirect_to idea_comments_path(@idea), notice: 'Comment was successfully created.' }
       else
         format.html { render :new }
