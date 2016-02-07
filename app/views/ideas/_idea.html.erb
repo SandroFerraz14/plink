@@ -20,15 +20,12 @@
                 
                 <% if @ideation_session.allow_comments %>
                     <%= link_to idea_comments_path(idea), method: :get do %>
-                        <i class="fa fa-comment-o">&nbsp&nbsp&nbsp&nbsp&nbsp </i>
+                        <i class="fa fa-comments"></i>
                     <% end %>
                 <% end %> 
 
-                <% if current_user.id==@ideation_session.user_id %>
-                    <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-                        <i class="fa fa-trash-o"></i>
-                    <% end %>
-                <% end %>
+
+
 
             
 

@@ -256,7 +256,11 @@ ul.notes li div {
   box-shadow: 5px 5px 2px rgba(33, 33, 33, 0.7);
 }
 
-
+ul.notes li div {
+  -webkit-transform: rotate(-0deg);
+  -o-transform: rotate(-0deg);
+  -moz-transform: rotate(-0deg);
+}
 
 ul.notes li:nth-child(even) div {
   -o-transform: rotate(4deg);
@@ -304,11 +308,13 @@ ul.notes li div {
 
 
 ul.notes.c1 li div {
+  opacity: 1;
   background: #FDC331;
   -moz-box-shadow: 2px 1px 5px #FB9509;
   -webkit-box-shadow: 2px 1px 5px #FB9509;
   box-shadow: 2px 1px 5px #FB9509;
 }
+
 
 ul.notes.c2 li div {
   background: #EF8F24;
