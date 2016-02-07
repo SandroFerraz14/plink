@@ -1,0 +1,25 @@
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <div class="logo-element">
+                        <%= link_to root_path do %>
+                            <img alt="logo" src="<%= image_url 'logo.png' %>"  width="40"/>
+                        <% end %>
+                    </div>
+                </li>
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <%= link_to root_path do %>
+                            <img alt="logo" class="logo" src="<%= image_url 'logo_text.png' %>"  width="130"/>
+                        <% end %>
+                    </div>
+                    
+                </li>
+                 
+
+            </ul>
+
+        </div>
+    </nav>
