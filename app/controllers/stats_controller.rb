@@ -48,8 +48,7 @@ class StatsController < ApplicationController
       @most_useful_part << @elemento
     end
 
-    @most_useful_part_part = @most_useful_part_part.take(5)
-
+    @most_useful_part = @most_useful_part.take(5)
     @most_useful_part_part = @most_useful_part.map {|i| i[0]}
    
     # temas com mais ideias
