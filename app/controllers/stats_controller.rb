@@ -9,93 +9,105 @@ class StatsController < ApplicationController
     @ideas = Idea.where(ideation_session_id: @ideation_session.id)
     @themes = Theme.where(ideation_session_id: @ideation_session.id)
 
-    total_de_votos = @votes.all.count(:all)
-    total_de_votos2 = @votes.all.size
+    @ideas_por_tema = @ideas.joins(:theme).group(:name).count(:all).to_a
+
+    total_de_votos = @votes.count(:all)
+    total_de_votos2 = @votes.size
+
+    total_idea = @ideas.count(:all)
+    total_idea2 = @ideas.size
+
+    participants_who_gave_ideas = @ideas.count(:participant_id)
+
+    @ideas_por_participant = @ideas.joins(:participant).group(:nickname).order('count_all desc').count('all').take(5).to_a
+    @ideas_por_participant_participant = @ideas_por_participant.map {|i| i[0]}
+
+    @ideas_mais_votos = @votes.joins(:idea).group(:number).order('count_all desc').count('all').take(5).to_a
+    @ideas_mas_votos_ideas = @ideas_mais_votos.map {|i| i[0]}
+
+    
 
 
-    byebug;1+1;
+
+
+
+
+
+    # participantes que tiveram mais votos nas suas ideias
+    @most_useful_participant = LazyHighCharts::HighChart.new('column') do |f|
+      f.chart defaultSeriesType: 'column', margin: [50, 200, 60, 170]
+      f.xAxis(:categories => @ideas_mas_votos_ideas)
+      series = { type: 'column', name: 'nome?', data: @ideas_mais_votos }
+      f.series(series)
+      f.options[:title][:text] = 'Total Expenses and Revenues'
+      f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
+      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
+    end
+
+
+
+
+
+
+
+
+
+
+
+   
+    # temas com mais ideias
+    @theme_ideas = LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
+      series = {
+               :type=> 'pie',
+               :name=> 'Browser share',
+               :data=> @ideas_por_tema
+      }
+      f.series(series)
+      f.options[:title][:text] = "Ideas by Theme"
+      f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+      f.plot_options(:pie=>{
+        :allowPointSelect=>true, 
+        :cursor=>"pointer" , 
+        :dataLabels=>{
+          :enabled=>true,
+          :color=>"black",
+          :style=>{
+            :font=>"13px Trebuchet MS, Verdana, sans-serif"
+          }
+        }
+      })
+    end
+
+    #participantes que lançaram mais ideias
+    @most_active_participant = LazyHighCharts::HighChart.new('column') do |f|
+      f.chart defaultSeriesType: 'column', margin: [50, 200, 60, 170]
+      f.xAxis(:categories => @ideas_por_participant_participant)
+      series = { type: 'column', name: 'nome?', data: @ideas_por_participant }
+      f.series(series)
+      f.options[:title][:text] = 'Total Expenses and Revenues'
+      f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
+      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
+    end
 
     # ideias masi votadas
-    @top_ideas = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title({ :text=>"Combination chart"})
-      f.options[:xAxis][:categories] = ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
-      f.labels(:items=>[:html=>"Total fruit consumption", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
-      f.series(:type=> 'column',:name=> 'Jane',:data=> [3, 2, 1, 3, 4])
-      f.series(:type=> 'column',:name=> 'John',:data=> [2, 3, 5, 7, 6])
-      f.series(:type=> 'column', :name=> 'Joe',:data=> [4, 3, 3, 9, 0])
-      f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
-      f.series(:type=> 'pie',:name=> 'Total consumption', 
-        :data=> [
-          {:name=> 'Jane', :y=> 13, :color=> 'red'}, 
-          {:name=> 'John', :y=> 23,:color=> 'green'},
-          {:name=> 'Joe', :y=> 19,:color=> 'blue'}
-        ],
-        :center=> [100, 80], :size=> 100, :showInLegend=> false)
+    @top_ideas = LazyHighCharts::HighChart.new('column') do |f|
+      f.chart defaultSeriesType: 'column', margin: [50, 200, 60, 170]
+      f.xAxis(:categories => @ideas_mas_votos_ideas)
+      series = { type: 'column', name: 'nome?', data: @ideas_mais_votos }
+      f.series(series)
+      f.options[:title][:text] = 'Total Expenses and Revenues'
+      f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
+      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
 
-    # participantes que lançaram mais ideias
-    @most_active_participant = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
-      f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
-      f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
-      f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
-
-      f.yAxis [
-        {:title => {:text => "GDP in Billions", :margin => 70} },
-        {:title => {:text => "Population in Millions"}, :opposite => true},
-      ]
-
-      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
-      f.chart({:defaultSeriesType=>"column"})
-    end
 
     # participantes que tiveram mais votos nas suas ideias
-    @most_useful_participant = LazyHighCharts::HighChart.new('pie') do |f|
-          f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
-          series = {
-                   :type=> 'pie',
-                   :name=> 'Browser share',
-                   :data=> [
-                      ['Firefox',   45.0],
-                      ['IE',       26.8],
-                      {
-                         :name=> 'Chrome',    
-                         :y=> 12.8,
-                         :sliced=> true,
-                         :selected=> true
-                      },
-                      ['Safari',    8.5],
-                      ['Opera',     6.2],
-                      ['Others',   0.7]
-                   ]
-          }
-          f.series(series)
-          f.options[:title][:text] = "THA PIE"
-          f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
-          f.plot_options(:pie=>{
-            :allowPointSelect=>true, 
-            :cursor=>"pointer" , 
-            :dataLabels=>{
-              :enabled=>true,
-              :color=>"black",
-              :style=>{
-                :font=>"13px Trebuchet MS, Verdana, sans-serif"
-              }
-            }
-          })
+    @most_useful_participant = 
+
     end
 
-
-
-    # temas com mais ideias
-    @chart4 = LazyHighCharts::HighChart.new('column') do |f|
-      f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
-      f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )     
-      f.title({ :text=>"example test title from controller"})
-      f.options[:chart][:defaultSeriesType] = "column"
-      f.plot_options({:column=>{:stacking=>"percent"}})
-    end
-
+     
     
   end
 
