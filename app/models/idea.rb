@@ -1,5 +1,5 @@
 class Idea < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :participant
   belongs_to :ideation_session
   belongs_to :theme
   has_many :votes, :dependent => :delete_all

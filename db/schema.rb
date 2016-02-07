@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206141530) do
+ActiveRecord::Schema.define(version: 20160206183136) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "participant_id"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20160206141530) do
   add_index "comments", ["participant_id"], name: "index_comments_on_participant_id"
 
   create_table "ideas", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "ideation_session_id"
     t.text     "text"
     t.string   "color"
@@ -33,26 +32,29 @@ ActiveRecord::Schema.define(version: 20160206141530) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "theme_id"
+    t.integer  "participant_id"
   end
 
   add_index "ideas", ["ideation_session_id"], name: "index_ideas_on_ideation_session_id"
+  add_index "ideas", ["participant_id"], name: "index_ideas_on_participant_id"
   add_index "ideas", ["theme_id"], name: "index_ideas_on_theme_id"
-  add_index "ideas", ["user_id"], name: "index_ideas_on_user_id"
 
   create_table "ideation_sessions", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "nideas"
     t.integer  "user_id"
     t.integer  "anonymity"
     t.boolean  "allow_comments"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.boolean  "available"
     t.boolean  "available_session"
     t.integer  "number_votes"
+    t.boolean  "status_votation"
+    t.datetime "end_time_votation"
+    t.datetime "start_time_votation"
   end
 
   add_index "ideation_sessions", ["user_id"], name: "index_ideation_sessions_on_user_id"

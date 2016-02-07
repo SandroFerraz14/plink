@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
   # GET /participants.json
   def index
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
-    @participants = Participant.all
+    @participants = Participant.where(ideation_session_id: params[:ideation_session_id])
   end
 
   # GET /participants/1

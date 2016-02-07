@@ -21,12 +21,6 @@
   </div>
   <br>
   <div class="field">
-    <label>Set number of votes</label>
-    <br>
-    <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3  %>
-  </div>
-  <br>
-  <div class="field">
     <label>Set duration</label>
     <div class="input-daterange input-group">
       <%= f.text_field :start_time, class: "input-sm form-control", value: (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y - %H:%M") : "" %>
@@ -34,6 +28,23 @@
       <span class="input-group-addon">to</span>
       <%= f.text_field :end_time, class: "input-sm form-control", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
       <%= hidden_field_tag "end_time_value" %>
+    </div>
+  </div>
+  <br>
+  <div class="field">
+    <label>Set number of votes</label>
+    <br>
+    <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3, disabled: (@ideation_session.end_time != nil) ? false : true  %>
+  </div>
+  <br>
+  <div class="field">
+    <label>Set duration votation</label>
+    <div class="input-daterange input-group">
+      <%= f.text_field :start_time_votation, disabled: true, class: "input-sm form-control", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
+      <%= hidden_field_tag "start_time_votation_value" %>
+      <span class="input-group-addon">to</span>
+      <%= f.text_field :end_time_votation, disabled: (@ideation_session.end_time != nil) ? false : true, class: "input-sm form-control", value: (@ideation_session.end_time_votation != nil) ? @ideation_session.end_time_votation.strftime("%d %B %Y - %H:%M") : "" %>
+      <%= hidden_field_tag "end_time_votation_value" %>
     </div>
   </div>
   <br>
@@ -69,23 +80,53 @@
 <script type="text/javascript">
   $(document).ready(function() {
     var datepickerStartId = "#ideation_session_start_time";
+    var datepickerEndId = "#ideation_session_end_time";
+    var datepickerStartVotationId = "#ideation_session_start_time_votation";
+    var datepickerEndVotationId = "#ideation_session_end_time_votation";
+
     $(datepickerStartId).datetimepicker({ 
       format: "DD MMMM YYYY - HH:mm"
     });
-
-    var datepickerEndId = "#ideation_session_end_time";
     $(datepickerEndId).datetimepicker({ 
       format: "DD MMMM YYYY - HH:mm",
       useCurrent: false
     });
-
+    $(datepickerStartVotationId).datetimepicker({ 
+      format: "DD MMMM YYYY - HH:mm"
+    });
+    $(datepickerEndVotationId).datetimepicker({ 
+      format: "DD MMMM YYYY - HH:mm",
+      minDate: "<%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.to_s : 0 %>",
+      useCurrent: false
+    });
     $(datepickerStartId).on("dp.change", function (e) {
       $("#start_time_value").attr('value', $(datepickerStartId).val());
       $(datepickerEndId).data("DateTimePicker").minDate(e.date);
     });
     $(datepickerEndId).on("dp.change", function (e) {
       $("#end_time_value").attr('value', $(datepickerEndId).val());
-      $(datepickerStartId).data("DateTimePicker").maxDate(e.date);
+      $("#start_time_votation_value").attr('value', $(datepickerEndId).val());
+      $(datepickerStartVotationId).val($(datepickerEndId).val());
+      $(datepickerEndVotationId).val($(datepickerEndId).val());
+      $(datepickerStartId).data("DateTimePicker").maxDate(e.date);  
+      $(datepickerEndVotationId).data("DateTimePicker").minDate(e.date);   
+      if(e.date == false)
+      {
+        $(datepickerEndVotationId).val("");
+        $("#ideation_session_number_votes")[0].setAttribute("disabled", "true");
+        $(datepickerEndVotationId)[0].setAttribute("disabled", "true");
+      } else {
+        $("#ideation_session_number_votes")[0].removeAttribute("disabled");
+        $(datepickerEndVotationId)[0].removeAttribute("disabled");
+      }
+    });
+    $(datepickerStartVotationId).on("dp.change", function (e) {
+      $("#start_time_votation_value").attr('value', $(datepickerStartVotationId).val());
+      $(datepickerEndVotationId).data("DateTimePicker").minDate(e.date);
+    });
+    $(datepickerEndVotationId).on("dp.change", function (e) {
+      $("#end_time_votation_value").attr('value', $(datepickerEndVotationId).val());
+      $(datepickerStartVotationId).data("DateTimePicker").maxDate(e.date);
     });
   });
 </script>
