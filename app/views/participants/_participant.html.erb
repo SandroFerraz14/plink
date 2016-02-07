@@ -2,24 +2,12 @@
   <div class="contact-box">
       <div class="col-sm-4">
         <div class="text-center">
-
-
-
-
           <% @user = User.find(participant.user_id) %>
           <% if participant.avatar_file_name == @user.user_photo_file_name %>
             <%= image_tag( @user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile") %>
           <% else %>
             <%= image_tag( participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
           <% end %>
-
-
-
-
-         <!--  <%= image_tag(participant.avatar_file_name, alt: "image", class: "img-rounded user-img-profile")%>
-            <div class="m-t-xs font-bold">
-              <%= (participant.user_id == @ideation_session.user_id) ? "Dinamizador" : "Membro" %>
-            </div> -->
         </div>
       </div>
     <div class="col-sm-8">
