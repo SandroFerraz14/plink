@@ -113,7 +113,8 @@ class IdeasController < ApplicationController
   end
   
   def vote_remove
-    if params[:idea_ids].present?
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    if params[:idea_ids].present? && @ideation_session.status_votation == true
       ids = params[:idea_ids]
       @ideas = Idea.find(ids)
       vote_ids = []
