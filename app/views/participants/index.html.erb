@@ -24,15 +24,15 @@
           <strong>Idea Generation</strong>
         </div> 
       <div class="forum-sub-title">
-        Begin:<%= (@ideation_session.start_time != nil)?  @ideation_session.start_time.strftime("%d %B %Y at %H:%M"): "Not Defined"%>
+        Begin: <%= (@ideation_session.start_time != nil)?  @ideation_session.start_time.strftime("%d %B %Y at %H:%M"): "Not Defined"%>
       <br>
         End: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
       </div>
     </div>
     </div>
-    <div class="ibox-content ">
+    <div class="ibox-content m-b-sm">
       <div class="forum-icon">
-        <i class="fa fa-clock-o"></i>
+        <i class="fa fa-calendar"></i>
       </div>
       <div class="forum-item-title text-info">
         <strong>Votation phase</strong>
@@ -43,7 +43,7 @@
   </div>
 
   <div class="col-xs-6 col-md-4">
-    <div class="ibox-content border-bottom">
+    <div class="ibox-content m-b-sm border-bottom">
     <div class="p-xs">
       <div class="forum-icon">
         <i class="fa fa-users"></i>
@@ -63,19 +63,30 @@
           No Comments
         <%end%>
         <br>
-        Votes per person: <%= @ideation_session.number_votes %>
+        Votes per person: <%= (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : "Not defined" %>
       </div>
     </div>
   </div>
 
 </div>
        <div class="col-xs-6 col-md-4">
-      <div class="ibox-content ">
+      <div class="ibox-content m-b-sm">
         <div class="p-xs">
           <div class="forum-icon">
             <i class="fa fa-archive"></i>
           </div>
+          <div class="forum-item-title ">
+          Session Status: 
+          <% if @ideation_session.available_session  %>
+            Generating Ideas
+          <% elsif @ideation_session.status_votation %>
+            Voting
+          <%else%>
+            Session Closed
+          <%end%>  
+          </div>
               <div class="forum-item-title ">
+                <br>
                 <%= @ideation_session.nideas %> Ideas generated
               </div>
           </div>
