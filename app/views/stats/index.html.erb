@@ -15,5 +15,16 @@
 <% end %>
 
 <% if (@ideas_by_theme == []) && (@ideas_by_participant == []) && (@ideas_top_votes == []) && (@most_useful_part == []) %>
-	There are no Statistics to display
+  <div class="col-lg-12">
+    <div class="widget alert alert-danger no-padding">
+      <div class="ppp"></div>
+        <div class="p-m">
+
+          <h4 class="m-xs font-bold">
+              There is not enough data
+          </h4>
+        </div>
+    </div> 
+   </div>
+
 <% end %>
