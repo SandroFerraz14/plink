@@ -8,7 +8,24 @@
     <% else %>
     
 	<% end %>
-	
+<% if notice != nil %>
+  <div class="col-lg-12">
+    <div class="widget navy-bg no-padding">
+      <div class="ppp"></div>
+        <div class="p-m">
+          <div class="col-xs-8 text-right">
+          </div>
+          <h4 class="m-xs font-bold">
+            <div id="countdown">
+              <p id="notice"><%= notice %></p>
+            </div>                
+          </h4>
+        </div>
+    </div> 
+   </div>
+<%end%>	
+
+
 		<div class="col-lg-12">
             <div class="widget navy-bg no-padding">
               <div class="ppp"></div>
@@ -29,8 +46,6 @@
                </div>
               </div> 
             </div>
-
-	<p id="notice"><%= notice %></p>
 
 	<%= render 'themes/partial_index' %>
 
