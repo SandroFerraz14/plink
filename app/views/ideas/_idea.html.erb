@@ -2,7 +2,7 @@
 <ul class="notes <%=idea.color%>">
     <li>
         <div>
-            <small><%= check_box_tag "idea_ids[]", idea.id %></small>
+            <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
             <section id="vote-actions">
                 <% if idea.votes.where(idea_id: idea.id, participant_id: @part.id, ideation_session_id: @ideation_session.id).exists? %>
                     <i class="fa fa-thumbs-o-up", title="You voted that idea"></i>
