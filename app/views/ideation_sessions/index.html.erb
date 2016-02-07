@@ -7,7 +7,7 @@
       <% if current_user.id==ideation_session.user_id or 
   @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists? %>
           <div class="col-lg-12">
-            <div class="widget red-bg no-padding">
+            <div class="widget lazur-bg no-padding">
               <div class="ppp"></div>
               <div class="p-m">
               <div class="col-xs-8 text-right">

@@ -1,8 +1,8 @@
 <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <ul class="notes <%=idea.color%>">
     <li>
-        <div>   
-            <small><%= check_box_tag "idea_ids[]", idea.id %></small>
+        <div>
+            <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
             <section id="vote-actions">
                 <% if idea.votes.where(idea_id: idea.id, participant_id: @part.id, ideation_session_id: @ideation_session.id).exists? %>
                     <i class="fa fa-thumbs-o-up", title="You voted that idea"></i>
@@ -15,19 +15,21 @@
             </section>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
-            <% if current_user.id==@ideation_session.user_id %>
-                <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' }  do %>
-                    <i class="fa fa-trash-o"></i>
-                <% end %>
-            <% end %>
+            
+            
+                
+                <% if @ideation_session.allow_comments %>
+                    <%= link_to idea_comments_path(idea), method: :get do %>
+                        <i class="fa fa-comments"></i>
+                    <% end %>
+                <% end %> 
+
+
+
+
+            
 
             <!-- <%= idea.id %> -->
-
-            <% if @ideation_session.allow_comments %>
-                <%= link_to idea_comments_path(idea) do %>
-                    Comentários
-                <% end %>
-            <% end %>
 
             <%# idea.comments.each do |comment| %>
                 <%#= render partial: "comments/comment", object: comment %>

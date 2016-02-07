@@ -190,6 +190,9 @@ ul.clear-list:first-child {
 }
 
 /* PIN BOARD */
+
+
+
 ul.notes li, ul.tag-list li {
   list-style: none;
 }
@@ -208,7 +211,10 @@ ul.notes li div {
   width: 140px;
   padding: 1em;
   position: relative;
+  overflow:hidden;
 }
+
+
 
 ul.notes li div small {
   position: absolute;
@@ -233,6 +239,7 @@ ul.notes li div p {
   font-size: 12px;
 }
 
+
 ul.notes li div {
   text-decoration: none;
   color: black;
@@ -250,9 +257,9 @@ ul.notes li div {
 }
 
 ul.notes li div {
-  -webkit-transform: rotate(-2deg);
-  -o-transform: rotate(-2deg);
-  -moz-transform: rotate(-2deg);
+  -webkit-transform: rotate(-0deg);
+  -o-transform: rotate(-0deg);
+  -moz-transform: rotate(-0deg);
 }
 
 ul.notes li:nth-child(even) div {
@@ -299,19 +306,15 @@ ul.notes li div {
   -webkit-transition: -webkit-transform 0.15s linear;
 }
 
-.notas {
-  position: relative;
-  margin-right: 180px;
-  margin-top: 180px;
-  background-color: red;
-}
 
 ul.notes.c1 li div {
+  opacity: 1;
   background: #FDC331;
   -moz-box-shadow: 2px 1px 5px #FB9509;
   -webkit-box-shadow: 2px 1px 5px #FB9509;
   box-shadow: 2px 1px 5px #FB9509;
 }
+
 
 ul.notes.c2 li div {
   background: #EF8F24;
