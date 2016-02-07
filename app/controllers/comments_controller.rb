@@ -6,6 +6,22 @@ class CommentsController < ApplicationController
   def index
     @idea = Idea.find(params[:idea_id])
     @ideation_session = IdeationSession.find(@idea.ideation_session_id)
+    if Time.new.to_i <= @ideation_session.end_time.to_i || Time.new.to_i > @ideation_session.end_time_votation.to_i
+      @ideation_session.update_attribute(:status_votation, false)
+    else
+      @ideation_session.update_attribute(:status_votation, true)
+    end
+    if @ideation_session.start_time == nil
+      @ideation_session.update_attribute(:available_session, true)
+    elsif @ideation_session.start_time.to_i > Time.new.to_i
+      @ideation_session.update_attribute(:available_session, false)
+    elsif @ideation_session.end_time == nil
+      @ideation_session.update_attribute(:available_session, true)
+    elsif @ideation_session.end_time.to_i < Time.new.to_i
+      @ideation_session.update_attribute(:available_session, false)
+    else
+      @ideation_session.update_attribute(:available_session, true)
+    end
     @comments = Comment.where(idea_id: @idea.id)
 
   end
