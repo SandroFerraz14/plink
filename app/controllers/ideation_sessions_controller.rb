@@ -12,9 +12,9 @@ class IdeationSessionsController < ApplicationController
   def show
     @ideation_session = IdeationSession.find(params[:id])
     if Time.new.to_i <= @ideation_session.end_time.to_i || Time.new.to_i > @ideation_session.end_time_votation.to_i
-      @ideation_session.status_votation = false
+      @ideation_session.update_attribute(:status_votation, false)
     else
-      @ideation_session.status_votation = true
+      @ideation_session.update_attribute(:status_votation, true)
     end
   end
 

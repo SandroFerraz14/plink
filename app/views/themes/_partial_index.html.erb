@@ -58,8 +58,10 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
+                <%if @ideation_session.available_session %>
                 <h2>Insert idea</h2>
               <%= render 'ideas/form', id_theme: theme.id %>
+                <%end%>
             </div>
             </div>
           </div>
@@ -72,7 +74,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Ideias</h2>
+                    <h2>Ideas</h2>
                   <ol class="breadcrumb">
                     <li>
                         <strong><%=@ideation_session.name%></strong>
@@ -108,6 +110,7 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript">
   var showFormTopic = function(){
     $(".new_theme").show();
@@ -182,7 +185,11 @@
   }
   function voteIdeas(form) {
     var votesLeft = parseInt($("#how_many_votes_left").val());
-    var numCheckedIdeas = form.find('input:checked').length;
+    var numCheckedIdeas = 0;
+    form.find('input:checked').each(function(){
+      if($(this).parents().eq(1).find("#vote-actions").children().length == 0)
+        numCheckedIdeas++;
+    })
     if(numCheckedIdeas <= votesLeft){
       $.ajax({
         type: "GET",

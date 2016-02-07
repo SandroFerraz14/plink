@@ -109,11 +109,14 @@ class IdeasController < ApplicationController
         Vote.create(idea_id: idea.id, participant_id: params[:id_participant], ideation_session_id: params[:id_ideation_session])
       end
       render json: [{ message: 'Ideas voted with success.' }]
+    else
+      render json: [{ message: 'Error.' }]
     end
   end
   
   def vote_remove
-    if params[:idea_ids].present?
+    @ideation_session = IdeationSession.find(params[:id_ideation_session])
+    if params[:idea_ids].present? && @ideation_session.status_votation == true
       ids = params[:idea_ids]
       @ideas = Idea.find(ids)
       vote_ids = []

@@ -1,16 +1,35 @@
-<tr>
-  <td>
-    <% if participant.active? %>
+<div class="col-lg-4">
+  <div class="contact-box">
+      <div class="col-sm-4">
+        <div class="text-center">
+
+
+
+
+          <% @user = User.find(participant.user_id) %>
+          <% if participant.avatar_file_name == @user.user_photo_file_name %>
+            <%= image_tag( @user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile") %>
+          <% else %>
+            <%= image_tag( participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+          <% end %>
+
+
+
+
+         <!--  <%= image_tag(participant.avatar_file_name, alt: "image", class: "img-rounded user-img-profile")%>
+            <div class="m-t-xs font-bold">
+              <%= (participant.user_id == @ideation_session.user_id) ? "Dinamizador" : "Membro" %>
+            </div> -->
+        </div>
+      </div>
+    <div class="col-sm-8">
+      <h3><strong><%=participant.nickname%></strong></h3>
+      <% if participant.active? %>
       <i class='fa fa-check text-navy'></i>
     <% else %>
       <i class="fa fa-circle text-danger"></i>
     <% end %>
-  </td>
-  <td><%= participant.email %></td>
-  <td>
-    <% if current_user.id != participant.user_id %> 
-      <%= link_to '', participant, method: :delete, data: { confirm: 'Are you sure?' }, title: "Delete", class: "glyphicon glyphicon-remove" %>        
-    <% end %>
-  </td>
-</tr>
-    
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
