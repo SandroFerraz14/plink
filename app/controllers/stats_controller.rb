@@ -5,7 +5,24 @@ class StatsController < ApplicationController
     @ideation_session = IdeationSession.find(params[:ideation_session_id])
     @participants = Participant.all
 
-    @chart = LazyHighCharts::HighChart.new('graph') do |f|
+    @votes = Vote.all.where(ideation_session_id: @ideation_session.id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # ideias masi votadas
+    @top_ideas = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"Combination chart"})
       f.options[:xAxis][:categories] = ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
       f.labels(:items=>[:html=>"Total fruit consumption", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
@@ -21,7 +38,9 @@ class StatsController < ApplicationController
         ],
         :center=> [100, 80], :size=> 100, :showInLegend=> false)
     end
-    @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
+
+    # participantes que lançaram mais ideias
+    @most_active_participant = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
       f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
       f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
@@ -36,7 +55,8 @@ class StatsController < ApplicationController
       f.chart({:defaultSeriesType=>"column"})
     end
 
-    @chart3 = LazyHighCharts::HighChart.new('pie') do |f|
+    # participantes que tiveram mais votos nas suas ideias
+    @most_useful_participant = LazyHighCharts::HighChart.new('pie') do |f|
           f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
           series = {
                    :type=> 'pie',
@@ -71,6 +91,9 @@ class StatsController < ApplicationController
           })
     end
 
+
+
+    # teste apenas
     @chart4 = LazyHighCharts::HighChart.new('column') do |f|
       f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
       f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )     
