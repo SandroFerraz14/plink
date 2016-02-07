@@ -82,7 +82,7 @@ class StatsController < ApplicationController
       f.xAxis(:categories => @ideas_by_participant_participant)
       series = { type: 'column', name: @ideas_by_participant_participant, data: @ideas_by_participant }
       f.series(series)
-      f.options[:title][:text] = 'most_active_participant'
+      f.options[:title][:text] = 'Most Active Participants'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
       f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
@@ -93,7 +93,7 @@ class StatsController < ApplicationController
       f.xAxis(:categories => @ideas_top_votes_ideas)
       series = { type: 'column', name: @ideas_top_votes_ideas, data: @ideas_top_votes }
       f.series(series)
-      f.options[:title][:text] = 'top_ideas'
+      f.options[:title][:text] = 'Best Ideas'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
       f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
@@ -105,7 +105,7 @@ class StatsController < ApplicationController
       f.xAxis(:categories => @most_useful_part_part)
       series = { type: 'column', name: @most_useful_part_part, data: @most_useful_part }
       f.series(series)
-      f.options[:title][:text] = 'most_useful_participant'
+      f.options[:title][:text] = 'Most Useful Participants'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
       f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
