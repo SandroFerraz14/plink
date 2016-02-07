@@ -1,63 +1,102 @@
 <p id="notice"><%= notice %></p>
 
-
+<div class="ibox-content">
 <div class="row">
   <div class="col-xs-6 col-md-4">
-  <h2><%=@ideation_session.name%></h2>
-  <br>    
-  <span><%=@ideation_session.description%></span>
-  </div>
-  <div class="col-xs-6 col-md-4">
-  <i class="fa fa-calendar"></i>
-    Start Date: <%= (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
-        <br>
-        <i class="fa fa-clock-o"></i>
-        End of first phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
-        <br>
-        <i class="fa fa-calendar"></i>
-        Start Votation phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
-        <br>
-        <i class="fa fa-clock-o"></i>
-        End of Votation phase: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
-        <br>
+    <div class="ibox-content m-b-sm ">
+      <div class="p-xs">
+        <div class="pull-left m-r-md">
+          <i class="fa fa-bookmark text-navy mid-icon"></i>
         </div>
+        <h2><strong><%=@ideation_session.name%></strong></h2>
+        <span><%=@ideation_session.description%></span>
+      </div>
+    </div>
+    </div>
+
+  <div class="col-xs-6 col-md-4 ">
+    <div class="ibox-content m-b-sm border-bottom">
+      <div class="p-xs">
+        <div class="forum-icon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <div class="forum-item-title text-info">
+          <strong>Idea Generation</strong>
+        </div> 
+      <div class="forum-sub-title">
+        Begin:<%= (@ideation_session.start_time != nil)?  @ideation_session.start_time.strftime("%d %B %Y at %H:%M"): "Not Defined"%>
+      <br>
+        End: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+      </div>
+    </div>
+    </div>
+    <div class="ibox-content ">
+      <div class="forum-icon">
+        <i class="fa fa-clock-o"></i>
+      </div>
+      <div class="forum-item-title text-info">
+        <strong>Votation phase</strong>
+      </div> 
+        Begin: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %><br>        
+        End: <%= (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+    </div>
+  </div>
+
   <div class="col-xs-6 col-md-4">
-    <i class="fa fa-qq"></i>
-   <% if (@ideation_session.anonymity ==0 ) %>
-            No Anonimity 
-          <%elsif (@ideation_session.anonymity ==1 ) %>
-            Anonimity
-          <%else%>
-            User Choise
-          <%end%>
-          <br>
-          <i class="fa fa-comments-o"></i>
-          Comments: <%= @ideation_session.allow_comments%>
-          <br>
-          <i class="fa fa-thumbs-o-up"></i>
-          Number of Votes: <%= @ideation_session.number_votes %>
-          <br>
-          <i class="fa fa-users"></i>
-          Ideas generated: <%= @ideation_session.nideas %>
+    <div class="ibox-content border-bottom">
+    <div class="p-xs">
+      <div class="forum-icon">
+        <i class="fa fa-users"></i>
+      </div>
+      <div class="forum-sub-title">   
+        <% if (@ideation_session.anonymity ==0 ) %>
+          No Anonimity 
+        <%elsif (@ideation_session.anonymity ==1 ) %>
+          Anonimity
+        <%else%>
+          User Choise
+        <%end%>
+        <br>
+        <% if (@ideation_session.allow_comments  ) %>
+          Comments Alowed
+        <%else%>
+          No Comments
+        <%end%>
+        <br>
+        Votes per person: <%= @ideation_session.number_votes %>
+      </div>
+    </div>
+  </div>
+
+</div>
+       <div class="col-xs-6 col-md-4">
+      <div class="ibox-content ">
+        <div class="p-xs">
+          <div class="forum-icon">
+            <i class="fa fa-archive"></i>
           </div>
+              <div class="forum-item-title ">
+                <%= @ideation_session.nideas %> Ideas generated
+              </div>
+          </div>
+        </div>
+      </div>
 </div>
 
 
-
-
-
-
-<h1>Participants</h1>
-<div>Anonymity: <%=@ideation_session.anonymity%></div>
- 
-<div class= "field">
-  <%= render @participants %>
 </div>
+
 <div class= "field">
 <% if current_user.id==@ideation_session.user_id %>
   <%= render 'participants/form' %>
 <% end %>
 </div>
+<h2>Participants</h2>
+ 
+<div class= "field">
+  <%= render @participants %>
+</div>
+
 
 <script>
   $(document).ready(function() {
