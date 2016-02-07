@@ -182,7 +182,11 @@
   }
   function voteIdeas(form) {
     var votesLeft = parseInt($("#how_many_votes_left").val());
-    var numCheckedIdeas = form.find('input:checked').length;
+    var numCheckedIdeas = 0;
+    form.find('input:checked').each(function(){
+      if($(this).parents().eq(1).find("#vote-actions").children().length == 0)
+        numCheckedIdeas++;
+    })
     if(numCheckedIdeas <= votesLeft){
       $.ajax({
         type: "GET",
