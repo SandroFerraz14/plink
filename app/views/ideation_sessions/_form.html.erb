@@ -1,4 +1,5 @@
-<div class="col-lg-6">
+
+
 <%= form_for(@ideation_session) do |f| %>
   <% if @ideation_session.errors.any? %>
     <div id="error_explanation">
@@ -36,6 +37,7 @@
     <br>
     <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3, disabled: (@ideation_session.end_time != nil) ? false : true  %>
   </div>
+
   <br>
   <div class="field">
     <label>Set duration votation</label>
@@ -49,7 +51,7 @@
   </div>
   <br>
   <br>
-  <div class="field">
+  <div class="field ibox-content">
    
     <%= f.radio_button :anonymity, '0',:checked => true%><%= f.label :anonimity, 'Anonimous'%>
     <br>
@@ -61,7 +63,7 @@
   </div>
 
   <br>
-  <div class="field">
+  <div class="field ibox-content">
     <%= f.radio_button :allow_comments, true, :checked => true %><%= f.label :allow_comments, 'Allow Comments'%>
     <br>
     <%= f.radio_button :allow_comments, false%><%= f.label :allow_comments, 'No Comments'%>
@@ -72,12 +74,13 @@
     <div class="actions">
       <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Ideation session</strong></button>
     </div>
-
   </div>
 
-<br><br><br>
+<br><br><br><br><br><br><br><br>
+
 <% end %>
-</div>
+
+
 
 
 
