@@ -9,21 +9,13 @@ class StatsController < ApplicationController
     @ideas = Idea.where(ideation_session_id: @ideation_session.id)
     @themes = Theme.where(ideation_session_id: @ideation_session.id)
 
-    @ideas_por_tema = @ideas.joins(:theme).group(:name).count(:all).to_a
+    @ideas_by_theme = @ideas.joins(:theme).group(:name).count(:all).to_a
 
-    total_de_votos = @votes.count(:all)
-    total_de_votos2 = @votes.size
+    @ideas_by_participant = @ideas.joins(:participant).group(:nickname).order('count_all desc').count('all').take(5).to_a
+    @ideas_by_participant_participant = @ideas_by_participant.map {|i| i[0]}
 
-    total_idea = @ideas.count(:all)
-    total_idea2 = @ideas.size
-
-    participants_who_gave_ideas = @ideas.count(:participant_id)
-
-    @ideas_por_participant = @ideas.joins(:participant).group(:nickname).order('count_all desc').count('all').take(5).to_a
-    @ideas_por_participant_participant = @ideas_por_participant.map {|i| i[0]}
-
-    @ideas_mais_votos = @votes.joins(:idea).group(:number).order('count_all desc').count('all').take(5).to_a
-    @ideas_mas_votos_ideas = @ideas_mais_votos.map {|i| i[0]}
+    @ideas_top_votes = @votes.joins(:idea).group(:number).order('count_all desc').count('all').take(5).to_a
+    @ideas_top_votes_ideas = @ideas_top_votes.map {|i| i[0]}
 
     
 
@@ -61,7 +53,7 @@ class StatsController < ApplicationController
       series = {
                :type=> 'pie',
                :name=> 'Browser share',
-               :data=> @ideas_por_tema
+               :data=> @ideas_by_theme
       }
       f.series(series)
       f.options[:title][:text] = "Ideas by Theme"
@@ -82,8 +74,8 @@ class StatsController < ApplicationController
     #participantes que lançaram mais ideias
     @most_active_participant = LazyHighCharts::HighChart.new('column') do |f|
       f.chart defaultSeriesType: 'column', margin: [50, 200, 60, 170]
-      f.xAxis(:categories => @ideas_por_participant_participant)
-      series = { type: 'column', name: 'nome?', data: @ideas_por_participant }
+      f.xAxis(:categories => @ideas_by_participant_participant)
+      series = { type: 'column', name: 'nome?', data: @ideas_by_participant }
       f.series(series)
       f.options[:title][:text] = 'Total Expenses and Revenues'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
@@ -93,8 +85,8 @@ class StatsController < ApplicationController
     # ideias masi votadas
     @top_ideas = LazyHighCharts::HighChart.new('column') do |f|
       f.chart defaultSeriesType: 'column', margin: [50, 200, 60, 170]
-      f.xAxis(:categories => @ideas_mas_votos_ideas)
-      series = { type: 'column', name: 'nome?', data: @ideas_mais_votos }
+      f.xAxis(:categories => @ideas_top_votes_ideas)
+      series = { type: 'column', name: 'nome?', data: @ideas_top_votes }
       f.series(series)
       f.options[:title][:text] = 'Total Expenses and Revenues'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
@@ -103,9 +95,7 @@ class StatsController < ApplicationController
 
 
     # participantes que tiveram mais votos nas suas ideias
-    @most_useful_participant = 
 
-    end
 
      
     
