@@ -24,7 +24,8 @@
 
 
 
-//= require_tree .
+// VER BEM SE A AUSENCIA DESTE REQUIRE NAO VAI DAR ERROS
+// require_tree .
 //= require turbolinks
 
 //= require highcharts/highcharts

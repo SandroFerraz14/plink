@@ -9,7 +9,7 @@ class StatsController < ApplicationController
     @ideas = Idea.where(ideation_session_id: @ideation_session.id)
     @themes = Theme.where(ideation_session_id: @ideation_session.id)
 
-    total_de_votos = @votes.all.sum(:amount)
+    total_de_votos = @votes.all
 
 
 
