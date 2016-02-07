@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     put "/users/password" => "devise/passwords#update"
   end
 
+
   post "ideation_sessions/set_anonymous/:id" => "ideation_sessions#set_anonymous"
   post "ideation_sessions/set_anonymous/:ideation_session_id" => "ideation_sessions#set_anonymous"
   post "ideation_sessions/set_anonymous/:idea_id" => "ideation_sessions#set_anonymous"
