@@ -9,16 +9,8 @@ class StatsController < ApplicationController
     @ideas = Idea.where(ideation_session_id: @ideation_session.id)
     @themes = Theme.where(ideation_session_id: @ideation_session.id)
 
-    total_de_votos = @votes.all
-
-
-
-
-
-
-
-
-
+    total_de_votos = @votes.all.count(:all)
+    total_de_votos2 = @votes.all.size
 
 
     byebug;1+1;
