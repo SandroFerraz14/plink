@@ -166,6 +166,10 @@ class IdeationSessionsController < ApplicationController
       @participants = @ideation_session.participants
     end
 
+    def set_votes
+      @votes = @ideation_session.votes
+    end
+
     def all_participants
       @participants = Participant.all
     end

@@ -27,6 +27,8 @@ gem 'devise'
 gem 'devise_invitable'
 
 gem "paperclip", "~> 4.3"
+gem 'lazy_high_charts'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
