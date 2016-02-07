@@ -59,6 +59,7 @@
     <br>
 
   </div>
+
   <br>
   <div class="field">
     <%= f.radio_button :allow_comments, true, :checked => true %><%= f.label :allow_comments, 'Allow Comments'%>
@@ -66,16 +67,20 @@
     <%= f.radio_button :allow_comments, false%><%= f.label :allow_comments, 'No Comments'%>
   </div>
   <br>
+
   <div class="field">
     <div class="actions">
       <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Ideation session</strong></button>
     </div>
+
   </div>
 
- 
+<br><br><br>
 <% end %>
-
 </div>
+
+
+
 <script type="text/javascript">
   $(document).ready(function() {
     var datepickerStartId = "#ideation_session_start_time";

@@ -58,7 +58,7 @@
                         <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->
                     </a>
                 </li>
-                <li>
+                <li class="landing_link">
                     <%= link_to ideation_session_path(@ideation_session.id) do %>
                     <i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>
                     <% end %>
@@ -66,6 +66,11 @@
                 <li>
                     <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
                     <i class="fa fa-list"></i> <span class="nav-label">Participants</span>
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to ideation_session_stats_path(@ideation_session.id) do %>
+                    <i class="fa fa-list"></i> <span class="nav-label">Stats</span>
                     <% end %>
                 </li>
             </ul>
