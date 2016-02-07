@@ -76,6 +76,9 @@
             <i class="fa fa-archive"></i>
           </div>
           <div class="forum-item-title ">
+            Dinamizador: <%= User.find(@ideation_session.user_id).name %>
+          </div>
+          <div class="forum-item-title ">
           Session Status: 
           <% if @ideation_session.available_session  %>
             Generating Ideas
@@ -86,7 +89,6 @@
           <%end%>  
           </div>
               <div class="forum-item-title ">
-                <br>
                 <%= @ideation_session.nideas %> Ideas generated
               </div>
           </div>
