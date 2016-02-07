@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         resources :comments
       end
       resources :participants
+      resources :stats
     end
   end
   devise_for :users, controllers: { 
