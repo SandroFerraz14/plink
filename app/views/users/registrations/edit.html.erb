@@ -4,7 +4,10 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
   <%= devise_error_messages! %>
-
+<div class="row">
+  <div class="col-md-6 col-md-4">
+      <div class="p-xs">
+        <div class="pull-left m-r-md">
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true , class: "input-sm form-control"%>
@@ -40,12 +43,6 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" , class: "input-sm form-control"%>
-  </div>
-
-<br><br><br>
 
   <h4> Change Password </h4>
   <div class="field">
@@ -60,7 +57,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "input-sm form-control"%>
   </div>
 
-
+ <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" , class: "input-sm form-control"%>
+  </div>
 
 <br><br><br>
     <div class="field">
@@ -80,4 +80,7 @@
 
 <br>
 
-
+</div>
+</div>
+</div>
+</div>
