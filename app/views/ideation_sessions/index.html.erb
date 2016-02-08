@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+
+<% if notice != nil %>
+  <div class="col-lg-12">
+    <div class="widget navy-bg no-padding">
+      <div class="ppp"></div>
+        <div class="p-m">
+          <div class="col-xs-8 text-right">
+          </div>
+          <h4 class="m-xs font-bold">
+            <div id="countdown">
+              <p id="notice"><%= notice %></p>
+            </div>                
+          </h4>
+        </div>
+    </div> 
+   </div>
+<%end%>
+
 
 <h1> Ideation Sessions</h1>
   <div class="wrapper wrapper-content animated fadeInRight">
