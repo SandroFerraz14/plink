@@ -1,23 +1,35 @@
-<div class="col-lg-4">
-  <div class="contact-box">
-      <div class="col-sm-4">
-        <div class="text-center">
-          <% @user = User.find(participant.user_id) %>
-          <% if participant.avatar_file_name == @user.user_photo_file_name %>
-            <%= image_tag( @user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile") %>
-          <% else %>
-            <%= image_tag( participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
-          <% end %>
+<% if Participant.where(email: participant.email, ideation_session_id: @ideation_session.id).exists? %>
+  <div class="col-lg-4">
+    <div class="contact-box">
+        <div class="col-sm-4">
+          <div class="text-center">
+            <% if participant.user_id? %>
+              <% @user = User.find(participant.user_id) %>
+              <% if participant.avatar_file_name == @user.user_photo_file_name %>
+                <%= image_tag( @user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile") %>
+              <% else %>
+                <%= image_tag( participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+              <% end %>
+            <% else %>
+              <%= image_tag( participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+            <% end %>
+
+          </div>
         </div>
+      <div class="col-sm-8">
+        <h3><strong><%=participant.nickname%></strong></h3>
+        <% if current_user.id == @ideation_session.user_id %>
+          <%= participant.email%>
+        <% end %>
+        <br>
+        User activated <% if participant.active? %>
+        <i class='fa fa-check text-navy'></i>
+      <% else %>
+        <i class="fa fa-circle text-danger"></i>
+      <% end %>
       </div>
-    <div class="col-sm-8">
-      <h3><strong><%=participant.nickname%></strong></h3>
-      User activity <% if participant.active? %>
-      <i class='fa fa-check text-navy'></i>
-    <% else %>
-      <i class="fa fa-circle text-danger"></i>
-    <% end %>
+      <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
   </div>
-</div>
+<% end %>
+
