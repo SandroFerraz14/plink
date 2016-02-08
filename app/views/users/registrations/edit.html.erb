@@ -60,15 +60,16 @@
 <br>
 <br>
 
- <div class="field">
+  <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" , class: "input-sm form-control"%>
   </div>
 
 <br><br>
     <div class="field">
-    <div class="actions">
-      <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Update</strong></button>
+      <div class="actions">
+        <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Update</strong></button>
+      </div>
     </div>
 
 <% end %>
@@ -78,8 +79,9 @@
 <h3>Cancel my account</h3>
 
 <br>
-
-<%= button_to "Cancel my account" , registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-sm btn-primary  m-t-n-xs"%>
+    <div>
+      <%= button_to "Cancel my account" , class: "btn btn-sm btn-primary  m-t-n-xs"%>
+    </div>
 
 <br>
 
