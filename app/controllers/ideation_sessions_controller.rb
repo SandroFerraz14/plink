@@ -157,7 +157,6 @@ class IdeationSessionsController < ApplicationController
     else
       Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: current_user.email, avatar_file_name: 'default_profile', email: current_user.email)
     end
-    byebug;1+1;
   end
 
 
