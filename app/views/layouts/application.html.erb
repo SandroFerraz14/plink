@@ -26,10 +26,6 @@
     <!-- Wrapper-->
     <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
 
-        <% if params[:controller] == "users/registrations" && params[:action] == "edit"  %>
-            <%= render 'layouts/navigationUSER'%>
-        <% end %>
-
         <!-- Navigation -->
         <% if params[:controller] == "ideation_sessions" && (params[:action] == "index" || params[:action] == "new") %>
             <%= render 'layouts/navigationSessions' %>
