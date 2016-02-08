@@ -12,7 +12,12 @@
       </ul>
     </div>
   <% end %>
+<div class="row">
 
+  <div class="col-xs-6 col-md-6">
+    <div class="m-b-sm ">
+      <div class="p-xs">
+        <div class="pull-left m-r-md">
   <div class="field">
     
     <%= f.text_field :name, placeholder: :name, class: "form-control ", required: true %>
@@ -52,29 +57,36 @@
   </div>
   <br>
   <br>
-  <div class="field ibox-content">
-   
-    <%= f.radio_button :anonymity, '0',:checked => true%><%= f.label :anonimity, 'Anonimous'%>
+
+  <h3><strong>Anonimity</strong></h3>
+  <div class="field ibox-content m-b-sm">
+
+    <%= f.radio_button :anonymity, '0',:checked => true%><%= f.label :anonimity, 'All anonimous'%>
     <br>
     <%= f.radio_button :anonymity, '1' %><%= f.label :anonimity, 'No Anonimity'%>
     <br>
      <%= f.radio_button :anonymity, '2'  %><%= f.label :anonimity, 'User Choice'%>
     <br>
+    </div>
 
-  </div>
+  <h3><strong>Comments </strong></h3>
+  <div class="field ibox-content" >
+    
 
-  <br>
-  <div class="field ibox-content">
     <%= f.radio_button :allow_comments, true, :checked => true %><%= f.label :allow_comments, 'Allow Comments'%>
     <br>
     <%= f.radio_button :allow_comments, false%><%= f.label :allow_comments, 'No Comments'%>
   </div>
-  <br>
-  <div class="field">
+
+  <h3><strong>Private/Public session</strong></h3>
+  <div class="field ibox-content ">
+    
+
     <%= f.radio_button :private_session, true, :checked => true %><%= f.label :private_session, 'Private Session'%>
     <br>
     <%= f.radio_button :private_session, false%><%= f.label :private_session, 'Public Session'%>
   </div>
+ 
   <br>
 
   <div class="field">
@@ -83,8 +95,9 @@
     </div>
   </div>
 
-<br><br><br><br><br><br><br><br>
 
+<br><br><br><br><br><br><br><br>
+</div></div></div></div>
 <% end %>
 
 
