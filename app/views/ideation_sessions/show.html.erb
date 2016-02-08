@@ -1,5 +1,40 @@
-<% if current_user.id==@ideation_session.user_id or 
-	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists? %>
+<% if (current_user.id==@ideation_session.user_id or 
+	@participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).exists?) || (@ideation_session.private_session==false)%>
+
+	<!-- MANDAR FAZER UM PARTECIPANTE PARA O OUTSIDER AAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHH -->
+
+
+
+
+	<% create_participant_outsider %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <% if @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.active == false %>
         <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take.update_attribute(:active, true) %>
@@ -17,14 +52,14 @@
                 </div>
                 <h4 class="m-xs font-bold">
 				<div id="countdown">
-						<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
-							<span>The session is closed</span>
-						<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
-							<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
-						<% else %>
-							<span>The session is open</span>
-						<% end %>
-				    </div>
+					<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
+						<span>The session is closed</span>
+					<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
+						<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
+					<% else %>
+						<span>The session is open</span>
+					<% end %>
+				</div>
                 </h1>
                </div>
               </div> 
@@ -46,6 +81,42 @@
 		Access denied.
 	</p>
 <% end %>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 	var idIdeationSession = <%= @ideation_session.id %>;
 	var updateStatusSession = function(status){

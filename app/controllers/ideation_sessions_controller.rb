@@ -5,6 +5,8 @@ class IdeationSessionsController < ApplicationController
   before_action :set_participants, only: [:show, :destroy]
   before_action :all_participants, only: [:index, :new, :edit]
 
+  helper_method :create_participant_outsider
+
   def index
     @ideation_sessions = IdeationSession.all
   end
@@ -148,6 +150,16 @@ class IdeationSessionsController < ApplicationController
     render json: [{ message: 'Status of votation updated with success.' }]
   end
 
+  def create_participant_outsider
+    if @ideation_session.anonymity == 1
+      @seed = NicknamesFeed.find(rand(1..10))
+      Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: @seed.nick, avatar_file_name: @seed.image_url, email: current_user.email)
+    else
+      Participant.create(user_id: current_user.id, ideation_session_id: @ideation_session.id, active: true, nickname: current_user.email, avatar_file_name: 'default_profile', email: current_user.email)
+    end
+    byebug;1+1;
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -157,7 +169,7 @@ class IdeationSessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ideation_session_params
-      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :number_votes, :start_time, :end_time, :start_time_votation, :end_time_votation, :status_votation, themes_attributes: [:id, :name, :_destroy])
+      params.require(:ideation_session).permit(:name, :description, :anonymity, :allow_comments, :private_session, :number_votes, :start_time, :end_time, :start_time_votation, :end_time_votation, :status_votation, themes_attributes: [:id, :name, :_destroy])
     end
 
     def set_themes

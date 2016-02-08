@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206183136) do
+ActiveRecord::Schema.define(version: 20160207224441) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "participant_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160206183136) do
     t.boolean  "status_votation"
     t.datetime "end_time_votation"
     t.datetime "start_time_votation"
+    t.boolean  "private_session"
   end
 
   add_index "ideation_sessions", ["user_id"], name: "index_ideation_sessions_on_user_id"
