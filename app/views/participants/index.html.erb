@@ -76,7 +76,12 @@
             <i class="fa fa-archive"></i>
           </div>
           <div class="forum-item-title ">
-            Dinamizador: <%= User.find(@ideation_session.user_id).name %>
+            Dinamizador: 
+          <% if User.find(@ideation_session.user_id).name? %>
+            <%= User.find(@ideation_session.user_id).name %>
+          <% else %>
+            <%= User.find(@ideation_session.user_id).email %>
+          <% end %>
           </div>
           <div class="forum-item-title ">
           Session Status: 
