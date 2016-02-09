@@ -22,7 +22,7 @@
     <div class="row">
       <% @ideation_sessions.each do |ideation_session| %>
       <% if (current_user.id==ideation_session.user_id or 
-        @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) || (ideation_session.private_session==false) %>
+        @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) %>
           <div class="col-lg-12">
             <div class="widget lazur-bg no-padding">
               <div class="ppp"></div>
