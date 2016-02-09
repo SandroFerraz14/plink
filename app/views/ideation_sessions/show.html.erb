@@ -12,7 +12,7 @@
     <% else %>
     
 	<% end %>
-	<div id="countdown" class="ibox-content text-center p-md">
+	<div id="countdown" class="ibox-content text-center">
 		<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
 			<span>The session is closed</span>
 		<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>

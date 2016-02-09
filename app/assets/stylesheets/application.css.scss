@@ -136,8 +136,9 @@ small.small-time{
 }
 
 #countdown {
+  padding: 7px;
   position: fixed;
-  bottom: 40px;
+  bottom: 38px;
   right: 15px;
   z-index: 9999;
   border: 1px solid #e7eaec;
@@ -145,5 +146,14 @@ small.small-time{
 
 #countdown h2{
   margin:0;
+}
+
+.ibox-content.info-session{
+  padding-top:0;
+  padding-bottom:0;
+}
+
+.ibox-content.info-session .ibox-content{
+  border-top:0 !important;
 }
 
