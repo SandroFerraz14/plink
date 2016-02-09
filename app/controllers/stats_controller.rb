@@ -14,10 +14,10 @@ class StatsController < ApplicationController
     @ideas_by_participant = @ideas.joins(:participant).group(:nickname).order('count_all desc').count(:all).take(5).to_a
     @ideas_by_participant_participant = @ideas_by_participant.map {|i| i[0]}
 
-    @ideas_top_votes = @votes.joins(:idea).group(:number).order('count_all desc').count('all').take(5).to_a
+    @ideas_top_votes = @votes.joins(:idea).group(:number).order('count_all desc').count(:all).take(5).to_a
     @ideas_top_votes_ideas = @ideas_top_votes.map {|i| i[0]}
 
-    @ideas_top_votes_id = @votes.joins(:idea).group(:idea_id).order('count_all desc').count('all').take(5).to_a
+    @ideas_top_votes_id = @votes.joins(:idea).group(:idea_id).order('count_all desc').count(:all).take(5).to_a
 
     @participant_id = []
     @nickname_vote_idea = []
