@@ -40,6 +40,10 @@ class ThemesController < ApplicationController
     id_session = @theme.ideation_session_id
     @ideation_session = IdeationSession.find(id_session)
     if @theme.present?
+      @theme.ideas.each do |idea|
+        theme_default = @ideation_session.themes.where(name: GlobalConstants::DefaultTheme).first
+        idea.update_attribute(:theme_id, theme_default.id)
+      end
       @theme.destroy
       redirect_to ideation_session_path(@ideation_session), notice: ''
     else

@@ -8,7 +8,7 @@
              <li class="<%= (@themes.first == theme) ? "active" : "" %>">
                 <a data-toggle="tab" href="#tab-<%= theme.id %>" class=""><%= theme.name %></a>
                 <% if (@themes.first != theme) and current_user.id==@ideation_session.user_id %>
-                  <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Are you sure?' } do %>X<% end %>
+                  <%= link_to theme,  class: "absolute-top-right remove-button", method: :delete, data: { confirm: 'Every ideas in this topic goes to the default theme. Are you sure?' } do %>X<% end %>
                 <% end %>
              </li>
           <% end %>
