@@ -39,7 +39,7 @@
                 </div>
             </li>
             
-            <li class="landing_link">
+            <li class="<%= "active" if params[:controller] == 'ideation_sessions' && (params[:action] == 'new' || params[:action] == 'edit') %>">
                 <%= link_to new_ideation_session_path do %>
                 <i class="fa fa-plus"></i> <span class="nav-label">Create Session </span>
                 <% end %>

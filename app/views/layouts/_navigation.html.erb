@@ -58,17 +58,17 @@
                         <!--<i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>-->
                     </a>
                 </li>
-                <li class="landing_link">
+                <li class="<%= "active" if params[:controller] == 'ideation_sessions' && params[:action] == 'show' %>">
                     <%= link_to ideation_session_path(@ideation_session.id) do %>
                     <i class="fa fa-lightbulb-o"></i> <span class="nav-label">Session</span>
                     <% end %>
                 </li>
-                <li>
+                <li class="<%= "active" if params[:controller] == 'participants' && params[:action] == 'index' %>">
                     <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
                     <i class="fa fa-list"></i> <span class="nav-label">Participants</span>
                     <% end %>
                 </li>
-                <li>
+                <li class="<%= "active" if params[:controller] == 'stats' && params[:action] == 'index' %>">
                     <%= link_to ideation_session_stats_path(@ideation_session.id) do %>
                     <i class="fa fa-bar-chart-o"></i> <span class="nav-label">Stats</span>
                     <% end %>
