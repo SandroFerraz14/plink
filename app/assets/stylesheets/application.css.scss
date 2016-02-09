@@ -84,3 +84,38 @@ ul.notes li div a.remove-vote {
   	padding-left:5px;
 }
 
+span.green, 
+span.blue {
+  margin-left: 5px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1em;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  padding-top:8px;
+}
+
+span.green {
+  background: #1ab394;
+}
+
+span.blue {
+  background: #1c84c6;
+}
+
+small.small-time{
+	color:#fff;
+	display:block;
+	font-size:12px;
+}
+
+.ibox-title h5.no-float{
+	float:none;
+} 
+

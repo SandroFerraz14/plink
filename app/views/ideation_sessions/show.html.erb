@@ -12,27 +12,23 @@
     <% else %>
     
 	<% end %>
-	
+	<div class="col-lg-12">
 		<div class="col-lg-12">
-            <div class="widget navy-bg no-padding">
-              <div class="ppp"></div>
-              <div class="p-m">
-              <div class="col-xs-8 text-right">
+            <div class="ibox collapsed">
+                <div class="ibox-title">
+                    <h5 class="no-float"><div id="countdown">
+						<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
+							<span>The session is closed</span>
+						<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
+							<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
+						<% else %>
+							<span>The session is open</span>
+						<% end %>
+					</div></h5>
                 </div>
-                <h4 class="m-xs font-bold">
-				<div id="countdown">
-					<% if ((@ideation_session.end_time != nil) && (Time.new.to_i > Time.zone.parse(@ideation_session.end_time.to_s).to_i)) %>
-						<span>The session is closed</span>
-					<% elsif (@ideation_session.start_time != nil && Time.new.to_i < Time.zone.parse(@ideation_session.start_time.to_s).to_i) %>
-						<span><%= @ideation_session.start_time.strftime("Start on %d %B %Y at %H:%M") %></span>
-					<% else %>
-						<span>The session is open</span>
-					<% end %>
-				</div>
-                </h1>
-               </div>
-              </div> 
             </div>
+        </div>
+    </div>
 
 	<p id="notice"><%= notice %></p>
 
@@ -50,41 +46,6 @@
 		Access denied.
 	</p>
 <% end %>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script type="text/javascript">
 	var idIdeationSession = <%= @ideation_session.id %>;
@@ -115,12 +76,17 @@
 		  countdown(
 		    dateFinishVotation,
 		    function(ts) {
-		      document.getElementById("countdown").innerHTML = "<span>The votation phase ends on:</span><br>" + ts.toHTML("strong");
+		    	var days = (ts.days > 0) ? "<h2 class='inline'><span class='blue'>" + ts.days + "<small class='small-time'> days</small></span></h2>" : "";
+		    	var hours = (ts.hours >= 0) ? "<h2 class='inline'><span class='blue'>" + ts.hours + "<small class='small-time'> hours</small></span></h2>" : "";
+		    	var minutes = (ts.minutes >= 0) ? "<h2 class='inline'><span class='blue'>" + ts.minutes + "<small class='small-time'> minutes</small></span></h2>" : "";
+		    	var seconds = (ts.seconds >= 0) ? "<h2 class='inline'><span class='blue'>" + ts.seconds + "<small class='small-time'> seconds</small></span></h2>" : "";
+		    	var html = days + "" +  hours + "" + minutes + "" + seconds;
+		      document.getElementById("countdown").innerHTML = "Launch phase of ideas ends on: " + html;
 		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
 		      {
 		      	clearInterval(timerVotationId);
 		      	$("#countdown").html("");
-		      	$("#countdown").append("<span>The session is closed</span>");
+		      	$("#countdown").append("The session is closed");
 		      	updateStatusVotation(false);
 		      	$("#btn_votes").remove();
 		      }
@@ -141,12 +107,17 @@
 		  countdown(
 		    dateFinish,
 		    function(ts) {
-		      document.getElementById("countdown").innerHTML = "<span>Launch phase of ideas ends on:</span><br>" + ts.toHTML("strong");
+		    	var days = (ts.days > 0) ? "<h2 class='inline'><span class='green'>" + ts.days + "<small class='small-time'> days</small></span></h2>" : "";
+		    	var hours = (ts.hours >= 0) ? "<h2 class='inline'><span class='green'>" + ts.hours + "<small class='small-time'> hours</small></span></h2>" : "";
+		    	var minutes = (ts.minutes >= 0) ? "<h2 class='inline'><span class='green'>" + ts.minutes + "<small class='small-time'> minutes</small></span></h2>" : "";
+		    	var seconds = (ts.seconds >= 0) ? "<h2 class='inline'><span class='green'>" + ts.seconds + "<small class='small-time'> seconds</small></span></h2>" : "";
+		    	var html = days + "" +  hours + "" + minutes + "" + seconds;
+		      document.getElementById("countdown").innerHTML = "Launch phase of ideas ends on: " + html;
 		      if(ts.days == 0 && ts.hours == 0 && ts.minutes == 0 && ts.seconds == 0)
 		      {
 		      	clearInterval(timerId);
 		      	$("#countdown").html("");
-		      	$("#countdown").append("<span>The launch phase of ideas is closed</span>");
+		      	$("#countdown").append("The launch phase of ideas is closed");
 		      	updateStatusSession(false);
 		      	updateStatusVotation(true);
 		      	$(".themes-box").after('<a onclick="selectedIdeas(\'voteideias\', 0)" id="btn_votes" class="btn btn-white" alt="Vote selected ideas" title="Vote selected ideas" href="#"><i class="glyphicon glyphicon-inbox"></i></a>');
