@@ -101,7 +101,7 @@
           <%end%>  
           </div>
               <div class="forum-item-title ">
-                <%= @ideation_session.nideas %> Ideas generated
+                <%= (@ideation_session.nideas - 1) %> Ideas generated
               </div>
           </div>
         </div>
@@ -120,10 +120,4 @@
   <%= render @participants %>
 </div>
 
-
-<script>
-  $(document).ready(function() {
-    $('.footable').footable();
-  });
-</script>
 
