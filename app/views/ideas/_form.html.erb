@@ -11,12 +11,10 @@
   <% end %>
 
   <%= hidden_field_tag "id_theme",id_theme %>
-
 <br>
   <div class="field">
     <%= f.text_area :text, placeholder: "Write there your idea", class: "form-control", required: true %>
   </div>
-  <br>
 <div class="field form-group" >
     <div class="btn-group-horizontal" data-toggle="buttons">
       <%= f.label :color, class: "btn c1-bg inline-block active" do %>
@@ -43,14 +41,7 @@
        <%= f.label :color, class: "btn c8-bg" do %>
         <%= f.radio_button :color, "c8"%>
       <% end %>
-      
-
     </div>
   </div>
-  <br>
-  <br>  
-    <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Idea</strong></button>
-  
-
-
+  <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Idea</strong></button>
 <% end %>
