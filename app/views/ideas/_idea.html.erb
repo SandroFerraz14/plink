@@ -2,7 +2,9 @@
 <ul class="notes <%=idea.color%>">
     <li>
         <div>
-            <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
+            <% if((current_user.id==@ideation_session.user_id) || (@ideation_session.status_votation == true)) %>
+                <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
+            <% end %> 
             <section id="vote-actions">
                 <% if idea.votes.where(idea_id: idea.id, participant_id: @part.id, ideation_session_id: @ideation_session.id).exists? %>
                     <i class="fa fa-thumbs-o-up", title="You voted that idea"></i>
@@ -15,29 +17,11 @@
             </section>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
-            
-            
-                
-                <% if @ideation_session.allow_comments %>
-                    <%= link_to idea_comments_path(idea), method: :get do %>
-                        <i class="fa fa-comments"></i>
-                    <% end %>
-                <% end %> 
-
-
-
-
-            
-
-            <!-- <%= idea.id %> -->
-
-            <%# idea.comments.each do |comment| %>
-                <%#= render partial: "comments/comment", object: comment %>
-            <%# end %>
-            
-            <%#= render 'comments/form', object: idea.id %>
-
-
+            <% if @ideation_session.allow_comments %>
+                <%= link_to idea_comments_path(idea), method: :get do %>
+                    <i class="fa fa-comments"></i>
+                <% end %>
+            <% end %> 
         </div>
     </li>
 </ul>
