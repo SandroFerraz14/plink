@@ -1,13 +1,11 @@
 <% if(@idea.ideation_session.status_votation || @idea.ideation_session.available_session) %>
-	<div class="col-lg-6">
-		<%= form_for([@idea, @idea.comments.build]) do |f| %>
-			<div class="field">
-		    	<%= f.text_area :body, class:'form-control', placeholder: "New comment text" %>
-		  	</div>
-		  	<br>
-		  	<div class="actions">
-		    	<button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Comment</strong></button>
-		  	</div>
-	  	<% end %>
-	</div>
+	<%= form_for([@idea, @idea.comments.build]) do |f| %>
+		<div class="field">
+	    	<%= f.text_area :body, class:'form-control', placeholder: "New comment text" %>
+	  	</div>
+	  	<br>
+	  	<div class="actions">
+	    	<button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Comment</strong></button>
+	  	</div>
+  	<% end %>
 <% end %>

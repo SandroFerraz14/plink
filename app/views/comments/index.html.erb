@@ -25,15 +25,9 @@
         </li>
     </ul>
 
-
-  <br><br>
-    <div class="ibox float-e-margins">
+    <div class="ibox no-margin">
         <div class="ibox-title">
-          <h5>
-            <div class="text-warning">
-              Comments
-            </div>
-          </h5>
+          <h5>Comments <small>Leave your comment about this idea.</small></h5>
         </div>
         <div class="ibox-content no-padding">
             <ul class="list-group">
@@ -55,10 +49,7 @@
 
             </ul>
         </div>
-
-
     </div>
-
-<%= render 'comments/form', id_idea: @idea.id %>
-
-<br><br><br><br><br><br><br><br>
+  <div class="ibox-content">
+    <%= render 'comments/form', id_idea: @idea.id %>
+  </div>
