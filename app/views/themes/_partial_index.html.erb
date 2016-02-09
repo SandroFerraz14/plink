@@ -33,7 +33,6 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Ideas</h2>
                   <ol class="breadcrumb">
                     <li>
                         <strong><%=@ideation_session.name%></strong>
@@ -43,9 +42,10 @@
                     </li>
                   </ol>
                 </div>
-                    <br><br>
-                    <%= render partial: "formTools" %>
-                    <% theme.ideas.each do |idea| %>
+                <div class="col-lg-2">
+                  <%= render partial: "formTools" %>
+                </div>
+                  <% theme.ideas.each do |idea| %>
                     <%= render partial: "ideas/idea", object: idea %>
                   <% end %>
                   <%= hidden_field_tag "id_theme" %>
@@ -59,7 +59,6 @@
           <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <%if @ideation_session.available_session %>
-                <h2>Insert idea</h2>
               <%= render 'ideas/form', id_theme: theme.id %>
                 <%end%>
             </div>
