@@ -55,7 +55,7 @@
                         <i class="fa fa-edit"></i>
                       <%end %>
   
-                      <%= link_to ideation_session, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                      <%= link_to ideation_session, method: :delete, data: { confirm: 'Do you want delete session ' + ideation_session.name + '?' }  do %>
                         <i class="fa fa-trash-o"></i>
                       <%end %>
                     <%end %>
