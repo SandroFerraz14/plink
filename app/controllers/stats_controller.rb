@@ -83,7 +83,7 @@ class StatsController < ApplicationController
       f.series(series)
       f.options[:title][:text] = 'Most Active Participants'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
-      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
+      f.plot_options(series: {pointWidth: 45},pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
 
     # ideias masi votadas
@@ -94,7 +94,7 @@ class StatsController < ApplicationController
       f.series(series)
       f.options[:title][:text] = 'Best Ideas'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
-      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
+      f.plot_options(series: {pointWidth: 45},pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
 
 
@@ -106,7 +106,7 @@ class StatsController < ApplicationController
       f.series(series)
       f.options[:title][:text] = 'Most Useful Participants'
       f.legend(layout: 'vertical', style: { left: 'auto', bottom: 'auto', right: '50px', top: '100px' })
-      f.plot_options(pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
+      f.plot_options(series: {pointWidth: 45},pie: { allowPointSelect: true, cursor: 'pointer', dataLabels: { enabled: true, color: 'black', style: { font: '13px Trebuchet MS, Verdana, sans-serif' } } })
     end
 
      
