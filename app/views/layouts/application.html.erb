@@ -20,8 +20,6 @@
 </head>
 <body class= <%= (user_signed_in?) ? "" : "secondary-background" %> >
 <% if user_signed_in? %>
-<!-- Skin configuration box -->
-<!-- <%= render 'layouts/skinconfig' %>-->
 
     <!-- Wrapper-->
     <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
@@ -54,9 +52,6 @@
 
         </div>
         <!-- End page wrapper-->
-
-        <!-- Right sidebar -->
-        <%= render 'layouts/rightsidebar' %>
 
     </div>
     <!-- End wrapper-->
