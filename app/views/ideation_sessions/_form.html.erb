@@ -30,82 +30,71 @@
   <div class="field">
     <label>Set duration</label>
     <div class="input-daterange input-group">
-      <%= f.text_field :start_time, class: "input-sm form-control", value: (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y - %H:%M") : "" %>
+      <%= f.text_field :start_time, class: "input-sm form-control", placeholder: "Start date", value: (@ideation_session.start_time != nil) ? @ideation_session.start_time.strftime("%d %B %Y - %H:%M") : "" %>
       <%= hidden_field_tag "start_time_value" %>
       <span class="input-group-addon">to</span>
-      <%= f.text_field :end_time, class: "input-sm form-control", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
+      <%= f.text_field :end_time, class: "input-sm form-control", placeholder: "End date", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
       <%= hidden_field_tag "end_time_value" %>
     </div>
+    <small class="text-navy">You can activate params of votation if you set end date.</small>
   </div>
   <br>
-  <div class="field">
-    <label>Set number of votes</label>
-    <br>
-    <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3, disabled: (@ideation_session.end_time != nil) ? false : true  %>
-  </div>
+  <div id="params_votation">
+    <div class="field">
+      <label>Set number of votes</label>
+      <br>
+      <%= f.number_field :number_votes, in: 0..100, step: 1, value: (@ideation_session.number_votes != nil) ? @ideation_session.number_votes : 3, disabled: (@ideation_session.end_time != nil) ? false : true  %>
+    </div>
 
-  <br>
-  <div class="field">
-    <label>Set duration votation</label>
-    <div class="input-daterange input-group">
-      <%= f.text_field :start_time_votation, disabled: true, class: "input-sm form-control", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
-      <%= hidden_field_tag "start_time_votation_value" %>
-      <span class="input-group-addon">to</span>
-      <%= f.text_field :end_time_votation, disabled: (@ideation_session.end_time != nil) ? false : true, class: "input-sm form-control", value: (@ideation_session.end_time_votation != nil) ? @ideation_session.end_time_votation.strftime("%d %B %Y - %H:%M") : "" %>
-      <%= hidden_field_tag "end_time_votation_value" %>
+    <br>
+    <div class="field">
+      <label>Set duration votation</label>
+      <div class="input-daterange input-group">
+        <%= f.text_field :start_time_votation, disabled: true, class: "input-sm form-control", placeholder: "Start date", value: (@ideation_session.end_time != nil) ? @ideation_session.end_time.strftime("%d %B %Y - %H:%M") : "" %>
+        <%= hidden_field_tag "start_time_votation_value" %>
+        <span class="input-group-addon">to</span>
+        <%= f.text_field :end_time_votation, disabled: (@ideation_session.end_time != nil) ? false : true, class: "input-sm form-control", placeholder: "End date", value: (@ideation_session.end_time_votation != nil) ? @ideation_session.end_time_votation.strftime("%d %B %Y - %H:%M") : "" %>
+        <%= hidden_field_tag "end_time_votation_value" %>
+      </div>
     </div>
   </div>
   <br>
-  <br>
 
-  <h3><strong>Anonimity</strong></h3>
+  <label>Anonimity</label>
   <div class="field ibox-content m-b-sm">
-
-    <%= f.radio_button :anonymity, '0',:checked => true%><%= f.label :anonimity, 'All anonimous'%>
+    <label><%= f.radio_button :anonymity, '0',:checked => true%> All anonimous</label>
     <br>
-    <%= f.radio_button :anonymity, '1' %><%= f.label :anonimity, 'No Anonimity'%>
+    <label><%= f.radio_button :anonymity, '1' %> No anonimity</label>
     <br>
-     <%= f.radio_button :anonymity, '2'  %><%= f.label :anonimity, 'User Choice'%>
-    <br>
-    </div>
-
-  <h3><strong>Comments </strong></h3>
-  <div class="field ibox-content" >
-    
-
-    <%= f.radio_button :allow_comments, true, :checked => true %><%= f.label :allow_comments, 'Allow Comments'%>
-    <br>
-    <%= f.radio_button :allow_comments, false%><%= f.label :allow_comments, 'No Comments'%>
+     <label><%= f.radio_button :anonymity, '2'  %> User choice</label>
   </div>
 
-  <h3><strong>Private/Public session</strong></h3>
-  <div class="field ibox-content ">
-    
-
-    <%= f.radio_button :private_session, true, :checked => true %><%= f.label :private_session, 'Private Session'%>
+  <label>Comments</label>
+  <div class="field ibox-content" >
+    <label><%= f.radio_button :allow_comments, true, :checked => true %> Allow comments</label>
     <br>
-    <%= f.radio_button :private_session, false%><%= f.label :private_session, 'Public Session'%>
+    <label><%= f.radio_button :allow_comments, false %> No comments</label>
+  </div>
+
+  <label>Private/Public session</label>
+  <div class="field ibox-content ">
+    <label><%= f.radio_button :private_session, true, :checked => true %> Private session</label>
+    <br>
+    <label><%= f.radio_button :private_session, false%> Public session</label>
   </div>
  
   <br>
 
   <div class="field">
     <div class="actions">
-      <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create Ideation session</strong></button>
+      <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit"><strong>Create</strong></button>
     </div>
   </div>
-
-
-<br><br><br><br><br><br><br><br>
-</div></div></div></div>
 <% end %>
-
-
-
-
 
 <script type="text/javascript">
   $(document).ready(function() {
+    $("#params_votation").hide();
     var datepickerStartId = "#ideation_session_start_time";
     var datepickerEndId = "#ideation_session_end_time";
     var datepickerStartVotationId = "#ideation_session_start_time_votation";
@@ -142,9 +131,11 @@
         $(datepickerEndVotationId).val("");
         $("#ideation_session_number_votes")[0].setAttribute("disabled", "true");
         $(datepickerEndVotationId)[0].setAttribute("disabled", "true");
+        $("#params_votation").hide();
       } else {
         $("#ideation_session_number_votes")[0].removeAttribute("disabled");
         $(datepickerEndVotationId)[0].removeAttribute("disabled");
+        $("#params_votation").show();
       }
     });
     $(datepickerStartVotationId).on("dp.change", function (e) {

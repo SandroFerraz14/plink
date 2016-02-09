@@ -152,7 +152,6 @@
   }
   function updateThemeIdeas(form, themeId) {
     form.find("#id_theme").val(themeId);
-    console.log(form.find("#id_theme"));
     $.ajax({
       type: "GET",
       url: "/ideas/update_theme_ideas",

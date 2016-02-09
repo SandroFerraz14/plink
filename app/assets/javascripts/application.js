@@ -23,7 +23,6 @@
 //= require plugins/countdown/countdown.js
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
-//= require highcharts/highstock
 
 // VER BEM SE A AUSENCIA DESTE REQUIRE NAO VAI DAR ERROS
 // require_tree .
