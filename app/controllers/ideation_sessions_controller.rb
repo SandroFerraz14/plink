@@ -18,6 +18,7 @@ class IdeationSessionsController < ApplicationController
     else
       @ideation_session.update_attribute(:status_votation, true)
     end
+
     if @ideation_session.start_time == nil
       @ideation_session.update_attribute(:available_session, true)
     elsif @ideation_session.start_time.to_i > Time.new.to_i
