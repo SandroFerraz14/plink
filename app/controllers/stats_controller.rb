@@ -11,7 +11,7 @@ class StatsController < ApplicationController
 
     @ideas_by_theme = @ideas.joins(:theme).group(:name).count(:all).to_a
 
-    @ideas_by_participant = @ideas.joins(:participant).group(:nickname).order('count_all desc').count('all').take(5).to_a
+    @ideas_by_participant = @ideas.joins(:participant).group(:nickname).count('all').take(5).to_a
     @ideas_by_participant_participant = @ideas_by_participant.map {|i| i[0]}
 
     @ideas_top_votes = @votes.joins(:idea).group(:number).order('count_all desc').count('all').take(5).to_a
