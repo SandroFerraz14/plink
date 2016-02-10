@@ -2,7 +2,12 @@
 <ul class="notes <%=idea.color%>">
     <li>
         <div>
-            <%= image_tag(idea.participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+            <% @user = User.find(idea.participant.user_id) %>
+            <% if idea.participant.avatar_file_name == @user.user_photo_file_name %>
+                <%= image_tag( @user.user_photo.url(:thumb), alt: "image", class: "img-rounded user-img-profile") %>
+              <% else %>
+                <%= image_tag( idea.participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+              <% end %>
             <%= idea.participant.nickname %>
             <% if((current_user.id==@ideation_session.user_id) || (@ideation_session.status_votation == true)) %>
                 <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
