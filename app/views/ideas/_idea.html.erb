@@ -15,29 +15,11 @@
             </section>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
-            
-            
-                
                 <% if @ideation_session.allow_comments %>
                     <%= link_to idea_comments_path(idea), method: :get do %>
                         <i class="fa fa-comments"></i>
                     <% end %>
                 <% end %> 
-
-
-
-
-            
-
-            <!-- <%= idea.id %> -->
-
-            <%# idea.comments.each do |comment| %>
-                <%#= render partial: "comments/comment", object: comment %>
-            <%# end %>
-            
-            <%#= render 'comments/form', object: idea.id %>
-
-
         </div>
     </li>
 </ul>
