@@ -87,7 +87,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#params_votation").hide();
+    
+    if($("#ideation_session_end_time").val() == "")
+      $("#params_votation").hide();
+
     var datepickerStartId = "#ideation_session_start_time";
     var datepickerEndId = "#ideation_session_end_time";
     var datepickerStartVotationId = "#ideation_session_start_time_votation";
