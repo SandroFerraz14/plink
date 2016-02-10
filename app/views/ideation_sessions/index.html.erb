@@ -1,53 +1,60 @@
-<p id="notice"><%= notice %></p>
+<%if notice!=nil %>
+  <div class="alert alert-success">
+    <p id="notice"><%= notice %></p>
+  </div>
+<%end%>
 
-<h2> Ideation Sessions</h2>
+
+<h1> Ideation Sessions</h1>
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-      <% @ideation_sessions.each do |ideation_session| %>
-      <% if (current_user.id==ideation_session.user_id or 
-        @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) %>
-          <div class="col-lg-12">
-            <div class="widget lazur-bg no-padding">
-              <div class="ppp"></div>
-              <div class="p-m">
-              <div class="col-xs-8 text-right">
-                </div>
+      <% if @ideation_sessions.exists? %>
+        <% @ideation_sessions.each do |ideation_session| %>
+        <% if (current_user.id==ideation_session.user_id or 
+          @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) || (ideation_session.private_session==false) %>
+            <div class="col-lg-12">
+              <div class="widget lazur-bg no-padding">
+                <div class="ppp"></div>
+                <div class="p-m">
+                <div class="col-xs-8 text-right">
+                  </div>               
+                    <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
+                  <div class= "direitaa">
+                    Starts on: <i class="fa fa-calendar"></i>
+                    <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime(" %d %B %Y at %H:%M") : "" %>
+                    <br>
+                    Ends on: <i class="fa fa-calendar"></i>
+                    <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime(" %d %B %Y at %H:%M") : "" %>
+                    <br>
+                  </div>
 
-                
-                  <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
-                <div class= "direitaa">
-                  Starts on: <i class="fa fa-calendar"></i>
-                  <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime(" %d %B %Y at %H:%M") : "" %>
                   <br>
-                  Ends on: <i class="fa fa-calendar"></i>
-                  <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime(" %d %B %Y at %H:%M") : "" %>
-                  <br>
-                </div>
 
-                <br>
-
-                Description: <%=ideation_session.description %>
-                <br><br>
-                <div class = "linkbranco">
-                  <h2 class="font-bold">
-                    <%= link_to ideation_session, method: :get  do %>
-                      <i class="fa fa-eye"></i>
-                    <%end %>
-                    <% if current_user.id==ideation_session.user_id %>
-                      <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
-                        <i class="fa fa-edit"></i>
+                  Description: <%=ideation_session.description %>
+                  <br><br>
+                  <div class = "linkbranco">
+                    <h2 class="font-bold">
+                      <%= link_to ideation_session, method: :get  do %>
+                        <i class="fa fa-eye"></i>
                       <%end %>
-  
-                      <%= link_to ideation_session, method: :delete, data: { confirm: 'Do you want delete session ' + ideation_session.name + '?' }  do %>
-                        <i class="fa fa-trash-o"></i>
+                      <% if current_user.id==ideation_session.user_id %>
+                        <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
+                          <i class="fa fa-edit"></i>
+                        <%end %>
+    
+                        <%= link_to ideation_session, method: :delete, data: { confirm: 'Do you want delete session ' + ideation_session.name + '?' }  do %>
+                          <i class="fa fa-trash-o"></i>
+                        <%end %>
                       <%end %>
-                    <%end %>
-                  </h2>
-                </div>
-              </div> 
+                    </h2>
+                  </div>
+                </div> 
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
+      <% else %>
+        <h5>Without Sessions</h5>
       <% end %>
     </div>
   </div>

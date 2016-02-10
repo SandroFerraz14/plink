@@ -22,7 +22,11 @@
 		<% end %>
 	</div>
 
-	<p id="notice"><%= notice %></p>
+	<%if notice!=nil %>
+  <div class="alert alert-success">
+    <p id="notice"><%= notice %></p>
+  </div>
+<%end%>
 
 	<%= render 'themes/partial_index' %>
 <% else %>
