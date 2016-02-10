@@ -8,7 +8,7 @@ class IdeationSessionsController < ApplicationController
   helper_method :create_participant_outsider
 
   def index
-    @ideation_sessions = IdeationSession.all
+    @ideation_sessions = IdeationSession.all.order(created_at: :desc)
   end
 
   def show
