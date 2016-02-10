@@ -35,7 +35,9 @@
                     </ul> -->
                 </div>
                 <div class="logo-element">
-                    <img alt="image" class="img-circle" src="<%= image_url 'logo.png' %>" height="40" width="40"/>
+                    <%= link_to root_path do %>
+                        <img alt="image" class="img-circle" src="<%= image_url 'logo.png' %>" height="40" width="40"/>
+                    <% end %>
                 </div>
             </li>
             
