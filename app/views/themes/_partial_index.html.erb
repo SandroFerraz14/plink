@@ -1,7 +1,6 @@
 <% @part = @participants.where(email: current_user.email, ideation_session_id: @ideation_session.id).take %>
 <div class="panel blank-panel">
   <div class="panel-heading">
-    <br><br>
     <div class="panel-options">
         <ul class="nav nav-tabs">
           <% @themes.each do |theme| %>

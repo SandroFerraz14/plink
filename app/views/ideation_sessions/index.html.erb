@@ -25,8 +25,8 @@
                       <h3>
                         <strong><%= ideation_session.name %></strong>
                         <div class="actions-sessions pull-right">
-                          <%= link_to ideation_session, method: :get  do %>
-                            <i class="fa fa-eye"></i>
+                          <%= link_to ideation_session, title: "Enter session", method: :get  do %>
+                            <i class="fa fa-sign-in"></i>
                           <%end %>
                           <% if current_user.id==ideation_session.user_id %>
                             <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
