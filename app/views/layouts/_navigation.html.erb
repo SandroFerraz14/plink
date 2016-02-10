@@ -63,7 +63,7 @@
                 </li>
                 <li class="<%= "active" if params[:controller] == 'participants' && params[:action] == 'index' %>">
                     <%= link_to ideation_session_participants_path(@ideation_session.id) do %>
-                    <i class="fa fa-list"></i> <span class="nav-label">Participants</span>
+                    <i class="fa fa-info"></i> <span class="nav-label">Info and Participants</span>
                     <% end %>
                 </li>
                 <li class="<%= "active" if params[:controller] == 'stats' && params[:action] == 'index' %>">
