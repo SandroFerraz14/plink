@@ -2,6 +2,8 @@
 <ul class="notes <%=idea.color%>">
     <li>
         <div>
+            <%= image_tag(idea.participant.avatar_file_name, alt: "image", class: "img-circle user-img-profile") %>
+            <%= idea.participant.nickname %>
             <% if((current_user.id==@ideation_session.user_id) || (@ideation_session.status_votation == true)) %>
                 <small><%= check_box_tag "idea_ids[]" , idea.id %></small>
             <% end %> 
@@ -17,6 +19,7 @@
             </section>
             <h4><%= idea.number %></h4>
             <p><%= idea.text %></p>
+
             <% if @ideation_session.allow_comments %>
                 <%= link_to idea_comments_path(idea), method: :get do %>
                     <i class="fa fa-comments"></i> <%= Comment.where(idea_id: idea.id).count(:all)  %>

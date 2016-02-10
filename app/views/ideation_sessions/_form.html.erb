@@ -53,14 +53,17 @@
   </div>
   <br>
 
-  <label>Anonimity</label>
-  <div class="field ibox-content m-b-sm">
-    <label><%= f.radio_button :anonymity, '1',:checked => true%> All anonimous</label>
-    <br>
-    <label><%= f.radio_button :anonymity, '0' %> No anonimity</label>
-    <br>
-     <label><%= f.radio_button :anonymity, '2'  %> User choice</label>
-  </div>
+  <% if ((params[:controller] == "ideation_sessions") && (params[:action] != "edit")) %>
+    <label>Anonimity</label>
+    <small class="text-danger">After create session you can't edit this section.</small>
+    <div class="field ibox-content m-b-sm">
+      <label><%= f.radio_button :anonymity, '1',:checked => true%> All anonimous</label>
+      <br>
+      <label><%= f.radio_button :anonymity, '0' %> No anonimity</label>
+      <br>
+       <label><%= f.radio_button :anonymity, '2'  %> User choice</label>
+    </div>
+  <% end %>
 
   <label>Comments</label>
   <div class="field ibox-content" >
