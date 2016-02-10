@@ -11,55 +11,103 @@
       <% if @ideation_sessions.exists? %>
         <% @ideation_sessions.each do |ideation_session| %>
         <% if (current_user.id==ideation_session.user_id or 
-          @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) || (ideation_session.private_session==false) %>
-            <div class="col-lg-4">
-              <div class="panel panel-primary">
+          @participants.where(email: current_user.email, ideation_session_id: ideation_session.id).exists?) %>
+            <div class="col-lg-12 info-session">
+              <% if(ideation_session.available_session) %>
+                <% status = "primary" %>
+              <% elsif(ideation_session.status_votation) %>
+                <% status = "success" %>
+              <% else %>
+                <% status = "danger" %>
+              <% end %>
+              <div class="panel panel-<%= status %>">
                   <div class="panel-heading">
-                      Primary Panel
+                      <h3>
+                        <strong><%= ideation_session.name %></strong>
+                        <div class="actions-sessions pull-right">
+                          <%= link_to ideation_session, method: :get  do %>
+                            <i class="fa fa-eye"></i>
+                          <%end %>
+                          <% if current_user.id==ideation_session.user_id %>
+                            <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
+                              <i class="fa fa-edit"></i>
+                            <%end %>
+                            <%= link_to ideation_session, method: :delete, data: { confirm: 'Do you want delete session ' + ideation_session.name + '?' }  do %>
+                              <i class="fa fa-trash-o"></i>
+                            <%end %>
+                          <%end %>
+                        </div>
+                      </h3>
                   </div>
                   <div class="panel-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                    <div class="col-lg-12 margin-bottom-15">
+                        <strong>Description:</strong> <%=ideation_session.description %>
+                    </div>
+                    <div class="col-lg-3 margin-bottom-15">
+                        <div class="forum-icon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="forum-item-title">
+                          <strong>Idea Generation</strong>
+                        </div> 
+                      <div class="forum-sub-title">
+                        <strong>Begin:</strong> <%= (ideation_session.start_time != nil)?  ideation_session.start_time.strftime("%d %B %Y at %H:%M"): "Not Defined"%>
+                      <br>
+                        <strong>End:</strong> <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+                      </div>
                   </div>
-              </div>
-            </div>
-
-            <div class="col-lg-12">
-              <div class="widget lazur-bg no-padding">
-                <div class="ppp"></div>
-                <div class="p-m">
-                <div class="col-xs-8 text-right">
-                  </div>               
-                    <h1 class="m-xs font-bold"><%= ideation_session.name %></h1>
-                  <div class= "direitaa">
-                    Starts on: <i class="fa fa-calendar"></i>
-                    <%= (ideation_session.start_time != nil) ? ideation_session.start_time.strftime(" %d %B %Y at %H:%M") : "" %>
-                    <br>
-                    Ends on: <i class="fa fa-calendar"></i>
-                    <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime(" %d %B %Y at %H:%M") : "" %>
-                    <br>
+                  <div class="col-lg-3 margin-bottom-15">
+                      <div class="forum-icon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <div class="forum-item-title">
+                        <strong>Votation phase</strong>
+                      </div> 
+                      <div class="forum-sub-title">
+                        <strong>Begin:</strong> <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %><br>        
+                        <strong>End:</strong> <%= (ideation_session.end_time != nil) ? ideation_session.end_time.strftime("%d %B %Y at %H:%M") : "Not defined" %>
+                      </div>
                   </div>
-
-                  <br>
-
-                  Description: <%=ideation_session.description %>
-                  <br><br>
-                  <div class = "linkbranco">
-                    <h2 class="font-bold">
-                      <%= link_to ideation_session, method: :get  do %>
-                        <i class="fa fa-eye"></i>
-                      <%end %>
-                      <% if current_user.id==ideation_session.user_id %>
-                        <%= link_to edit_ideation_session_path(ideation_session), method: :get do %>
-                          <i class="fa fa-edit"></i>
-                        <%end %>
-    
-                        <%= link_to ideation_session, method: :delete, data: { confirm: 'Do you want delete session ' + ideation_session.name + '?' }  do %>
-                          <i class="fa fa-trash-o"></i>
-                        <%end %>
-                      <%end %>
-                    </h2>
+                  <div class="col-lg-3 margin-bottom-15">
+                      <div class="forum-icon">
+                        <i class="fa fa-users"></i>
+                      </div>
+                      <div class="forum-sub-title">  
+                        <% if (ideation_session.anonymity ==0 ) %>
+                          No Anonimity 
+                        <%elsif (ideation_session.anonymity ==1 ) %>
+                          All anonimous
+                        <%else%>
+                          User Choise
+                        <%end%>
+                        <br>
+                        <% if (ideation_session.allow_comments  ) %>
+                          Comments Alowed
+                        <%else%>
+                          No Comments
+                        <%end%>
+                        <br>
+                        <strong>Votes per person:</strong> <%= (ideation_session.number_votes != nil) ? ideation_session.number_votes : "Not defined" %>
+                      </div>
                   </div>
-                </div> 
+                  <div class="col-lg-3 margin-bottom-15">
+                      <div class="forum-icon">
+                        <i class="fa fa-archive"></i>
+                      </div>
+                      <div class="forum-sub-title ">
+                      <strong>Session Status:</strong> 
+                        <% if ideation_session.available_session  %>
+                          Generating Ideas
+                        <% elsif ideation_session.status_votation %>
+                          Voting
+                        <%else%>
+                          Session Closed
+                        <%end%>  
+                        <br>
+                        <strong><%= (ideation_session.nideas - 1) %></strong> Ideas generated
+                      </div>
+                  </div>
+                </div>
               </div>
             </div>
           <% end %>

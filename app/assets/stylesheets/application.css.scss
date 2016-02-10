@@ -26,6 +26,10 @@
 	margin-top: 20px;
  }
 
+ .margin-bottom-15{
+  margin-bottom:15px;
+ }
+
  .no-margin{
  	margin:0 !important;
  }
@@ -155,5 +159,25 @@ small.small-time{
 
 .ibox-content.info-session .ibox-content{
   border-top:0 !important;
+}
+
+.info-session .forum-sub-title{
+  display:inline-block;
+}
+
+.actions-sessions a{
+  padding: 0 5px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.actions-sessions a:hover{
+  color: #2f4050;
+}
+
+.info-session .forum-item-title{
+  color: #2f4050;
+  position:relative;
+  top: 5px;
 }
 

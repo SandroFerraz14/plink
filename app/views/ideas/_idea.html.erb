@@ -19,7 +19,7 @@
             <p><%= idea.text %></p>
             <% if @ideation_session.allow_comments %>
                 <%= link_to idea_comments_path(idea), method: :get do %>
-                    <i class="fa fa-comments"></i>
+                    <i class="fa fa-comments"></i> <%= Comment.where(idea_id: idea.id).count(:all)  %>
                 <% end %>
             <% end %> 
         </div>
